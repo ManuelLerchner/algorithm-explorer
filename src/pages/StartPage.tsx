@@ -1,4 +1,4 @@
-import { AlgorithmCategories } from "../data/AlgorithmsStructure";
+import { AlgorithmCategories } from "../data/AlgorithmCategories";
 
 import AlgorithmCategory from "../components/NavigationButton";
 import { motion } from "framer-motion";

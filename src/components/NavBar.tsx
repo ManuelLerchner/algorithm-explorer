@@ -1,39 +1,45 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { AlgorithmCategories } from "../data/AlgorithmCategories";
 
 function NavBar({ toggleIsDark }: { toggleIsDark: () => void }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const breadcrumbs = ("home/" + location.pathname).split("/").filter(Boolean);
+  function mapUrlToBreadcrumbs(url: string) {
+    let res = [{ name: "Home", url: "" }];
 
-  function goToRoute(breadcrumbs: string[], index: number) {
-    breadcrumbs[0] = "";
-    let res = breadcrumbs.splice(0, index + 1).join("/");
+    let path = url.split("/").filter(Boolean);
+    let category = AlgorithmCategories.find(({ url }) => url.endsWith(path[0]));
 
-    navigate(res);
+    if (category) {
+      res.push({ name: category.category, url: category.url });
+
+      let algorithm = category.implementations.find(({ url }) =>
+        url.endsWith(path[1])
+      );
+
+      if (algorithm) {
+        res.push({ name: algorithm.name, url: algorithm.url });
+      }
+    }
+    return res;
   }
 
-  function formatBreadcrumbs(crumb: string) {
-    let words = crumb.split("-");
-
-    return words
-      .map((word) => {
-        return word.charAt(0).toUpperCase() + word.slice(1);
-      })
-      .join("-");
-  }
+  const breadcrumbs = mapUrlToBreadcrumbs(location.pathname);
 
   return (
     <div className="h-12 flex flex-row items-center justify-between px-16 bg-neutral-200 dark:bg-gray-800 drop-shadow-md text-2xl dark:text-white">
       <button
         className="md:hidden"
-        onClick={() => goToRoute(breadcrumbs, breadcrumbs.length - 2)}
+        onClick={() => {
+          navigate(breadcrumbs[breadcrumbs.length - 2].url);
+        }}
       >
         {breadcrumbs.length > 1 && "Back"}
       </button>
 
       <div className="hidden md:flex items-center justify-center">
-        {breadcrumbs.map((name, i) => (
+        {breadcrumbs.map((breadCrumb, i) => (
           <div key={"breadcrumb-" + i}>
             <span className="mx-1">/</span>
             <button
@@ -43,9 +49,9 @@ function NavBar({ toggleIsDark }: { toggleIsDark: () => void }) {
                   ? " underline underline-offset-8 dark:decoration-orange-600 decoration-cyan-700 scale-[1.05]"
                   : "")
               }
-              onClick={() => goToRoute(breadcrumbs, i)}
+              onClick={() => navigate(breadCrumb.url)}
             >
-              {formatBreadcrumbs(name)}
+              {breadCrumb.name}
             </button>
           </div>
         ))}

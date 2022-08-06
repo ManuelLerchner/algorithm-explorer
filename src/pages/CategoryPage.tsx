@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import AlgorithmCategory from "../components/NavigationButton";
-import { AlgorithmCategories } from "../data/AlgorithmsStructure";
+import { AlgorithmCategories } from "../data/AlgorithmCategories";
 import AlgorithmCategoryNotFound from "./error/AlgorithmCategoryNotFound";
 import { motion } from "framer-motion";
 import { pageVariant } from "./transitionProperties";
