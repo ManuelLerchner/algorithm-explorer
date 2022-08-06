@@ -1,8 +1,14 @@
-import { AlgorithmCategoryProps } from "../../models/AlgorithmCategoryProps";
 import { useNavigate } from "react-router-dom";
-import "./AlgorithmCategory.css";
 
-function AlgorithmCategory({ name, Icon, url }: AlgorithmCategoryProps) {
+function AlgorithmCategory({
+  name,
+  Icon,
+  url,
+}: {
+  name: string;
+  Icon: any;
+  url: string;
+}) {
   const navigate = useNavigate();
 
   function goToRoute() {
@@ -17,15 +23,14 @@ function AlgorithmCategory({ name, Icon, url }: AlgorithmCategoryProps) {
       <div className="flex justify-center items-center flex-col">
         <div
           className={
-            "w-28 h-28 shadow-xl shadow-stone-400 dark:shadow-gray-600 bg-zinc-300 dark:bg-neutral-200/90 rounded-md mb-2  "
+            "w-28 h-28 shadow-xl shadow-stone-300 dark:shadow-gray-600 bg-zinc-400/90 dark:bg-neutral-200/90 rounded-md mb-2  "
           }
         >
-          <Icon className="w-full h-full dropShadow p-3 hover:p-[0.65rem] transition-all ease-in" />
+          <Icon className="w-full h-full drop-shadow-lg p-3 hover:p-[0.65rem] transition-all ease-in" />
         </div>
         <h3 className="dark:text-neutral-200 text-2xl text-center tracking-wide font-medium ">
           {name}
         </h3>
-
       </div>
     </div>
   );
