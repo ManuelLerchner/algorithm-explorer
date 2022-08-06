@@ -1,12 +1,3 @@
-// <AlgorithmCategory name="Graphs" Icon={graphIcon} url="/" />
-// <AlgorithmCategory name="Convex Hull" Icon={convexHullIcon} url="/" />
-// <AlgorithmCategory name="Compression" Icon={compressionIcon} url="/" />
-// <AlgorithmCategory name="Classification" Icon={classificationIcon} url="/" />
-// <AlgorithmCategory name="Cryptography" Icon={cryptographyIcon} url="/" />
-// <AlgorithmCategory name="Searching" Icon={searchingIcon} url="/" />
-// <AlgorithmCategory name="Heaps" Icon={heapsIcon} url="/" />
-// <AlgorithmCategory name="Quantum" Icon={quantumIcon} url="/" />
-
 import { ReactComponent as sortIcon } from "../assets/sort-icon.svg";
 import { ReactComponent as graphIcon } from "../assets/graph-icon.svg";
 import { ReactComponent as convexHullIcon } from "../assets/convex-hull-icon.svg";
@@ -16,8 +7,11 @@ import { ReactComponent as cryptographyIcon } from "../assets/cryptography-icon.
 import { ReactComponent as searchingIcon } from "../assets/searching-icon.svg";
 import { ReactComponent as heapsIcon } from "../assets/heaps-icon.svg";
 import { ReactComponent as quantumIcon } from "../assets/quantum-icon.svg";
+import { AlgorithmCategory } from "../model/AlgorithmCategory";
 
-export const Algorithms = [
+//Temportary algorithm placeholders
+
+export const AlgorithmCategories: AlgorithmCategory[] = [
   {
     category: "Sorting",
     description:
@@ -39,6 +33,259 @@ export const Algorithms = [
         name: "Insertion Sort",
         url: "/sorting/insertion-sort",
         icon: sortIcon,
+      },
+    ],
+  },
+  {
+    category: "Graphs",
+    description:
+      "Graphs are a data structure that are used to represent a set of nodes and edges between them. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+    url: "/graphs",
+    icon: graphIcon,
+    implementations: [
+      {
+        name: "Breadth First Search",
+        url: "/graphs/breadth-first-search",
+        icon: graphIcon,
+      },
+      {
+        name: "Depth First Search",
+        url: "/graphs/depth-first-search",
+        icon: graphIcon,
+      },
+      {
+        name: "Dijkstra's Algorithm",
+        url: "/graphs/dijkstras-algorithm",
+        icon: graphIcon,
+      },
+      {
+        name: "Floyd Warshall Algorithm",
+        url: "/graphs/floyd-warshall-algorithm",
+        icon: graphIcon,
+      },
+      {
+        name: "Prim's Algorithm",
+        url: "/graphs/prims-algorithm",
+        icon: graphIcon,
+      },
+      {
+        name: "Kruskal's Algorithm",
+        url: "/graphs/kruskals-algorithm",
+        icon: graphIcon,
+      },
+    ],
+  },
+  {
+    category: "Convex-Hull",
+    description:
+      "Convex hull is a data structure that is used to represent a set of points that are in a convex shape. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+    url: "/convex-hull",
+    icon: convexHullIcon,
+    implementations: [
+      {
+        name: "Graham Scan",
+        url: "/convex-hull/graham-scan",
+        icon: convexHullIcon,
+      },
+      {
+        name: "Jarvis March",
+        url: "/convex-hull/jarvis-march",
+        icon: convexHullIcon,
+      },
+      {
+        name: "Monotone Chain",
+        url: "/convex-hull/monotone-chain",
+        icon: convexHullIcon,
+      },
+    ],
+  },
+  {
+    category: "Compression",
+    description:
+      "Compression is a data structure that is used to represent a set of items that are compressed into a smaller set of items. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+    url: "/compression",
+    icon: compressionIcon,
+    implementations: [
+      {
+        name: "LZW",
+        url: "/compression/lzw",
+        icon: compressionIcon,
+      },
+      {
+        name: "Huffman",
+        url: "/compression/huffman",
+        icon: compressionIcon,
+      },
+      {
+        name: "LZ77",
+        url: "/compression/lz77",
+        icon: compressionIcon,
+      },
+    ],
+  },
+  {
+    category: "Classification",
+    description:
+      "Classification is a data structure that is used to represent a set of items that are classified into a set of categories. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+    url: "/classification",
+    icon: classificationIcon,
+    implementations: [
+      {
+        name: "K-Nearest Neighbors",
+        url: "/classification/k-nearest-neighbors",
+        icon: classificationIcon,
+      },
+      {
+        name: "Naive Bayes",
+        url: "/classification/naive-bayes",
+        icon: classificationIcon,
+      },
+      {
+        name: "Decision Trees",
+        url: "/classification/decision-trees",
+        icon: classificationIcon,
+      },
+      {
+        name: "Random Forest",
+        url: "/classification/random-forest",
+        icon: classificationIcon,
+      },
+    ],
+  },
+  {
+    category: "Cryptography",
+    description:
+      "Cryptography is a data structure that is used to represent a set of items that are encrypted or decrypted. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+    url: "/cryptography",
+    icon: cryptographyIcon,
+
+    implementations: [
+      {
+        name: "RSA",
+        url: "/cryptography/rsa",
+        icon: cryptographyIcon,
+      },
+      {
+        name: "ElGamal",
+        url: "/cryptography/elgamal",
+        icon: cryptographyIcon,
+      },
+      {
+        name: "Diffie-Hellman",
+        url: "/cryptography/diffie-hellman",
+        icon: cryptographyIcon,
+      },
+      {
+        name: "Blowfish",
+        url: "/cryptography/blowfish",
+        icon: cryptographyIcon,
+      },
+      {
+        name: "AES",
+        url: "/cryptography/aes",
+        icon: cryptographyIcon,
+      },
+      {
+        name: "DES",
+        url: "/cryptography/des",
+        icon: cryptographyIcon,
+      },
+      {
+        name: "Triple DES",
+        url: "/cryptography/triple-des",
+        icon: cryptographyIcon,
+      },
+      {
+        name: "Rabbit",
+        url: "/cryptography/rabbit",
+        icon: cryptographyIcon,
+      },
+      {
+        name: "RC5",
+        url: "/cryptography/rc4",
+        icon: cryptographyIcon,
+      },
+    ],
+  },
+  {
+    category: "Searching",
+    description:
+      "Searching is a data structure that is used to represent a set of items that are searched for. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+    url: "/searching",
+    icon: searchingIcon,
+    implementations: [
+      {
+        name: "Binary Search",
+        url: "/searching/binary-search",
+        icon: searchingIcon,
+      },
+      {
+        name: "Interpolation Search",
+        url: "/searching/interpolation-search",
+        icon: searchingIcon,
+      },
+      {
+        name: "Quick-Search",
+        url: "/searching/quick-search",
+        icon: searchingIcon,
+      },
+      {
+        name: "Jump Search",
+        url: "/searching/jump-search",
+        icon: searchingIcon,
+      },
+      {
+        name: "Binary Search Tree",
+        url: "/searching/binary-search-tree",
+        icon: searchingIcon,
+      },
+      {
+        name: "AVL Tree",
+        url: "/searching/avl-tree",
+        icon: searchingIcon,
+      },
+    ],
+  },
+  {
+    category: "Heaps",
+    description:
+      "Heaps is a data structure that is used to represent a set of items that are stored in a heap. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+    url: "/heaps",
+    icon: heapsIcon,
+    implementations: [
+      {
+        name: "Binary Heap",
+        url: "/heaps/binary-heap",
+        icon: heapsIcon,
+      },
+      {
+        name: "Fibonacci Heap",
+        url: "/heaps/fibonacci-heap",
+        icon: heapsIcon,
+      },
+      {
+        name: "Leftist Heap",
+        url: "/heaps/leftist-heap",
+        icon: heapsIcon,
+      },
+      {
+        name: "Binary Search Tree",
+        url: "/heaps/binary-search-tree",
+        icon: heapsIcon,
+      },
+    ],
+  },
+  {
+    category: "Quantum",
+    description:
+      "Quantum is a data structure that is used to represent a set of items that are stored in a quantum. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+    url: "/quantum",
+    icon: quantumIcon,
+    implementations: [
+      {
+        name: "QFT",
+        url: "/quantum/qft",
+        icon: quantumIcon,
       },
     ],
   },

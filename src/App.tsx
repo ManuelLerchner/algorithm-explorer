@@ -22,7 +22,7 @@ function App() {
       <div className="bg-neutral-100 dark:bg-gray-800 flex flex-col h-screen overflow-y-auto transition-colors duration-500 overflow-x-hidden">
         <NavBar toggleIsDark={toggleIsDark} />
 
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence exitBeforeEnter >
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<StartPage />}></Route>
             <Route

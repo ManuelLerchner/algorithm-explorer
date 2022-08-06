@@ -1,4 +1,4 @@
-import { Algorithms } from "../data/AlgorithmsStructure";
+import { AlgorithmCategories } from "../data/AlgorithmsStructure";
 
 import AlgorithmCategory from "../components/NavigationButton";
 import { motion } from "framer-motion";
@@ -24,7 +24,7 @@ function StartPage() {
           </h2>
         </div>
         <div className="grid-cols-2 sm:grid-cols-3 grid gap-7 grid-flow-row-dense m-6 items-start ">
-          {Algorithms.map((algorithmType, i) => (
+          {AlgorithmCategories.map((algorithmType, i) => (
             <AlgorithmCategory
               key={i}
               name={algorithmType.category}

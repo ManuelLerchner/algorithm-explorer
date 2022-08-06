@@ -14,7 +14,13 @@ function NavBar({ toggleIsDark }: { toggleIsDark: () => void }) {
   }
 
   function formatBreadcrumbs(crumb: string) {
-    return crumb.charAt(0).toUpperCase() + crumb.slice(1);
+    let words = crumb.split("-");
+
+    return words
+      .map((word) => {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      })
+      .join("-");
   }
 
   return (
