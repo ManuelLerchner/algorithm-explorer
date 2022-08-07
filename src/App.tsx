@@ -4,6 +4,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { useState } from "react";
 import CategoryPage from "./pages/CategoryPage";
 import { AnimatePresence } from "framer-motion";
+import SortingPage from "./pages/Algorithms/SortingPage";
 
 function App() {
   const [isDark, setIsDark] = useState(true);
@@ -20,10 +21,7 @@ function App() {
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<StartPage />} />
             <Route path="/:algorithmCategory" element={<CategoryPage />} />
-            <Route
-              path="/sorting/:algorithm"
-              element={<p>sorting subpage</p>}
-            />
+            <Route path="/sorting/:sortingAlgorithm" element={<SortingPage />} />
           </Routes>
         </AnimatePresence>
       </div>
