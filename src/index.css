@@ -10,11 +10,7 @@ html {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100%;
-}
-
-#root {
-  min-height: 100vh;
+  scroll-behavior: smooth;
 }
 
 @layer utilities {

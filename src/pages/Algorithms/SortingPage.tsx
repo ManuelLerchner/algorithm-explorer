@@ -1,100 +1,110 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { bubbleSort } from "../../algorithms/sorting/BubbleSort";
 import { mapUrlToBreadcrumbs } from "../../components/BreadcrumbHelper";
 import { SortingStep } from "../../model/SortingStep";
+import { pageVariant } from "../transitionProperties";
+import { renderHistory, renderArray } from "./ArrayVisualization";
+import * as Scroll from "react-scroll";
+var scroll = Scroll.animateScroll;
 
-function renderHistory(steps: SortingStep[]) {
-  return (
-    <>
-      {steps.map((sortingStep, i) => (
-        <div key={"history-" + i}>{renderArray(sortingStep.array)}</div>
-      ))}
-    </>
+const randomizeArray = () => {
+  const arrayLength = 10;
+  return Array.from({ length: arrayLength }, () =>
+    Math.floor(Math.random() * 100)
   );
-}
-
-function renderArray(array: number[]) {
-  return (
-    <div
-      className="grid gap-0 grid-cols-10  justify-center items-center my-2"
-      key={"" + array}
-    >
-      {array.map((value: number, j: number) => (
-        <div
-          key={"entry-" + j}
-          className="aspect-square bg-white  max-w-16 max-h-16 flex items-center justify-center border "
-        >
-          <div>
-            <span>{value}</span>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
+};
 
 export default function SortingPage() {
   const location = useLocation();
   const breadcrumbs = mapUrlToBreadcrumbs(location.pathname);
   const algorithmName = breadcrumbs[breadcrumbs.length - 1].name;
 
-  const arrayLength = 10;
-
   function reset() {
     setStartArray(randomizeArray());
     setHistory([]);
+    setHistoryIndex(0);
   }
 
-  const randomizeArray = () => {
-    return Array.from({ length: arrayLength }, () =>
-      Math.floor(Math.random() * 100)
-    );
-  };
+  function performStep() {
+    scroll.scrollToBottom({
+      to: "container",
+      duration: 800,
+      smooth: true,
+    });
+
+    if (historyIndex >= history.length) {
+      const step = stepIterator.next();
+      if (step.done) {
+        return;
+      }
+      setHistory([...history, step.value]);
+    }
+    setHistoryIndex(historyIndex + 1);
+  }
+
+  function undoStep() {
+    setHistoryIndex(historyIndex - 1);
+  }
 
   const [startArray, setStartArray] = useState(randomizeArray());
   const [history, setHistory] = useState<SortingStep[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(0);
+  const [inAutoMode, setInAutoMode] = useState(false);
+  const [autoInterval, setAutoInterval] = useState<NodeJS.Timer | null>(null);
+  const stepIterator = useMemo(() => bubbleSort([...startArray]), [startArray]);
 
-  function performStep(iterator: IterableIterator<SortingStep>) {
-    const step = iterator.next();
-    console.log(step);
-    if (step.done) {
-      return;
+  useEffect(() => {
+    console.log(inAutoMode);
+    if (inAutoMode) {
+      const intervallId = setTimeout(() => {
+        performStep();
+      }, 1000);
+      setAutoInterval(intervallId);
+    } else {
+      clearTimeout(autoInterval ?? 0);
     }
-    setHistory([...history, step.value]);
-  }
-
-  const stepIterator = useMemo(() => bubbleSort(startArray), [startArray]);
+  }, [inAutoMode, historyIndex]);
 
   return (
-    <div className="flex flex-col-reverse justify-around items-center sm:flex-row m-auto w-full">
-      <div className="w-11/12 sm:w-7/12 m-4 ">
+    <motion.div
+      key="sorting-page"
+      variants={pageVariant}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      id="container"
+      className="flex flex-col-reverse justify-around md:flex-row w-full pt-14 pb-72 items-center"
+    >
+      <div className="flex flex-col m-4">
         {/* Input Field */}
-        <div className="flex  flex-row my-2  justify-center">
-          {startArray.map((value: number, j: number) => (
-            <input
-              key={"entry-" + j}
-              className=" bg-white  w-16 h-16 flex items-center justify-center border  text-center  placeholder:text-black "
-              type="number"
-              value={value}
-              placeholder="0"
-              disabled={history.length > 0}
-              onChange={(e) => {
-                const newArray = startArray.slice();
-                var newValue = parseInt(e.target.value) || 0;
-                newArray[j] = newValue;
-                setStartArray(newArray);
-              }}
-            ></input>
-          ))}
-        </div>
+        {renderArray(startArray, (value: number, j: number) => (
+          <input
+            type="number"
+            className="w-full h-full placeholder:text-black text-center"
+            value={value}
+            placeholder="0"
+            disabled={history.length > 0}
+            onChange={(e) => {
+              const newArray = startArray.slice();
+              var newValue = parseInt(e.target.value) || 0;
+              newArray[j] = newValue;
+              setStartArray(newArray);
+            }}
+          />
+        ))}
 
         {/* Step by Step Solution */}
-        {renderHistory(history)}
+        {renderHistory(history, historyIndex, (value: number) => (
+          <div className="w-full h-full flex items-center justify-center">
+            <span>{value}</span>
+          </div>
+        ))}
       </div>
 
-      <div className="w-8/12 sm:w-4/12 m-4 self-end my-64">
-        <h1 className="dark:text-white text-2xl sm:text-4xl my-4">
+      <div className="md:w-4/12 w-8/12 m-4 self-end ">
+        <h1 className="dark:text-white text-2xl sm:text-4xl my-4 ">
           {algorithmName}
         </h1>
 
@@ -110,13 +120,13 @@ export default function SortingPage() {
 
         <div className="flex justify-between items-center">
           <div className="flex my-4">
-            <button className="mx-4">
-              <h1>run</h1>
+            <button className="mx-4" onClick={() => setInAutoMode(!inAutoMode)}>
+              <h1>{inAutoMode ? "pause" : "run"}</h1>
             </button>
-            <button className="mx-4" onClick={() => performStep(stepIterator)}>
+            <button className="mx-4" onClick={() => performStep()}>
               <h1>step</h1>
             </button>
-            <button className="mx-4">
+            <button className="mx-4" onClick={() => undoStep()}>
               <h1>back</h1>
             </button>
           </div>
@@ -127,6 +137,6 @@ export default function SortingPage() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

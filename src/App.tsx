@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className={isDark ? "dark" : "light"}>
-      <div className="bg-neutral-100 dark:bg-gray-800 flex flex-col h-screen overflow-y-auto transition-colors duration-500 overflow-x-hidden">
+      <div className="bg-neutral-100 dark:bg-gray-800 flex flex-col min-h-screen transition-colors duration-500 ">
         <NavBar toggleIsDark={toggleIsDark} />
 
         <AnimatePresence exitBeforeEnter>

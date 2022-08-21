@@ -3,10 +3,8 @@ export interface SortingStep {
   leftBoundary: number;
   rightBoundary: number;
   currentIndex: number;
-  comparing?: {
-    from: number;
-    to: number;
-  };
+  comparing?: [number, number];
+  swapping?: [number, number];
   array: number[];
   locked: boolean[];
 }
