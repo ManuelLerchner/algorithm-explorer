@@ -6,7 +6,6 @@ export function renderHistory(
   currentElementRef: React.RefObject<HTMLHeadingElement>,
   contentBox: (value: number, j: number) => JSX.Element
 ) {
-
   return (
     <>
       {steps
