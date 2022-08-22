@@ -6,12 +6,12 @@ import { mapUrlToBreadcrumbs } from "../../components/BreadcrumbHelper";
 import { SortingStep } from "../../model/SortingStep";
 import { pageVariant } from "../transitionProperties";
 import { renderHistory, renderArray } from "./ArrayVisualization";
-import * as Scroll from "react-scroll";
-var scroll = Scroll.animateScroll;
+import { scroller } from "react-scroll";
+var Scroll = require("react-scroll");
 
 const randomizeArray = () => {
-  const arrayLength = 10;
-  return Array.from({ length: arrayLength }, () =>
+  const arrayLength = 30;
+  return Array.from({ length: arrayLength }, (v, i: number) =>
     Math.floor(Math.random() * 100)
   );
 };
@@ -26,14 +26,9 @@ export default function SortingPage() {
     setHistory([]);
     setHistoryIndex(0);
   }
+  const currentElementRef = useRef<HTMLHeadingElement>(null);
 
   function performStep() {
-    scroll.scrollToBottom({
-      to: "container",
-      duration: 800,
-      smooth: true,
-    });
-
     if (historyIndex >= history.length) {
       const step = stepIterator.next();
       if (step.done) {
@@ -42,6 +37,14 @@ export default function SortingPage() {
       setHistory([...history, step.value]);
     }
     setHistoryIndex(historyIndex + 1);
+
+    setTimeout(() => {
+      currentElementRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center",
+      });
+    }, 5);
   }
 
   function undoStep() {
@@ -75,9 +78,9 @@ export default function SortingPage() {
       animate="visible"
       exit="exit"
       id="container"
-      className="flex flex-col-reverse justify-around md:flex-row w-full pt-14 pb-72 items-center"
+      className="flex flex-col-reverse justify-around md:flex-row w-full h-[80vh] my-auto"
     >
-      <div className="flex flex-col m-4">
+      <div className="flex flex-col m-4 p-2 overflow-auto scroll-container">
         {/* Input Field */}
         {renderArray(startArray, (value: number, j: number) => (
           <input
@@ -96,14 +99,19 @@ export default function SortingPage() {
         ))}
 
         {/* Step by Step Solution */}
-        {renderHistory(history, historyIndex, (value: number) => (
-          <div className="w-full h-full flex items-center justify-center">
-            <span>{value}</span>
-          </div>
-        ))}
+        {renderHistory(
+          history,
+          historyIndex,
+          currentElementRef,
+          (value: number) => (
+            <div className="w-full h-full flex items-center justify-center">
+              <span>{value}</span>
+            </div>
+          )
+        )}
       </div>
 
-      <div className="md:w-4/12 w-8/12 m-4 self-end ">
+      <div className="md:w-4/12 w-8/12 m-4 self-center ">
         <h1 className="dark:text-white text-2xl sm:text-4xl my-4 ">
           {algorithmName}
         </h1>
