@@ -7,4 +7,5 @@ export interface SortingStep {
   swapping?: [number, number];
   array: number[];
   locked: boolean[];
+  stepNum: number;
 }

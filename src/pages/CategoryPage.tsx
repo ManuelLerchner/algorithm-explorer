@@ -3,7 +3,7 @@ import AlgorithmCategory from "../components/NavigationButton";
 import { AlgorithmCategories } from "../data/AlgorithmCategories";
 import AlgorithmCategoryNotFound from "./error/AlgorithmCategoryNotFound";
 import { motion } from "framer-motion";
-import { pageVariant } from "./transitionProperties";
+import { shiftIn } from "./transitionProperties";
 
 function CategoryPage() {
   const params = useParams();
@@ -25,7 +25,7 @@ function CategoryPage() {
   return (
     <motion.div
       key="algorithms-page"
-      variants={pageVariant}
+      variants={shiftIn}
       initial="hidden"
       animate="visible"
       exit="exit"

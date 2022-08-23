@@ -2,6 +2,7 @@ import { SortingStep } from "../../model/SortingStep";
 import { swap } from "./Swap";
 
 export function* bubbleSort(A: number[]): IterableIterator<SortingStep> {
+  var step = 0;
   for (let n = A.length - 1; n >= 1; n--) {
     for (let i = 0; i < n; i++) {
       if (A[i] > A[i + 1]) {
@@ -14,6 +15,7 @@ export function* bubbleSort(A: number[]): IterableIterator<SortingStep> {
           swapping: [i, i + 1],
           array: [...A],
           locked: A.map((_, i) => i > n),
+          stepNum: step++,
         };
       } else {
         yield {
@@ -24,6 +26,7 @@ export function* bubbleSort(A: number[]): IterableIterator<SortingStep> {
           comparing: [i, i + 1],
           array: [...A],
           locked: A.map((_, i) => i > n),
+          stepNum: step++,
         };
       }
     }
@@ -35,5 +38,6 @@ export function* bubbleSort(A: number[]): IterableIterator<SortingStep> {
     currentIndex: -1,
     array: [...A],
     locked: A.map((_, i) => i >= 0),
+    stepNum: step++,
   };
 }

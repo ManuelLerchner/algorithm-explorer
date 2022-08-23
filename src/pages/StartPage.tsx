@@ -2,13 +2,13 @@ import { AlgorithmCategories } from "../data/AlgorithmCategories";
 
 import AlgorithmCategory from "../components/NavigationButton";
 import { motion } from "framer-motion";
-import { pageVariant } from "./transitionProperties";
+import { shiftIn } from "./transitionProperties";
 
 function StartPage() {
   return (
     <motion.div
       key="start-page"
-      variants={pageVariant}
+      variants={shiftIn}
       initial="hidden"
       animate="visible"
       exit="exit"

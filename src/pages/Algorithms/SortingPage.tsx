@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { bubbleSort } from "../../algorithms/sorting/BubbleSort";
 import { mapUrlToBreadcrumbs } from "../../components/BreadcrumbHelper";
 import { SortingStep } from "../../model/SortingStep";
-import { pageVariant } from "../transitionProperties";
+import { shiftIn } from "../transitionProperties";
 import { renderHistory, renderArray } from "./ArrayVisualization";
 
 /**
@@ -38,8 +38,8 @@ export default function SortingPage() {
   const currentSortingElement = useRef<HTMLHeadingElement>(null);
   const [arrayLength, setArrayLength] = useState(10);
   const [startArray, setStartArray] = useState<number[]>([]);
-  const [history, setHistory] = useState<SortingStep[]>([]);
-  const [historyIndex, setHistoryIndex] = useState(0);
+  const [totalHistory, setTotalHistory] = useState<SortingStep[]>([]);
+  const [currentHistory, setCurrentHistory] = useState<SortingStep[]>([]);
   const [inAutoMode, setInAutoMode] = useState(false);
 
   const stepIterator = useMemo(() => bubbleSort([...startArray]), [startArray]);
@@ -53,8 +53,8 @@ export default function SortingPage() {
    * Resets the History-View
    */
   function resetHistory() {
-    setHistory([]);
-    setHistoryIndex(0);
+    setTotalHistory([]);
+    setCurrentHistory([]);
     setInAutoMode(false);
   }
 
@@ -62,21 +62,26 @@ export default function SortingPage() {
    * Performs a single step of the Sorting-Calculation
    */
   const performStep = useCallback(() => {
-    if (historyIndex >= history.length) {
+    if (currentHistory.length >= totalHistory.length) {
       const step = stepIterator.next();
       if (step.done) {
         return;
       }
-      setHistory([...history, step.value]);
+      const updateHistory = [...totalHistory, step.value];
+      setTotalHistory(updateHistory);
+      setCurrentHistory(updateHistory);
+    } else {
+      const newHistory = totalHistory.slice(0, currentHistory.length + 1);
+      setCurrentHistory(newHistory);
     }
-    setHistoryIndex(historyIndex + 1);
-  }, [history, historyIndex, stepIterator]);
+  }, [totalHistory, stepIterator, currentHistory.length]);
 
   /**
    * Goes back a step in the Sorting-Calculation
    */
   function undoStep() {
-    setHistoryIndex(historyIndex - 1);
+    const newHistory = totalHistory.slice(0, currentHistory.length - 1);
+    setCurrentHistory(newHistory);
     setInAutoMode(false);
   }
 
@@ -87,7 +92,7 @@ export default function SortingPage() {
       block: "center",
       inline: "center",
     });
-  }, [historyIndex]);
+  }, [currentHistory]);
 
   // Runs the "performStep" loop when "auto-mode" is enabled
   useEffect(() => {
@@ -104,7 +109,7 @@ export default function SortingPage() {
   return (
     <motion.div
       key="sorting-page"
-      variants={pageVariant}
+      variants={shiftIn}
       initial="hidden"
       animate="visible"
       exit="exit"
@@ -120,7 +125,7 @@ export default function SortingPage() {
             className="w-full h-full placeholder:text-black text-center"
             value={value}
             placeholder="0"
-            disabled={history.length > 0}
+            disabled={totalHistory.length > 0}
             onChange={(e) => {
               const newArray = startArray.slice();
               var newValue = parseInt(e.target.value) || 0;
@@ -132,8 +137,7 @@ export default function SortingPage() {
 
         {/* Step by Step Solution */}
         {renderHistory(
-          history,
-          historyIndex,
+          currentHistory,
           currentSortingElement,
           (value: number) => (
             <div className="w-full h-full flex items-center justify-center">
