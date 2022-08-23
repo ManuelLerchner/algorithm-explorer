@@ -1,6 +1,6 @@
 import { AlgorithmCategories } from "../data/AlgorithmCategories";
 
-import AlgorithmCategory from "../components/NavigationButton";
+import AlgorithmCategory from "../components/NavigationButton/NavigationButton";
 import { motion } from "framer-motion";
 import { shiftIn } from "./transitionProperties";
 
@@ -27,7 +27,7 @@ function StartPage() {
           {AlgorithmCategories.map((algorithmType, i) => (
             <AlgorithmCategory
               key={i}
-              name={algorithmType.category}
+              name={algorithmType.name}
               Icon={algorithmType.icon}
               url={algorithmType.url}
             />

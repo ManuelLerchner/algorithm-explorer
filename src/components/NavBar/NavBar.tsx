@@ -5,7 +5,7 @@ function NavBar({ toggleIsDark }: { toggleIsDark: () => void }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const breadcrumbs = mapUrlToBreadcrumbs(location.pathname);
+  const { validUntil, breadcrumbs } = mapUrlToBreadcrumbs(location.pathname);
 
   return (
     <div className="h-12 flex flex-row items-center justify-between px-16 bg-neutral-200 dark:bg-gray-800 drop-shadow-md text-2xl dark:text-white">
@@ -25,9 +25,9 @@ function NavBar({ toggleIsDark }: { toggleIsDark: () => void }) {
             <button
               className={
                 "mx-1 hover:scale-105 transition-all ease-out cursor-pointer " +
-                (i === breadcrumbs.length - 1
-                  ? " underline underline-offset-8 dark:decoration-orange-600 decoration-cyan-700 scale-[1.05]"
-                  : "")
+                (i === breadcrumbs.length - 1 &&
+                  " underline underline-offset-8 dark:decoration-orange-600 decoration-cyan-700 scale-[1.05]") +
+                (i > validUntil && "  dark:text-neutral-400 text-neutral-600")
               }
               onClick={() => navigate(breadCrumb.url)}
             >

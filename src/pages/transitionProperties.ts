@@ -44,8 +44,10 @@ export const popUp: Variants = {
     opacity: 0,
     scale: 0.3,
     height: 0,
+    marginTop: "-4px",
+
     transition: {
-      duration: 0.35,
+      duration: 0.65,
       ease: "easeOut",
     },
   },

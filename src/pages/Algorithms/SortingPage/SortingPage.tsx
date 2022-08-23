@@ -1,40 +1,18 @@
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { bubbleSort } from "../../algorithms/sorting/BubbleSort";
-import { mapUrlToBreadcrumbs } from "../../components/BreadcrumbHelper";
-import { SortingStep } from "../../model/SortingStep";
-import { shiftIn } from "../transitionProperties";
-import { renderHistory, renderArray } from "./ArrayVisualization";
 
-/**
- * Resets the start-array
- * @param arrayOrder The ordering type of the new array
- */
-function createArray(
-  arrayLength: number,
-  arrayOrder: "random" | "ascending" | "descending"
-) {
-  switch (arrayOrder) {
-    case "random":
-      return Array.from({ length: arrayLength }, (_) =>
-        Math.floor(Math.random() * 100)
-      );
-    case "ascending":
-      return Array.from({ length: arrayLength }, (_, i: number) => i + 1);
-    case "descending":
-      return Array.from(
-        { length: arrayLength },
-        (_, i: number) => arrayLength - i
-      );
-  }
-}
+import { SortingStep } from "../../../model/SortingStep";
+import { shiftIn } from "../../transitionProperties";
+import { createArray } from "./ArrayHelper";
+import { renderHistory, renderInputArrayField } from "./ArrayVisualization";
 
-export default function SortingPage() {
-  const location = useLocation();
-  const breadcrumbs = mapUrlToBreadcrumbs(location.pathname);
-  const algorithmName = breadcrumbs[breadcrumbs.length - 1].name;
-
+export default function SortingPage({
+  algorithmName,
+  algorithm,
+}: {
+  algorithmName: string;
+  algorithm: (A: number[]) => IterableIterator<SortingStep>;
+}) {
   const currentSortingElement = useRef<HTMLHeadingElement>(null);
   const [arrayLength, setArrayLength] = useState(10);
   const [startArray, setStartArray] = useState<number[]>([]);
@@ -42,7 +20,10 @@ export default function SortingPage() {
   const [currentHistory, setCurrentHistory] = useState<SortingStep[]>([]);
   const [inAutoMode, setInAutoMode] = useState(false);
 
-  const stepIterator = useMemo(() => bubbleSort([...startArray]), [startArray]);
+  const stepIterator = useMemo(
+    () => algorithm([...startArray]),
+    [startArray, algorithm]
+  );
 
   // Initializes the start-array using random ordering
   useEffect(() => {
@@ -89,7 +70,7 @@ export default function SortingPage() {
   useEffect(() => {
     currentSortingElement.current?.scrollIntoView({
       behavior: "smooth",
-      block: "center",
+      block: "start",
       inline: "center",
     });
   }, [currentHistory]);
@@ -114,41 +95,24 @@ export default function SortingPage() {
       animate="visible"
       exit="exit"
       id="container"
-      className="flex flex-col-reverse justify-around md:flex-row w-full h-[80vh] my-auto p-4"
+      className="flex flex-col-reverse justify-around md:flex-row md:items-start items-center w-full h-[95vh] md:h-[80vh] md:my-auto p-4"
     >
       {/* Array - Window */}
-      <div className="flex flex-col max-w-4xl  p-2 overflow-auto scroll-container  ">
+      <div className="flex flex-col w-11/12 md:max-w-4xl md:mr-4 overflow-auto scroll-container h-full">
         {/* Input Field */}
-        {renderArray(startArray, (value: number, j: number) => (
-          <input
-            type="number"
-            className="w-full h-full placeholder:text-black text-center"
-            value={value}
-            placeholder="0"
-            disabled={totalHistory.length > 0}
-            onChange={(e) => {
-              const newArray = startArray.slice();
-              var newValue = parseInt(e.target.value) || 0;
-              newArray[j] = newValue;
-              setStartArray(newArray);
-            }}
-          />
-        ))}
+        {renderInputArrayField(
+          startArray,
+          totalHistory,
+          startArray,
+          setStartArray
+        )}
 
         {/* Step by Step Solution */}
-        {renderHistory(
-          currentHistory,
-          currentSortingElement,
-          (value: number) => (
-            <div className="w-full h-full flex items-center justify-center">
-              <span>{value}</span>
-            </div>
-          )
-        )}
+        {renderHistory(currentHistory, currentSortingElement)}
       </div>
 
       {/* Input Windows */}
-      <div className="flex flex-col justify-around w-3/12">
+      <div className="flex flex-col justify-around w-10/12 sm:w-8/12 md:w-3/12 mb-12">
         <div>
           <h1 className="dark:text-white text-2xl sm:text-4xl my-4 ">
             {algorithmName}

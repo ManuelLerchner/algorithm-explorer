@@ -13,7 +13,7 @@ import { AlgorithmCategory } from "../model/AlgorithmCategory";
 
 export const AlgorithmCategories: AlgorithmCategory[] = [
   {
-    category: "Sorting",
+    name: "Sorting",
     description:
       "Sorting algorithms are used to sort a list of items. There exist many different algorithms each of them with their set of strengths and weaknesses.",
     url: "/sorting",
@@ -37,7 +37,7 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
     ],
   },
   {
-    category: "Graphs",
+    name: "Graphs",
     description:
       "Graphs are a data structure that are used to represent a set of nodes and edges between them. There exist many different algorithms each of them with their set of strengths and weaknesses.",
     url: "/graphs",
@@ -76,7 +76,7 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
     ],
   },
   {
-    category: "Convex-Hull",
+    name: "Convex-Hull",
     description:
       "Convex hull is a data structure that is used to represent a set of points that are in a convex shape. There exist many different algorithms each of them with their set of strengths and weaknesses.",
     url: "/convex-hull",
@@ -100,7 +100,7 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
     ],
   },
   {
-    category: "Compression",
+    name: "Compression",
     description:
       "Compression is a data structure that is used to represent a set of items that are compressed into a smaller set of items. There exist many different algorithms each of them with their set of strengths and weaknesses.",
     url: "/compression",
@@ -124,7 +124,7 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
     ],
   },
   {
-    category: "Classification",
+    name: "Classification",
     description:
       "Classification is a data structure that is used to represent a set of items that are classified into a set of categories. There exist many different algorithms each of them with their set of strengths and weaknesses.",
     url: "/classification",
@@ -153,7 +153,7 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
     ],
   },
   {
-    category: "Cryptography",
+    name: "Cryptography",
     description:
       "Cryptography is a data structure that is used to represent a set of items that are encrypted or decrypted. There exist many different algorithms each of them with their set of strengths and weaknesses.",
     url: "/cryptography",
@@ -208,7 +208,7 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
     ],
   },
   {
-    category: "Searching",
+    name: "Searching",
     description:
       "Searching is a data structure that is used to represent a set of items that are searched for. There exist many different algorithms each of them with their set of strengths and weaknesses.",
     url: "/searching",
@@ -247,7 +247,7 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
     ],
   },
   {
-    category: "Heaps",
+    name: "Heaps",
     description:
       "Heaps is a data structure that is used to represent a set of items that are stored in a heap. There exist many different algorithms each of them with their set of strengths and weaknesses.",
     url: "/heaps",
@@ -276,7 +276,7 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
     ],
   },
   {
-    category: "Quantum",
+    name: "Quantum",
     description:
       "Quantum is a data structure that is used to represent a set of items that are stored in a quantum. There exist many different algorithms each of them with their set of strengths and weaknesses.",
     url: "/quantum",
