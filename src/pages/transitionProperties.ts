@@ -36,7 +36,7 @@ export const popUp: Variants = {
     height: "3rem",
     translateY: 0,
     transition: {
-      duration: 0.65,
+      duration: 0.55,
       ease: "easeOut",
     },
   },
@@ -47,7 +47,7 @@ export const popUp: Variants = {
     marginTop: "-4px",
 
     transition: {
-      duration: 0.65,
+      duration: 0.45,
       ease: "easeOut",
     },
   },
