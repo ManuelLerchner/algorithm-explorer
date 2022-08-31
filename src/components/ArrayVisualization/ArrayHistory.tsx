@@ -11,15 +11,17 @@ export default function ArrayHistory({
   currentElementRef: React.RefObject<HTMLHeadingElement>;
 }) {
   return (
-    <AnimatePresence>
-      {steps.map((sortingStep) => (
-        <ArrayStep
-          key={"historyStep-" + sortingStep.stepNum}
-          step={sortingStep}
-          totalSteps={steps.length}
-          currentElementRef={currentElementRef}
-        />
-      ))}
-    </AnimatePresence>
+    <div className="flex flex-col w-max mx-auto">
+      <AnimatePresence>
+        {steps.map((sortingStep) => (
+          <ArrayStep
+            key={"historyStep-" + sortingStep.stepNum}
+            step={sortingStep}
+            totalSteps={steps.length}
+            currentElementRef={currentElementRef}
+          />
+        ))}
+      </AnimatePresence>
+    </div>
   );
 }

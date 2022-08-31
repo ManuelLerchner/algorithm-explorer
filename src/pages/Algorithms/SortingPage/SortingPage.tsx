@@ -21,6 +21,10 @@ export default function SortingPage({
   const [startArray, setStartArray] = useState<number[]>([]);
   const [totalHistory, setTotalHistory] = useState<SortingStep[]>([]);
   const [currentHistory, setCurrentHistory] = useState<SortingStep[]>([]);
+  const [animationSpeed, setAnimationSpeed] = useState(7);
+  const [arrayType, setArrayType] = useState<
+    "random" | "ascending" | "descending"
+  >("random");
   const [inAutoMode, setInAutoMode] = useState(false);
 
   const stepIterator = useMemo(
@@ -30,16 +34,17 @@ export default function SortingPage({
 
   // Initializes the start-array using random ordering
   useEffect(() => {
-    setStartArray(createArray(10, "random"));
-  }, []);
+    setStartArray(createArray(arrayLength, arrayType));
+  }, [arrayLength, arrayType]);
 
   /**
    * Resets the History-View
    */
-  function resetHistory() {
+  function reset() {
     setTotalHistory([]);
     setCurrentHistory([]);
     setInAutoMode(false);
+    setStartArray(createArray(arrayLength, arrayType));
   }
 
   /**
@@ -49,6 +54,7 @@ export default function SortingPage({
     if (currentHistory.length >= totalHistory.length) {
       const step = stepIterator.next();
       if (step.done) {
+        setInAutoMode(false);
         return;
       }
       const updateHistory = [...totalHistory, step.value];
@@ -64,9 +70,13 @@ export default function SortingPage({
    * Goes back a step in the Sorting-Calculation
    */
   function undoStep() {
-    const newHistory = totalHistory.slice(0, currentHistory.length - 1);
-    setCurrentHistory(newHistory);
-    setInAutoMode(false);
+    const newLength = currentHistory.length - 1;
+
+    if (newLength >= 0) {
+      const newHistory = totalHistory.slice(0, newLength);
+      setCurrentHistory(newHistory);
+      setInAutoMode(false);
+    }
   }
 
   // Scrolls to the currently evaluated array element after a step
@@ -85,10 +95,18 @@ export default function SortingPage({
         if (inAutoMode) {
           performStep();
         }
-      }, 1000);
+      }, animationSpeed * 200);
       return () => clearTimeout(timer);
     }
-  }, [inAutoMode, performStep]);
+  }, [inAutoMode, performStep, animationSpeed]);
+
+  // Performs initial sorting when the auto-mode is enabled
+  useEffect(() => {
+    if (inAutoMode) {
+      performStep();
+    }
+    // eslint-disable-next-line
+  }, [inAutoMode]);
 
   return (
     <motion.div
@@ -118,7 +136,7 @@ export default function SortingPage({
           algorithmName={algorithmName}
           inAutoMode={inAutoMode}
           setInAutoMode={setInAutoMode}
-          resetHistory={resetHistory}
+          reset={reset}
           performStep={performStep}
           undoStep={undoStep}
         />
@@ -127,7 +145,10 @@ export default function SortingPage({
           arrayLength={arrayLength}
           setArrayLength={setArrayLength}
           setStartArray={setStartArray}
-          resetHistory={resetHistory}
+          reset={reset}
+          setAnimationSpeed={setAnimationSpeed}
+          setInAutoMode={setInAutoMode}
+          setArrayType={setArrayType}
         />
       </div>
     </motion.div>

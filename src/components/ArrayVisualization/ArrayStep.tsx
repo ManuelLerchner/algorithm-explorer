@@ -13,7 +13,7 @@ export default function ArrayStep({
   currentElementRef: React.RefObject<HTMLHeadingElement>;
 }) {
   return (
-    <div className="flex justify-center">
+    <div className="flex">
       {step.array.map((value: number, i: number) => {
         let isBeingCompared = step.comparing?.includes(i);
         let isBeingSwapped = step.swapping?.includes(i);

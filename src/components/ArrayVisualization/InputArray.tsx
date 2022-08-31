@@ -10,7 +10,7 @@ export default function InputArray({
   setArray: React.Dispatch<React.SetStateAction<number[]>>;
 }) {
   return (
-    <div className="flex justify-center">
+    <div className="flex w-max justify-center mx-auto items-center">
       {array.map((value: number, j: number) => (
         <div
           className={

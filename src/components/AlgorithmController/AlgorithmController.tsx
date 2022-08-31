@@ -4,14 +4,14 @@ export default function AlgorithmController({
   algorithmName,
   inAutoMode,
   setInAutoMode,
-  resetHistory,
+  reset,
   performStep,
   undoStep,
 }: {
   algorithmName: string;
   inAutoMode: boolean;
   setInAutoMode: React.Dispatch<React.SetStateAction<boolean>>;
-  resetHistory: () => void;
+  reset: () => void;
   performStep: () => void;
   undoStep: () => void;
 }) {
@@ -53,9 +53,9 @@ export default function AlgorithmController({
 
         <button
           className="m-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-          onClick={resetHistory}
+          onClick={reset}
         >
-          Clear
+          Reset
         </button>
       </div>
     </div>
