@@ -2,7 +2,7 @@ import { AlgorithmCategories } from "../data/AlgorithmCategories";
 
 import AlgorithmCategory from "../components/NavigationButton/NavigationButton";
 import { motion } from "framer-motion";
-import { shiftIn } from "./transitionProperties";
+import { shiftIn } from "../transitions";
 
 function StartPage() {
   return (

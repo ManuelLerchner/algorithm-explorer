@@ -3,7 +3,7 @@ import AlgorithmCategory from "../components/NavigationButton/NavigationButton";
 import { AlgorithmCategories } from "../data/AlgorithmCategories";
 import AlgorithmCategoryNotFound from "./error/AlgorithmCategoryNotFound";
 import { motion } from "framer-motion";
-import { shiftIn } from "./transitionProperties";
+import { shiftIn } from "../transitions";
 
 function CategoryPage() {
   const params = useParams();
@@ -19,12 +19,12 @@ function CategoryPage() {
 
   return (
     <motion.div
-      key="algorithms-page"
+      key="category-page"
       variants={shiftIn}
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="flex items-center justify-center p-12 lg:p-16 my-auto overfk"
+      className="flex items-center justify-center p-12 lg:p-16 my-auto"
     >
       <div className="flex items-center justify-around h-min w-full  flex-col lg:flex-row ">
         <div className="title max-w-xl h-fit lg:mr-12 text-center lg:text-left flex flex-col lg:items-start items-center my-4">

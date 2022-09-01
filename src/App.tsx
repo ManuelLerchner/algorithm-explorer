@@ -18,10 +18,10 @@ function App() {
       <div className="bg-neutral-100 dark:bg-gray-800 flex flex-col min-h-screen transition-colors duration-500 overflow-x-hidden">
         <NavBar toggleIsDark={toggleIsDark} />
         <AnimatePresence exitBeforeEnter>
-          <Routes location={location} key={location.pathname}>
+          <Routes location={location} key={location.key}>
             <Route path="/" element={<StartPage />} />
             <Route path="/:category" element={<CategoryPage />} />
-            <Route path="/:category/:algorithm" element={<AlgorithmPage />} />
+            <Route path="/:category/:algorithm" element={AlgorithmPage()} />
             <Route path="*" element={<PageDoesNotExist />} />
           </Routes>
         </AnimatePresence>

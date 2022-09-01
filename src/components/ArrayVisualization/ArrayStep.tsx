@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 import { SortingStep } from "../../model/SortingStep";
-import { noPopUp, popUp } from "../../pages/transitionProperties";
+import { noPopUp, popUp } from "../../transitions";
 
 export default function ArrayStep({
   step,

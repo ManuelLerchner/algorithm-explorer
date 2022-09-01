@@ -18,7 +18,7 @@ export const shiftIn: Variants = {
     opacity: 0,
     x: "-50vw",
     transition: {
-      duration: 1,
+      duration: 1.5,
       ease: "easeInOut",
     },
   },
@@ -58,10 +58,6 @@ export const noPopUp: Variants = {
     scale: 1,
     height: "3rem",
     translateY: 0,
-    transition: {
-      duration: 0.55,
-      ease: "easeOut",
-    },
   },
   exit: {},
 };

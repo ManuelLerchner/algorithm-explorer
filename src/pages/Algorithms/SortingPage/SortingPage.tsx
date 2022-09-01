@@ -1,11 +1,9 @@
-import { motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import AlgorithmController from "../../../components/AlgorithmController/AlgorithmController";
 import ArrayHistory from "../../../components/ArrayVisualization/ArrayHistory";
 import InputArray from "../../../components/ArrayVisualization/InputArray";
 
 import { SortingStep } from "../../../model/SortingStep";
-import { shiftIn } from "../../transitionProperties";
 import { createArray } from "./ArrayHelper";
 import GeneralSortingSettings from "./GeneralSortingSettings";
 
@@ -123,15 +121,7 @@ export default function SortingPage({
   }, [inAutoMode]);
 
   return (
-    <motion.div
-      key="sorting-page"
-      variants={shiftIn}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      id="container"
-      className="flex flex-col-reverse justify-around md:flex-row md:items-start items-center w-full h-[95vh] md:h-[80vh] md:my-auto p-4"
-    >
+    <>
       <div className="flex flex-col w-11/12 md:max-w-4xl md:mr-4 overflow-auto scroll-container h-full">
         <InputArray
           array={startArray}
@@ -170,6 +160,6 @@ export default function SortingPage({
           setAnimationActivated={setAnimationActivated}
         />
       </div>
-    </motion.div>
+    </>
   );
 }
