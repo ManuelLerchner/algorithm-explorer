@@ -31,17 +31,14 @@ export default function GeneralSortingSettings({
   return (
     <div>
       <h1 className="dark:text-white text-2xl sm:text-4xl my-4 ">Settings</h1>
-      <div className="bg-white p-4 rounded-md shadow-lg flex flex-col font-semibold">
-        <section className="mb-2 flex justify-between items-center">
-          <label htmlFor="array-length" className="mr-4">
-            Length:
-          </label>
+      <div className="bg-white p-4 rounded-md shadow-lg flex flex-col">
+        <div className="grid grid-cols-[auto_1fr] items-center gap-1">
+          <label className="font-semibold">Array Length:</label>
           <input
-            id="array-length"
             type="number"
             min="0"
             max="16"
-            className="placeholder:text-black text-center w-full"
+            className="placeholder:text-black text-center"
             value={arrayLength.toString()}
             placeholder="0"
             onChange={(e) => {
@@ -57,13 +54,9 @@ export default function GeneralSortingSettings({
               } catch (_) {}
             }}
           />
-        </section>
-        <section className="mb-2 flex justify-between items-center">
-          <label htmlFor="buttons">Presets:</label>
-          <div
-            id="buttons"
-            className="flex flex-wrap justify-center items-center mt-1 w-full"
-          >
+
+          <label className="font-semibold">Array Type:</label>
+          <div className="flex flex-wrap justify-between items-center">
             <button
               className=" bg-blue-500 hover:bg-blue-700 text-white font-bold my-1 py-1 px-2 rounded text-sm"
               onClick={() => {
@@ -75,7 +68,7 @@ export default function GeneralSortingSettings({
               Random
             </button>
             <button
-              className=" bg-green-600 hover:bg-green-700 text-white font-bold my-1 py-1 px-2 rounded text-sm mx-1"
+              className=" bg-green-600 hover:bg-green-700 text-white font-bold my-1 py-1 px-2 rounded text-sm mx-1 "
               onClick={() => {
                 setArrayType("ascending");
                 setInAutoMode(false);
@@ -85,7 +78,7 @@ export default function GeneralSortingSettings({
               Ascending
             </button>
             <button
-              className=" bg-rose-500 hover:bg-rose-600 text-white font-bold my-1 py-1 px-2 rounded text-sm"
+              className=" bg-rose-500 hover:bg-rose-600 text-white font-bold my-1 py-1 px-2 rounded text-sm "
               onClick={() => {
                 setArrayType("descending");
                 setInAutoMode(false);
@@ -95,33 +88,29 @@ export default function GeneralSortingSettings({
               Descending
             </button>
           </div>
-        </section>
 
-        <section className="mb-2 flex justify-between items-center">
-          <label htmlFor="animation">Transitions:</label>
+          <label className="font-semibold">Animations:</label>
 
           <button
-            id="animation"
-            className=" bg-cyan-500 hover:bg-cyan-700 text-white font-bold my-1 py-1 px-2 rounded text-sm mx-auto"
+            className="bg-cyan-500 hover:bg-cyan-700 text-white font-bold my-1 py-1 px-2 rounded text-sm w-22"
             onClick={() => {
               setAnimationActivated(!animationActivated);
             }}
           >
-            {animationActivated ? "Disable" : "Enable"} Animation
+            {animationActivated ? "Disable" : "Enable"}
           </button>
-        </section>
 
-        <section className="mb-2">
-          <label htmlFor="animation" className="mr-4">
-            Speed:
-          </label>
-          <Stack id="animation" spacing={2} direction="row" alignItems="center">
-            <Slow className="w-16 h-16" />
+          <label className="font-semibold">Speed:</label>
+          <Stack spacing={1} direction="row" alignItems="center">
+            <Slow className="w-12 h-min" />
             <Slider
               size="medium"
+              sx={{
+                color: "warning.light",
+              }}
               min={1}
               max={10}
-              defaultValue={3}
+              defaultValue={4}
               valueLabelDisplay="auto"
               onChange={(_, value) => {
                 if (typeof value === "number") {
@@ -129,9 +118,9 @@ export default function GeneralSortingSettings({
                 }
               }}
             />
-            <Fast className="w-16 h-16" />
+            <Fast className="w-[4.5rem]  h-min" />
           </Stack>
-        </section>
+        </div>
       </div>
     </div>
   );

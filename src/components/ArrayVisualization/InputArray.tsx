@@ -14,7 +14,7 @@ export default function InputArray({
       {array.map((value: number, j: number) => (
         <div
           className={
-            "w-8 h-10 sm:h-12 sm:w-16 border-2" +
+            "w-10 h-12 sm:w-12 md:w-16 border-2" +
             (isLocked ? " bg-gray-400" : " bg-white ")
           }
           key={"entry-" + j}

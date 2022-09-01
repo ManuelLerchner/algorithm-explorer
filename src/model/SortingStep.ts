@@ -11,5 +11,8 @@ export interface SortingStep {
   variables?: {
     [key: string]: any;
   };
-  description?: string;
+  description?: {
+    type: "Compared" | "Swapped" | "Finished";
+    description: string;
+  };
 }

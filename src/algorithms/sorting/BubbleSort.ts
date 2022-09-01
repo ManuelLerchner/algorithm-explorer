@@ -25,10 +25,13 @@ export function* bubbleSort(A: number[]): IterableIterator<SortingStep> {
         locked: A.map((_, i) => i > n),
         stepNum: step++,
         variables: {
-          i: i,
-          n: n,
+          i,
+          n,
         },
-        description: `Compared A[${i}] and A[${i + 1}]`,
+        description: {
+          type: "Compared",
+          description: `A[${i}] and A[${i + 1}]`,
+        },
       };
 
       if (A[i] > A[i + 1]) {
@@ -43,10 +46,13 @@ export function* bubbleSort(A: number[]): IterableIterator<SortingStep> {
           locked: A.map((_, i) => i > n),
           stepNum: step++,
           variables: {
-            i: i,
-            n: n,
+            i,
+            n,
           },
-          description: `Swapped A[${i}] and A[${i + 1}]`,
+          description: {
+            type: "Swapped",
+            description: `A[${i}] and A[${i + 1}]`,
+          },
         };
       }
     }
@@ -59,10 +65,6 @@ export function* bubbleSort(A: number[]): IterableIterator<SortingStep> {
     array: [...A],
     locked: A.map((_, i) => i >= 0),
     stepNum: step++,
-    variables: {
-      i: 0,
-      n: 0,
-    },
-    description: "Finished, the array is sorted",
+    description: { type: "Finished", description: "" },
   };
 }

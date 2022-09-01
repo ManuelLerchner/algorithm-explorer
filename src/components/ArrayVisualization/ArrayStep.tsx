@@ -35,7 +35,7 @@ export default function ArrayStep({
                 : null
             }
             className={
-              "w-8 h-12 sm:w-16 border-2 bg-white mt-1" +
+              "w-10 h-12 sm:w-12 md:w-16 border-2 bg-white mt-1" +
               (isCurrentIndex ? " border-red-400 " : " ") +
               (isBeingCompared ? " bg-yellow-500 rounded-md " : "") +
               (isBeingSwapped ? " bg-blue-400 rounded-md " : "") +

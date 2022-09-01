@@ -23,7 +23,7 @@ export default function SortingPage({
   const [startArray, setStartArray] = useState<number[]>([]);
   const [totalHistory, setTotalHistory] = useState<SortingStep[]>([]);
   const [currentHistory, setCurrentHistory] = useState<SortingStep[]>([]);
-  const [animationSpeed, setAnimationSpeed] = useState(3);
+  const [animationSpeed, setAnimationSpeed] = useState(4);
   const [arrayType, setArrayType] = useState<
     "random" | "ascending" | "descending"
   >("random");
@@ -85,11 +85,20 @@ export default function SortingPage({
   // Scrolls to the currently evaluated array element after a step
   useEffect(() => {
     currentSortingElement.current?.scrollIntoView({
-      behavior: animationSpeed < 5 ? "smooth" : "auto",
+      behavior: animationSpeed >= 5 ? "auto" : "smooth",
       block: "start",
       inline: "center",
     });
   }, [currentHistory, animationSpeed]);
+
+  //Deactivate animation if to fast
+  useEffect(() => {
+    if (animationSpeed >= 5) {
+      setAnimationActivated(false);
+    } else {
+      setAnimationActivated(true);
+    }
+  }, [animationSpeed]);
 
   // Runs the "performStep" loop when "auto-mode" is enabled
   useEffect(() => {
@@ -137,7 +146,7 @@ export default function SortingPage({
         />
       </div>
 
-      <div className="flex flex-col w-10/12 sm:w-8/12 md:w-3/12 mb-12 justify-around">
+      <div className="flex flex-col max-w-md mb-12  justify-around h-full">
         <AlgorithmController
           algorithmName={algorithmName}
           inAutoMode={inAutoMode}
