@@ -1,4 +1,7 @@
-import { bubbleSort } from "../../algorithms/sorting/BubbleSort";
+import {
+  bubbleSort,
+  bubbleSortPseudoCode,
+} from "../../algorithms/sorting/BubbleSort";
 import SortingPage from "./SortingPage/SortingPage";
 
 export function getAlgorithmPage(category: string) {
@@ -18,6 +21,6 @@ export function getAlgorithm(category: string, algorithmName: string) {
 function getSortingAlgorithm(algorithmName: string) {
   switch (algorithmName) {
     case "Bubble Sort":
-      return bubbleSort;
+      return { algorithm: bubbleSort, pseudoCode: bubbleSortPseudoCode };
   }
 }

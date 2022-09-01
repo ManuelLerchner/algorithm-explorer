@@ -43,12 +43,25 @@ export const popUp: Variants = {
   exit: {
     opacity: 0,
     scale: 0.3,
-    height: 0,
-    marginTop: "-4px",
-
+    marginTop: "-40px",
     transition: {
       duration: 0.45,
       ease: "easeOut",
     },
   },
+};
+
+export const noPopUp: Variants = {
+  hidden: {},
+  visible: {
+    opacity: 1,
+    scale: 1,
+    height: "3rem",
+    translateY: 0,
+    transition: {
+      duration: 0.55,
+      ease: "easeOut",
+    },
+  },
+  exit: {},
 };

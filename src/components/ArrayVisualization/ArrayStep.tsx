@@ -1,16 +1,18 @@
 import { motion } from "framer-motion";
 import React from "react";
 import { SortingStep } from "../../model/SortingStep";
-import { popUp } from "../../pages/transitionProperties";
+import { noPopUp, popUp } from "../../pages/transitionProperties";
 
 export default function ArrayStep({
   step,
   totalSteps,
   currentElementRef,
+  animationActivated,
 }: {
   step: SortingStep;
   totalSteps: number;
   currentElementRef: React.RefObject<HTMLHeadingElement>;
+  animationActivated: boolean;
 }) {
   return (
     <div className="flex">
@@ -23,7 +25,7 @@ export default function ArrayStep({
         return (
           <motion.div
             key={"entry-" + step.stepNum + "-" + i}
-            variants={popUp}
+            variants={animationActivated ? popUp : noPopUp}
             initial="hidden"
             animate="visible"
             exit="exit"
@@ -33,7 +35,7 @@ export default function ArrayStep({
                 : null
             }
             className={
-              "h-12 w-16 border-2 bg-white mt-1" +
+              "w-8 h-12 sm:w-16 border-2 bg-white mt-1" +
               (isCurrentIndex ? " border-red-400 " : " ") +
               (isBeingCompared ? " bg-yellow-500 rounded-md " : "") +
               (isBeingSwapped ? " bg-blue-400 rounded-md " : "") +

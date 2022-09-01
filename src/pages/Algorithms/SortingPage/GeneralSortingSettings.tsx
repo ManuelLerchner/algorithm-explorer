@@ -13,6 +13,8 @@ export default function GeneralSortingSettings({
   setAnimationSpeed,
   setInAutoMode,
   setArrayType,
+  animationActivated,
+  setAnimationActivated,
 }: {
   arrayLength: number;
   setArrayLength: React.Dispatch<React.SetStateAction<number>>;
@@ -23,49 +25,47 @@ export default function GeneralSortingSettings({
   setArrayType: React.Dispatch<
     React.SetStateAction<"random" | "ascending" | "descending">
   >;
+  animationActivated: boolean;
+  setAnimationActivated: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return (
     <div>
       <h1 className="dark:text-white text-2xl sm:text-4xl my-4 ">Settings</h1>
       <div className="bg-white p-4 rounded-md shadow-lg flex flex-col font-semibold">
-        <section className="mb-2">
-          <label htmlFor="array-length" className=" mr-4">
-            Array Length:
+        <section className="mb-2 flex justify-between items-center">
+          <label htmlFor="array-length" className="mr-4">
+            Length:
           </label>
           <input
             id="array-length"
             type="number"
             min="0"
             max="16"
-            className="placeholder:text-black text-center w-8/12"
+            className="placeholder:text-black text-center w-full"
             value={arrayLength.toString()}
             placeholder="0"
             onChange={(e) => {
               try {
                 var value = parseInt(e.target.value);
-                console.log(value);
+
                 if (value < 1) value = 1;
                 if (value > 16) value = 16;
                 setArrayLength(value);
                 setStartArray(createArray(value, "random"));
                 setInAutoMode(false);
                 reset();
-              } catch (e) {
-                console.log(e);
-              }
+              } catch (_) {}
             }}
           />
         </section>
-        <section className="mb-2">
-          <label htmlFor="buttons" className="mr-4">
-            Array Types:
-          </label>
+        <section className="mb-2 flex justify-between items-center">
+          <label htmlFor="buttons">Presets:</label>
           <div
             id="buttons"
-            className="flex flex-wrap justify-around items-center mt-1 "
+            className="flex flex-wrap justify-center items-center mt-1 w-full"
           >
             <button
-              className=" bg-blue-500 hover:bg-blue-700 text-white font-bold m-1 py-1 px-2 rounded"
+              className=" bg-blue-500 hover:bg-blue-700 text-white font-bold my-1 py-1 px-2 rounded text-sm"
               onClick={() => {
                 setArrayType("random");
                 setInAutoMode(false);
@@ -75,7 +75,7 @@ export default function GeneralSortingSettings({
               Random
             </button>
             <button
-              className=" bg-green-600 hover:bg-green-700 text-white font-bold m-1 py-1 px-2 rounded"
+              className=" bg-green-600 hover:bg-green-700 text-white font-bold my-1 py-1 px-2 rounded text-sm mx-1"
               onClick={() => {
                 setArrayType("ascending");
                 setInAutoMode(false);
@@ -85,7 +85,7 @@ export default function GeneralSortingSettings({
               Ascending
             </button>
             <button
-              className=" bg-rose-500 hover:bg-rose-600 text-white font-bold m-1 py-1 px-2 rounded"
+              className=" bg-rose-500 hover:bg-rose-600 text-white font-bold my-1 py-1 px-2 rounded text-sm"
               onClick={() => {
                 setArrayType("descending");
                 setInAutoMode(false);
@@ -96,9 +96,24 @@ export default function GeneralSortingSettings({
             </button>
           </div>
         </section>
+
+        <section className="mb-2 flex justify-between items-center">
+          <label htmlFor="animation">Transitions:</label>
+
+          <button
+            id="animation"
+            className=" bg-cyan-500 hover:bg-cyan-700 text-white font-bold my-1 py-1 px-2 rounded text-sm mx-auto"
+            onClick={() => {
+              setAnimationActivated(!animationActivated);
+            }}
+          >
+            {animationActivated ? "Disable" : "Enable"} Animation
+          </button>
+        </section>
+
         <section className="mb-2">
           <label htmlFor="animation" className="mr-4">
-            Animation Speed:
+            Speed:
           </label>
           <Stack id="animation" spacing={2} direction="row" alignItems="center">
             <Slow className="w-16 h-16" />
@@ -106,11 +121,11 @@ export default function GeneralSortingSettings({
               size="medium"
               min={1}
               max={10}
-              defaultValue={7}
+              defaultValue={3}
               valueLabelDisplay="auto"
               onChange={(_, value) => {
                 if (typeof value === "number") {
-                  setAnimationSpeed(10 - value + 1);
+                  setAnimationSpeed(value);
                 }
               }}
             />

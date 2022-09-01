@@ -6,9 +6,11 @@ import ArrayStep from "./ArrayStep";
 export default function ArrayHistory({
   steps,
   currentElementRef,
+  animationActivated
 }: {
   steps: SortingStep[];
   currentElementRef: React.RefObject<HTMLHeadingElement>;
+  animationActivated: boolean;
 }) {
   return (
     <div className="flex flex-col w-max mx-auto">
@@ -19,6 +21,7 @@ export default function ArrayHistory({
             step={sortingStep}
             totalSteps={steps.length}
             currentElementRef={currentElementRef}
+            animationActivated={animationActivated}
           />
         ))}
       </AnimatePresence>

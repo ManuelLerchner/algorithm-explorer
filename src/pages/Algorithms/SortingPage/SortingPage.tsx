@@ -12,20 +12,23 @@ import GeneralSortingSettings from "./GeneralSortingSettings";
 export default function SortingPage({
   algorithmName,
   algorithm,
+  pseudoCode,
 }: {
   algorithmName: string;
   algorithm: (A: number[]) => IterableIterator<SortingStep>;
+  pseudoCode: string[];
 }) {
   const currentSortingElement = useRef<HTMLHeadingElement>(null);
   const [arrayLength, setArrayLength] = useState(10);
   const [startArray, setStartArray] = useState<number[]>([]);
   const [totalHistory, setTotalHistory] = useState<SortingStep[]>([]);
   const [currentHistory, setCurrentHistory] = useState<SortingStep[]>([]);
-  const [animationSpeed, setAnimationSpeed] = useState(7);
+  const [animationSpeed, setAnimationSpeed] = useState(3);
   const [arrayType, setArrayType] = useState<
     "random" | "ascending" | "descending"
   >("random");
   const [inAutoMode, setInAutoMode] = useState(false);
+  const [animationActivated, setAnimationActivated] = useState(true);
 
   const stepIterator = useMemo(
     () => algorithm([...startArray]),
@@ -82,20 +85,22 @@ export default function SortingPage({
   // Scrolls to the currently evaluated array element after a step
   useEffect(() => {
     currentSortingElement.current?.scrollIntoView({
-      behavior: "smooth",
+      behavior: animationSpeed < 5 ? "smooth" : "auto",
       block: "start",
       inline: "center",
     });
-  }, [currentHistory]);
+  }, [currentHistory, animationSpeed]);
 
   // Runs the "performStep" loop when "auto-mode" is enabled
   useEffect(() => {
     if (inAutoMode) {
+      let ms = 5000 / Math.pow(animationSpeed, 2);
+
       let timer = setTimeout(() => {
         if (inAutoMode) {
           performStep();
         }
-      }, animationSpeed * 200);
+      }, ms);
       return () => clearTimeout(timer);
     }
   }, [inAutoMode, performStep, animationSpeed]);
@@ -128,6 +133,7 @@ export default function SortingPage({
         <ArrayHistory
           steps={currentHistory}
           currentElementRef={currentSortingElement}
+          animationActivated={animationActivated}
         />
       </div>
 
@@ -138,7 +144,9 @@ export default function SortingPage({
           setInAutoMode={setInAutoMode}
           reset={reset}
           performStep={performStep}
+          currentStep={currentHistory[currentHistory.length - 1]}
           undoStep={undoStep}
+          pseudoCode={pseudoCode}
         />
 
         <GeneralSortingSettings
@@ -149,6 +157,8 @@ export default function SortingPage({
           setAnimationSpeed={setAnimationSpeed}
           setInAutoMode={setInAutoMode}
           setArrayType={setArrayType}
+          animationActivated={animationActivated}
+          setAnimationActivated={setAnimationActivated}
         />
       </div>
     </motion.div>

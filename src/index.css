@@ -20,3 +20,9 @@ html {
     margin: 0;
   }
 }
+
+code {
+  padding: 0px !important;
+  width: min-content !important;
+  margin: 0 !important;
+}

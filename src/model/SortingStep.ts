@@ -8,4 +8,8 @@ export interface SortingStep {
   array: number[];
   locked: boolean[];
   stepNum: number;
+  variables?: {
+    [key: string]: any;
+  };
+  description?: string;
 }

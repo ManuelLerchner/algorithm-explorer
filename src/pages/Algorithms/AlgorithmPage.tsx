@@ -11,13 +11,13 @@ function AlgorithmPage() {
   const algorithmName = breadcrumbs[breadcrumbs.length - 1].name;
 
   const AlgorithmPage = getAlgorithmPage(category);
-  const algorithm = getAlgorithm(category, algorithmName);
+  const { algorithm, pseudoCode } = getAlgorithm(category, algorithmName) ?? {};
 
-  if (!AlgorithmPage || !algorithm) {
+  if (!AlgorithmPage || !algorithm || !pseudoCode) {
     return <AlgorithmNotFound algorithm={algorithmName} category={category} />;
   }
 
-  return <AlgorithmPage algorithmName={algorithmName} algorithm={algorithm} />;
+  return <AlgorithmPage algorithmName={algorithmName} algorithm={algorithm} pseudoCode={pseudoCode} />;
 }
 
 export default AlgorithmPage;
