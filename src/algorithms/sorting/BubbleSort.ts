@@ -45,7 +45,7 @@ export function* bubbleSort(A: number[]): IterableIterator<SortingStep> {
           },
           description: {
             type: "Swapped",
-            description: `A[${i}] and A[${i + 1}]`,
+            description: `A[${i}] ↔ A[${i + 1}]`,
           },
         };
       }

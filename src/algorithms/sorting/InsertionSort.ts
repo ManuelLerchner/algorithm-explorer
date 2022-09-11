@@ -1,5 +1,4 @@
 import { SortingStep } from "../../model/SortingStep";
-import { swap } from "./Swap";
 
 export const insertionSortPseudoCode = [
   "for (let n=1; n<A.length; n++) {",
@@ -55,7 +54,7 @@ export function* insertionSort(A: number[]): IterableIterator<SortingStep> {
         },
         description: {
           type: "Shifted",
-          description: `A[${i}] and A[${i - 1}]`,
+          description: `A[${i + 1}] = A[${i}]`,
         },
       };
     }
@@ -64,14 +63,15 @@ export function* insertionSort(A: number[]): IterableIterator<SortingStep> {
       codeRow: 8,
       currentIndex: i,
       array: [...A],
-      locked: A.map((_, k) => k == i),
+      locked: A.map((_, i) => false),
       variables: {
         i,
         n,
       },
+      highlightedIndex: i,
       description: {
         type: "Set",
-        description: `A[${i}] =${element}`,
+        description: `A[${i}]=${element}`,
       },
     };
   }

@@ -72,7 +72,7 @@ export function* selectionSort(A: number[]): IterableIterator<SortingStep> {
       },
       description: {
         type: "Swapped",
-        description: `A[${n}] and A[${minIndex}]`,
+        description: `A[${n}] ↔ A[${minIndex}]`,
       },
     };
   }
