@@ -23,7 +23,7 @@ export default function SortingPage({
   const [currentHistory, setCurrentHistory] = useState<SortingStep[]>([]);
   const [animationSpeed, setAnimationSpeed] = useState(4);
   const [arrayType, setArrayType] = useState<
-    "random" | "ascending" | "descending"
+    "random" | "ascending" | "descending" | "almostSorted"
   >("random");
   const [inAutoMode, setInAutoMode] = useState(false);
   const [animationActivated, setAnimationActivated] = useState(true);
@@ -58,6 +58,7 @@ export default function SortingPage({
         setInAutoMode(false);
         return;
       }
+      step.value.stepNum = totalHistory.length;
       const updateHistory = [...totalHistory, step.value];
       setTotalHistory(updateHistory);
       setCurrentHistory(updateHistory);
@@ -122,7 +123,7 @@ export default function SortingPage({
 
   return (
     <>
-      <div className="flex flex-col w-11/12 md:max-w-4xl md:mr-4 overflow-auto scroll-container h-full">
+      <div className="flex flex-col w-11/12 md:max-w-4xl md:mr-4 overflow-auto scroll-container h-full py-16">
         <InputArray
           array={startArray}
           isLocked={totalHistory.length > 0}
@@ -136,7 +137,7 @@ export default function SortingPage({
         />
       </div>
 
-      <div className="flex flex-col max-w-md mb-12  justify-around h-full">
+      <div className="flex flex-col max-w-md mb-12 h-full overflow-y-auto py-6 pr-2">
         <AlgorithmController
           algorithmName={algorithmName}
           inAutoMode={inAutoMode}

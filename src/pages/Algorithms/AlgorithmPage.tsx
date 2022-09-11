@@ -26,7 +26,7 @@ function AlgorithmPage() {
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="flex flex-col-reverse justify-around md:flex-row md:items-start items-center w-full h-[95vh] md:h-[80vh] md:my-auto p-4"
+      className="flex flex-col-reverse justify-around md:flex-row md:items-start items-center w-full h-[95vh] md:h-[calc(100vh-5rem)] md:my-auto"
     >
       <AlgorithmPage
         algorithmName={algorithmName}

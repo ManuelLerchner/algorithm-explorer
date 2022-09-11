@@ -21,6 +21,8 @@ export default function ArrayStep({
         let isBeingSwapped = step.swapping?.includes(i);
         let isCurrentIndex = step.currentIndex === i;
         let isLocked = step.locked?.[i];
+        let isHighlighted = step.highlightedIndex === i;
+        let isHiddened = step.hidden?.includes(i);
 
         return (
           <motion.div
@@ -39,11 +41,12 @@ export default function ArrayStep({
               (isCurrentIndex ? " border-red-400 " : " ") +
               (isBeingCompared ? " bg-yellow-500 rounded-md " : "") +
               (isBeingSwapped ? " bg-blue-400 rounded-md " : "") +
-              (isLocked ? " bg-green-400 " : "")
+              (isLocked ? " bg-green-400 " : "") +
+              (isHighlighted ? " bg-purple-400 rounded-md " : "")
             }
           >
             <div className="w-full h-full flex items-center justify-center">
-              <span>{value}</span>
+              <span>{isHiddened ? "" : value}</span>
             </div>
           </motion.div>
         );

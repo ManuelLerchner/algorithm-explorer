@@ -38,8 +38,8 @@ export default function AlgorithmController({
       <div className="flex flex-col bg-white p-4 rounded-md shadow-lg">
         <SyntaxHighlighter
           customStyle={{
-            padding: "1rem",
-            paddingLeft: "0.5rem",
+            padding: "0.5rem",
+            paddingLeft: "0rem",
             marginTop: 0,
             marginBottom: 0,
             display: "flex",
@@ -71,7 +71,7 @@ export default function AlgorithmController({
           </div>
 
           <label className="font-semibold mr-4">Variables:</label>
-          <div className="flex items-center">
+          <div className="flex items-center flex-wrap">
             {Object.entries(currentStep?.variables ?? { A: "Array" }).map(
               ([variable, value]) => (
                 <div key={variable} className=" mr-4">

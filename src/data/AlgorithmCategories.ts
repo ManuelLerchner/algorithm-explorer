@@ -34,6 +34,11 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
         url: "/sorting/insertion-sort",
         icon: sortIcon,
       },
+      {
+        name: "Quick Sort",
+        url: "/sorting/quick-sort",
+        icon: sortIcon,
+      },
     ],
   },
   {

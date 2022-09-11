@@ -23,7 +23,7 @@ export default function GeneralSortingSettings({
   setAnimationSpeed: React.Dispatch<React.SetStateAction<number>>;
   setInAutoMode: React.Dispatch<React.SetStateAction<boolean>>;
   setArrayType: React.Dispatch<
-    React.SetStateAction<"random" | "ascending" | "descending">
+    React.SetStateAction<"random" | "ascending" | "descending" | "almostSorted">
   >;
   animationActivated: boolean;
   setAnimationActivated: React.Dispatch<React.SetStateAction<boolean>>;
@@ -86,6 +86,16 @@ export default function GeneralSortingSettings({
               }}
             >
               Descending
+            </button>
+            <button
+              className=" bg-orange-500 hover:bg-orange-600 text-white font-bold my-1 py-1 px-2 rounded text-sm "
+              onClick={() => {
+                setArrayType("almostSorted");
+                setInAutoMode(false);
+                reset();
+              }}
+            >
+              Amost Sorted
             </button>
           </div>
 
