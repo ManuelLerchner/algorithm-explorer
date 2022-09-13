@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { mapUrlToBreadcrumbs } from "../../components/NavBar/BreadcrumbHelper";
 import AlgorithmNotFound from "../Error/AlgorithmNotFound";
-import { shiftIn } from "../../transitions";
+import { shiftIn } from "../../util/Transitions";
 import SortingPage from "./SortingPage/SortingPage";
 import {
   getGraphTraversalAlgorithm,

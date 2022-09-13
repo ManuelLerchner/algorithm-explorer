@@ -1,5 +1,5 @@
-import { Graph, GraphNode } from "../../model/Graph";
-import { GraphTraversalStep } from "../../model/Steps/GraphTraversalStep";
+import { Graph, GraphNode } from "../../../model/Graph";
+import { GraphTraversalStep } from "../../../model/Steps/GraphTraversalStep";
 
 const breadthFirstSearchPseudoCode = [
   "function BFS(G, root) {",

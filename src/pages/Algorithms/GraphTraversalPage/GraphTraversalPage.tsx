@@ -9,7 +9,7 @@ export default function GraphTraversalPage({
 }: {
   algorithmName: string;
   algorithm: (
-    G: Graph,
+    graph: Graph,
     root: GraphNode
   ) => IterableIterator<GraphTraversalStep>;
   pseudoCode: string[];

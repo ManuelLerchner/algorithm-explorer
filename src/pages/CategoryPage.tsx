@@ -3,7 +3,7 @@ import AlgorithmCategory from "../components/NavigationButton/NavigationButton";
 import { AlgorithmCategories } from "../data/AlgorithmCategories";
 import AlgorithmCategoryNotFound from "./Error/AlgorithmCategoryNotFound";
 import { motion } from "framer-motion";
-import { shiftIn } from "../transitions";
+import { shiftIn } from "../util/Transitions";
 
 function CategoryPage() {
   const params = useParams();

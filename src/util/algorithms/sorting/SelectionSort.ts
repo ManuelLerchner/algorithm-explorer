@@ -1,4 +1,5 @@
-import { SortingStep } from "../../model/Steps/SortingStep";
+
+import { SortingStep } from "../../../model/Steps/SortingStep";
 import { swap } from "./Swap";
 
 const selectionSortPseudoCode = [

@@ -1,8 +1,8 @@
-import { bfsinfo } from "../algorithms/graph-traversal/breadthFirstSearch";
-import { bubbleSortInfo } from "../algorithms/sorting/BubbleSort";
-import { insertionSortInfo } from "../algorithms/sorting/InsertionSort";
-import { quickSortInfo } from "../algorithms/sorting/QuickSort";
-import { selectionSortInfo } from "../algorithms/sorting/SelectionSort";
+import { bfsinfo } from "./algorithms/graph-traversal/breadthFirstSearch";
+import { bubbleSortInfo } from "./algorithms/sorting/BubbleSort";
+import { insertionSortInfo } from "./algorithms/sorting/InsertionSort";
+import { quickSortInfo } from "./algorithms/sorting/QuickSort";
+import { selectionSortInfo } from "./algorithms/sorting/SelectionSort";
 
 export function getSortingAlgorithm(algorithmName: string) {
   switch (algorithmName) {

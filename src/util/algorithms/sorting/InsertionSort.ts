@@ -1,4 +1,4 @@
-import { SortingStep } from "../../model/Steps/SortingStep";
+import { SortingStep } from "../../../model/Steps/SortingStep";
 
 const insertionSortPseudoCode = [
   "for (let n=1; n<A.length; n++) {",
