@@ -49,7 +49,7 @@ function* breadthFirstSearch(
         description: `current = Q.shift()`,
       },
     };
-    for (let neighbor of current.outConnections) {
+    for (let neighbor of graph.neighbours(current)) {
       if (!neighbor.to.visited) {
         neighbor.to.visited = true;
         queue.push(neighbor.to);

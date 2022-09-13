@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import AlgorithmController from "../../../components/AlgorithmController/AlgorithmController";
 import ArrayHistory from "../../../components/ArrayVisualization/ArrayHistory";
 import InputArray from "../../../components/ArrayVisualization/InputArray";
+import { ArrayType } from "../../../model/CustomPresetTypes";
 
 import { SortingStep } from "../../../model/Steps/SortingStep";
 import { createArray } from "../../../util/ArrayCreator";
@@ -22,9 +23,7 @@ export default function SortingPage({
   const [totalHistory, setTotalHistory] = useState<SortingStep[]>([]);
   const [currentHistory, setCurrentHistory] = useState<SortingStep[]>([]);
   const [animationSpeed, setAnimationSpeed] = useState(4);
-  const [arrayType, setArrayType] = useState<
-    "random" | "ascending" | "descending" | "almostSorted"
-  >("random");
+  const [arrayType, setArrayType] = useState<ArrayType>("random");
   const [inAutoMode, setInAutoMode] = useState(false);
   const [animationActivated, setAnimationActivated] = useState(true);
 
@@ -38,9 +37,7 @@ export default function SortingPage({
     setStartArray(createArray(arrayLength, arrayType));
   }, [arrayLength, arrayType]);
 
-  /**
-   * Resets the History-View
-   */
+  // Resets the History-View
   function reset() {
     setTotalHistory([]);
     setCurrentHistory([]);
@@ -48,9 +45,7 @@ export default function SortingPage({
     setStartArray(createArray(arrayLength, arrayType));
   }
 
-  /**
-   * Performs a single step of the Sorting-Calculation
-   */
+  //Performs a single step of the Sorting-Calculation
   const performStep = useCallback(() => {
     if (currentHistory.length >= totalHistory.length) {
       const step = stepIterator.next();
@@ -68,9 +63,7 @@ export default function SortingPage({
     }
   }, [totalHistory, stepIterator, currentHistory.length]);
 
-  /**
-   * Goes back a step in the Sorting-Calculation
-   */
+  // Goes back a step in the Sorting-Calculation
   function undoStep() {
     const newLength = currentHistory.length - 1;
 

@@ -1,11 +1,10 @@
+import { ArrayType } from "../model/CustomPresetTypes";
+
 /**
- * Resets the start-array
+ * Creates an array of the specified length, of the specified type
  * @param arrayOrder The ordering type of the new array
  */
-export function createArray(
-  len: number,
-  arrayOrder: "random" | "ascending" | "descending" | "almostSorted"
-) {
+export function createArray(len: number, arrayOrder: ArrayType) {
   switch (arrayOrder) {
     case "random":
       return Array.from({ length: len }, (_) =>

@@ -12,6 +12,6 @@ export interface GraphTraversalStep extends IterationStep {
   variables?: {
     [key: string]: any;
   };
-  currentNode?: string;
-  visited?: string[];
+  currentNode?: number;
+  visited?: number[];
 }

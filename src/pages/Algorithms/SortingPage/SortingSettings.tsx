@@ -4,6 +4,7 @@ import { createArray } from "../../../util/ArrayCreator";
 
 import { ReactComponent as Slow } from "../../../assets/slow.svg";
 import { ReactComponent as Fast } from "../../../assets/fast.svg";
+import { ArrayType } from "../../../model/CustomPresetTypes";
 
 export default function GeneralSortingSettings({
   arrayLength,
@@ -22,9 +23,7 @@ export default function GeneralSortingSettings({
   reset: () => void;
   setAnimationSpeed: React.Dispatch<React.SetStateAction<number>>;
   setInAutoMode: React.Dispatch<React.SetStateAction<boolean>>;
-  setArrayType: React.Dispatch<
-    React.SetStateAction<"random" | "ascending" | "descending" | "almostSorted">
-  >;
+  setArrayType: React.Dispatch<React.SetStateAction<ArrayType>>;
   animationActivated: boolean;
   setAnimationActivated: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
