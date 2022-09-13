@@ -1,3 +1,3 @@
 export type ArrayType = "random" | "ascending" | "descending" | "almostSorted";
 
-export type GraphType = "fullyConnected" | "tree" | "star" | "cycle" | "grid";
+export type GraphType = "fullyConnected" | "star" | "random" | "grid";

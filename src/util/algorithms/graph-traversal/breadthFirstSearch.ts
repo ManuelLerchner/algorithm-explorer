@@ -7,6 +7,9 @@ const breadthFirstSearchPseudoCode = [
   "  root.visited = true;",
   "  while (Q.length > 0) {",
   "    let current = Q.shift();",
+  "    if (current == target) {",
+  "      return",
+  "    }",
   "    for (let neighbor of current.neighbors) {",
   "      if (!neighbor.visited) {",
   "        neighbor.visited = true;",
@@ -19,7 +22,8 @@ const breadthFirstSearchPseudoCode = [
 
 function* breadthFirstSearch(
   graph: Graph,
-  root: GraphNode
+  root: GraphNode,
+  target: GraphNode
 ): IterableIterator<GraphTraversalStep> {
   const queue = [root];
   root.visited = true;
@@ -50,16 +54,31 @@ function* breadthFirstSearch(
       },
     };
     for (let neighbor of graph.neighbours(current)) {
-      if (!neighbor.to.visited) {
-        neighbor.to.visited = true;
-        queue.push(neighbor.to);
+      if (neighbor === target) {
+        yield {
+          codeRow: 5,
+          currentIndex: -1,
+          array: [],
+          locked: [],
+          currentNode: current.id,
+          visited: [current.id],
+          description: {
+            type: "Selected",
+            description: `if (current == target) {`,
+          },
+        };
+      }
+
+      if (!neighbor.visited) {
+        neighbor.visited = true;
+        queue.push(neighbor);
         yield {
           codeRow: 6,
           currentIndex: -1,
           array: [],
           locked: [],
           currentNode: current.id,
-          visited: [current.id, neighbor.to.id],
+          visited: [current.id, neighbor.id],
           description: {
             type: "Updated",
             description: `neighbor.visited = true`,
@@ -71,7 +90,7 @@ function* breadthFirstSearch(
           array: [],
           locked: [],
           currentNode: current.id,
-          visited: [current.id, neighbor.to.id],
+          visited: [current.id, neighbor.id],
           description: {
             type: "Set",
             description: `Q.push(neighbor)`,

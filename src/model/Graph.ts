@@ -29,9 +29,9 @@ export class Graph {
     this.edges = edges;
   }
 
-  neighbours(from: GraphNode): Connection[] {
+  neighbours(from: GraphNode): GraphNode[] {
     return this.edges
       .filter((edge) => edge.from === from)
-      .sort((a, b) => a.to.id - b.to.id);
+      .map((edge) => edge.to);
   }
 }

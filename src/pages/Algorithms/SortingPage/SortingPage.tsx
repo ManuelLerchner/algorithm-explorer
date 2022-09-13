@@ -6,7 +6,7 @@ import { ArrayType } from "../../../model/CustomPresetTypes";
 
 import { SortingStep } from "../../../model/Steps/SortingStep";
 import { createArray } from "../../../util/ArrayCreator";
-import GeneralSortingSettings from "./SortingSettings";
+import SortingSettings from "./SortingSettings";
 
 export default function SortingPage({
   algorithmName,
@@ -53,7 +53,7 @@ export default function SortingPage({
         setInAutoMode(false);
         return;
       }
-     
+
       const updateHistory = [...totalHistory, step.value];
       setTotalHistory(updateHistory);
       setCurrentHistory(updateHistory);
@@ -142,7 +142,7 @@ export default function SortingPage({
           pseudoCode={pseudoCode}
         />
 
-        <GeneralSortingSettings
+        <SortingSettings
           arrayLength={arrayLength}
           setArrayLength={setArrayLength}
           setStartArray={setStartArray}
