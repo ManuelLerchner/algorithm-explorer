@@ -1,6 +1,6 @@
-import { SortingStep } from "../../model/SortingStep";
+import { SortingStep } from "../../model/Steps/SortingStep";
 
-export const insertionSortPseudoCode = [
+const insertionSortPseudoCode = [
   "for (let n=1; n<A.length; n++) {",
   "  let element = A[n];",
   "  let i = n;",
@@ -12,7 +12,7 @@ export const insertionSortPseudoCode = [
   "}",
 ];
 
-export function* insertionSort(A: number[]): IterableIterator<SortingStep> {
+function* insertionSort(A: number[]): IterableIterator<SortingStep> {
   for (let n = 1; n < A.length; n++) {
     let element = A[n];
     let i = n;
@@ -83,3 +83,9 @@ export function* insertionSort(A: number[]): IterableIterator<SortingStep> {
     description: { type: "Finished", description: "" },
   };
 }
+
+export const insertionSortInfo = {
+  algorithmName: "Insertion Sort",
+  algorithm: insertionSort,
+  pseudoCode: insertionSortPseudoCode,
+};

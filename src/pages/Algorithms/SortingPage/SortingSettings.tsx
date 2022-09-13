@@ -1,6 +1,6 @@
 import { Slider, Stack } from "@mui/material";
 import React from "react";
-import { createArray } from "./ArrayHelper";
+import { createArray } from "../../../util/ArrayCreator";
 
 import { ReactComponent as Slow } from "../../../assets/slow.svg";
 import { ReactComponent as Fast } from "../../../assets/fast.svg";

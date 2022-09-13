@@ -9,8 +9,6 @@ import { ReactComponent as heapsIcon } from "../assets/heaps-icon.svg";
 import { ReactComponent as quantumIcon } from "../assets/quantum-icon.svg";
 import { AlgorithmCategory } from "../model/AlgorithmCategory";
 
-//Temportary algorithm placeholders
-
 export const AlgorithmCategories: AlgorithmCategory[] = [
   {
     name: "Sorting",
@@ -42,40 +40,40 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
     ],
   },
   {
-    name: "Graphs",
+    name: "Graph Traversal",
     description:
       "Graphs are a data structure that are used to represent a set of nodes and edges between them. There exist many different algorithms each of them with their set of strengths and weaknesses.",
-    url: "/graphs",
+    url: "/graph-traversal",
     icon: graphIcon,
     implementations: [
       {
         name: "Breadth First Search",
-        url: "/graphs/breadth-first-search",
+        url: "/graph-traversal/breadth-first-search",
         icon: graphIcon,
       },
       {
         name: "Depth First Search",
-        url: "/graphs/depth-first-search",
+        url: "/graph-traversal/depth-first-search",
         icon: graphIcon,
       },
       {
         name: "Dijkstra's Algorithm",
-        url: "/graphs/dijkstras-algorithm",
+        url: "/graph-traversal/dijkstras-algorithm",
         icon: graphIcon,
       },
       {
         name: "Floyd Warshall Algorithm",
-        url: "/graphs/floyd-warshall-algorithm",
+        url: "/graph-traversal/floyd-warshall-algorithm",
         icon: graphIcon,
       },
       {
         name: "Prim's Algorithm",
-        url: "/graphs/prims-algorithm",
+        url: "/graph-traversal/prims-algorithm",
         icon: graphIcon,
       },
       {
         name: "Kruskal's Algorithm",
-        url: "/graphs/kruskals-algorithm",
+        url: "/graph-traversal/kruskals-algorithm",
         icon: graphIcon,
       },
     ],

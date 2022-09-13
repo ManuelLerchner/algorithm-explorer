@@ -1,7 +1,7 @@
-import { SortingStep } from "../../model/SortingStep";
+import { SortingStep } from "../../model/Steps/SortingStep";
 import { swap } from "./Swap";
 
-export const quickSortPseudoCode = [
+const quickSortPseudoCode = [
   "function quickSort(A, start, end) {",
   "  if (start >= end) return;",
   "  let i = start, j = end - 1;",
@@ -166,7 +166,7 @@ function* quickSortHelper(
   yield* quickSortHelper(A, i + 1, end, locked, depth + 1);
 }
 
-export function* quickSort(A: number[]): IterableIterator<SortingStep> {
+function* quickSort(A: number[]): IterableIterator<SortingStep> {
   let locked = A.map((_) => false);
   yield* quickSortHelper(A, 0, A.length - 1, locked, 0);
 
@@ -178,3 +178,9 @@ export function* quickSort(A: number[]): IterableIterator<SortingStep> {
     description: { type: "Finished", description: "" },
   };
 }
+
+export const quickSortInfo = {
+  algorithmName: "Quick Sort",
+  algorithm: quickSort,
+  pseudoCode: quickSortPseudoCode,
+};

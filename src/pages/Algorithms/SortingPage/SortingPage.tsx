@@ -3,9 +3,9 @@ import AlgorithmController from "../../../components/AlgorithmController/Algorit
 import ArrayHistory from "../../../components/ArrayVisualization/ArrayHistory";
 import InputArray from "../../../components/ArrayVisualization/InputArray";
 
-import { SortingStep } from "../../../model/SortingStep";
-import { createArray } from "./ArrayHelper";
-import GeneralSortingSettings from "./GeneralSortingSettings";
+import { SortingStep } from "../../../model/Steps/SortingStep";
+import { createArray } from "../../../util/ArrayCreator";
+import GeneralSortingSettings from "./SortingSettings";
 
 export default function SortingPage({
   algorithmName,
@@ -58,7 +58,7 @@ export default function SortingPage({
         setInAutoMode(false);
         return;
       }
-      step.value.stepNum = totalHistory.length;
+     
       const updateHistory = [...totalHistory, step.value];
       setTotalHistory(updateHistory);
       setCurrentHistory(updateHistory);

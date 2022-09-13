@@ -1,15 +1,17 @@
 import { motion } from "framer-motion";
 import React from "react";
-import { SortingStep } from "../../model/SortingStep";
+import { SortingStep } from "../../model/Steps/SortingStep";
 import { noPopUp, popUp } from "../../transitions";
 
 export default function ArrayStep({
   step,
+  stepNum,
   totalSteps,
   currentElementRef,
   animationActivated,
 }: {
   step: SortingStep;
+  stepNum: number;
   totalSteps: number;
   currentElementRef: React.RefObject<HTMLHeadingElement>;
   animationActivated: boolean;
@@ -26,13 +28,13 @@ export default function ArrayStep({
 
         return (
           <motion.div
-            key={"entry-" + step.stepNum + "-" + i}
+            key={"entry-" + stepNum + "-" + i}
             variants={animationActivated ? popUp : noPopUp}
             initial="hidden"
             animate="visible"
             exit="exit"
             ref={
-              isCurrentIndex && step.stepNum === totalSteps - 1
+              isCurrentIndex && stepNum === totalSteps - 1
                 ? currentElementRef
                 : null
             }

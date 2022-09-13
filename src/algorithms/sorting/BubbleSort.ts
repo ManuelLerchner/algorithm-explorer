@@ -1,7 +1,7 @@
-import { SortingStep } from "../../model/SortingStep";
+import { SortingStep } from "../../model/Steps/SortingStep";
 import { swap } from "./Swap";
 
-export const bubbleSortPseudoCode = [
+const bubbleSortPseudoCode = [
   "for (let n=A.length-1; n>=1; n--) {",
   "  for (let i=0; i<n; i++) {",
   "    if (A[i] > A[i+1]) {",
@@ -11,7 +11,7 @@ export const bubbleSortPseudoCode = [
   "}",
 ];
 
-export function* bubbleSort(A: number[]): IterableIterator<SortingStep> {
+function* bubbleSort(A: number[]): IterableIterator<SortingStep> {
   for (let n = A.length - 1; n >= 1; n--) {
     for (let i = 0; i < n; i++) {
       yield {
@@ -59,3 +59,9 @@ export function* bubbleSort(A: number[]): IterableIterator<SortingStep> {
     description: { type: "Finished", description: "" },
   };
 }
+
+export const bubbleSortInfo = {
+  algorithmName: "Bubble Sort",
+  algorithm: bubbleSort,
+  pseudoCode: bubbleSortPseudoCode,
+};

@@ -1,7 +1,7 @@
-import { SortingStep } from "../../model/SortingStep";
+import { SortingStep } from "../../model/Steps/SortingStep";
 import { swap } from "./Swap";
 
-export const selectionSortPseudoCode = [
+const selectionSortPseudoCode = [
   "for (let n=0; n<A.length; n++) {",
   "  let minIndex = n;",
   "  for (let i=n+1; i<A.length; i++) {",
@@ -13,7 +13,7 @@ export const selectionSortPseudoCode = [
   "}",
 ];
 
-export function* selectionSort(A: number[]): IterableIterator<SortingStep> {
+function* selectionSort(A: number[]): IterableIterator<SortingStep> {
   for (let n = 0; n < A.length; n++) {
     let minIndex = n;
 
@@ -84,3 +84,9 @@ export function* selectionSort(A: number[]): IterableIterator<SortingStep> {
     description: { type: "Finished", description: "" },
   };
 }
+
+export const selectionSortInfo = {
+  algorithmName: "Insertion Sort",
+  algorithm: selectionSort,
+  pseudoCode: selectionSortPseudoCode,
+};

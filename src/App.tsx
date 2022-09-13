@@ -1,11 +1,11 @@
-import StartPage from "./pages/StartPage";
+import StartPage from "./pages/LandingPage";
 import NavBar from "./components/NavBar/NavBar";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useState } from "react";
 import CategoryPage from "./pages/CategoryPage";
 import { AnimatePresence } from "framer-motion";
 import AlgorithmPage from "./pages/Algorithms/AlgorithmPage";
-import PageDoesNotExist from "./pages/error/PageDoesNotExist";
+import PageDoesNotExist from "./pages/Error/PageDoesNotExist";
 
 function App() {
   const [isDark, setIsDark] = useState(true);

@@ -3,7 +3,7 @@ import React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
 import { coy as codeStyle } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { SortingStep } from "../../model/SortingStep";
+import { SortingStep } from "../../model/Steps/SortingStep";
 
 export default function AlgorithmController({
   algorithmName,

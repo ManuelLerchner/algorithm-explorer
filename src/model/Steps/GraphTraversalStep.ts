@@ -1,5 +1,6 @@
-export interface SortingStep {
-  codeRow: number;
+import { IterationStep } from "./IterationStep";
+
+export interface GraphTraversalStep extends IterationStep {
   currentIndex: number;
   comparing?: [number, number];
   swapping?: [number, number];
@@ -11,16 +12,6 @@ export interface SortingStep {
   variables?: {
     [key: string]: any;
   };
-  description?: {
-    type:
-      | "Compared"
-      | "Swapped"
-      | "Finished"
-      | "Selected"
-      | "Updated"
-      | "Set"
-      | "Shifted";
-
-    description: string;
-  };
+  currentNode?: string;
+  visited?: string[];
 }

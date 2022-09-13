@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import AlgorithmCategory from "../components/NavigationButton/NavigationButton";
 import { AlgorithmCategories } from "../data/AlgorithmCategories";
-import AlgorithmCategoryNotFound from "./error/AlgorithmCategoryNotFound";
+import AlgorithmCategoryNotFound from "./Error/AlgorithmCategoryNotFound";
 import { motion } from "framer-motion";
 import { shiftIn } from "../transitions";
 
@@ -9,9 +9,9 @@ function CategoryPage() {
   const params = useParams();
   const algorithmCategory = params.category;
 
-  const algorithm = AlgorithmCategories.find(
-    (category) => category.name.toLowerCase() === algorithmCategory
-  )!;
+  const algorithm = AlgorithmCategories.find((category) => {
+    return category.url.substring(1) === algorithmCategory;
+  })!;
 
   if (!algorithm) {
     return <AlgorithmCategoryNotFound category={algorithmCategory ?? "-"} />;
