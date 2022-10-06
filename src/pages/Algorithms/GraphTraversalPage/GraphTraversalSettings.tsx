@@ -31,7 +31,6 @@ export default function GraphTraversalSettings({
 }) {
   return (
     <div>
-      <h1 className="dark:text-white text-2xl sm:text-4xl my-4 ">Settings</h1>
       <div className="bg-white p-4 rounded-md shadow-lg flex flex-col">
         <div className="grid grid-cols-[auto_1fr] items-center gap-1">
           <label className="font-semibold">Nodes:</label>

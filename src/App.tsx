@@ -5,7 +5,7 @@ import { useState } from "react";
 import CategoryPage from "./pages/CategoryPage";
 import { AnimatePresence } from "framer-motion";
 import AlgorithmPage from "./pages/Algorithms/AlgorithmPage";
-import PageDoesNotExist from "./pages/Error/PageDoesNotExist";
+import PageDoesNotExist from "./pages/error/PageDoesNotExist";
 
 function App() {
   const [isDark, setIsDark] = useState(true);

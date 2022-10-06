@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import AlgorithmController from "../../../components/AlgorithmController/AlgorithmController";
 import ArrayHistory from "../../../components/ArrayVisualization/ArrayHistory";
 import InputArray from "../../../components/ArrayVisualization/InputArray";
+import AlgoPageLayout from "../../../components/Layout/AlgoPageLayout";
 import { ArrayType } from "../../../model/CustomPresetTypes";
 
 import { SortingStep } from "../../../model/Steps/SortingStep";
@@ -115,33 +115,30 @@ export default function SortingPage({
   }, [inAutoMode]);
 
   return (
-    <>
-      <div className="flex flex-col w-11/12 md:max-w-4xl md:mr-4 overflow-auto scroll-container h-full py-16">
-        <InputArray
-          array={startArray}
-          isLocked={totalHistory.length > 0}
-          setArray={setStartArray}
-        />
-
-        <ArrayHistory
-          steps={currentHistory}
-          currentElementRef={currentSortingElement}
-          animationActivated={animationActivated}
-        />
-      </div>
-
-      <div className="flex flex-col max-w-md mb-12 h-full overflow-y-auto py-6 pr-2">
-        <AlgorithmController
-          algorithmName={algorithmName}
-          inAutoMode={inAutoMode}
-          setInAutoMode={setInAutoMode}
-          reset={reset}
-          performStep={performStep}
-          currentStep={currentHistory[currentHistory.length - 1]}
-          undoStep={undoStep}
-          pseudoCode={pseudoCode}
-        />
-
+    <AlgoPageLayout
+      algorithmName={algorithmName}
+      inAutoMode={inAutoMode}
+      setInAutoMode={setInAutoMode}
+      reset={reset}
+      performStep={performStep}
+      undoStep={undoStep}
+      pseudoCode={pseudoCode}
+      currentStep={currentHistory[currentHistory.length - 1]}
+      MainContent={
+        <>
+          <InputArray
+            array={startArray}
+            isLocked={totalHistory.length > 0}
+            setArray={setStartArray}
+          />
+          <ArrayHistory
+            steps={currentHistory}
+            currentElementRef={currentSortingElement}
+            animationActivated={animationActivated}
+          />
+        </>
+      }
+      GeneralSettings={
         <SortingSettings
           arrayLength={arrayLength}
           setArrayLength={setArrayLength}
@@ -153,7 +150,7 @@ export default function SortingPage({
           animationActivated={animationActivated}
           setAnimationActivated={setAnimationActivated}
         />
-      </div>
-    </>
+      }
+    />
   );
 }

@@ -1,12 +1,7 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import AlgorithmController from "../../../components/AlgorithmController/AlgorithmController";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import GraphRenderer from "../../../components/GraphVisualization/GraphRenderer";
+import AlgoPageLayout from "../../../components/Layout/AlgoPageLayout";
+import AlgorithmController from "../../../components/StepController/StepController";
 import { GraphType } from "../../../model/CustomPresetTypes";
 import { Graph, GraphNode } from "../../../model/Graph";
 import { GraphTraversalStep } from "../../../model/Steps/GraphTraversalStep";
@@ -120,34 +115,30 @@ export default function GraphTraversalPage({
 
   return (
     <>
-      <div className="flex flex-col w-11/12 md:max-w-4xl md:mr-4 overflow-auto scroll-container h-full py-16">
-        <GraphRenderer />
-      </div>
-
-      <div className="flex flex-col max-w-md mb-12 h-full overflow-y-auto py-6 pr-2">
-        <AlgorithmController
-          algorithmName={algorithmName}
-          inAutoMode={inAutoMode}
-          setInAutoMode={setInAutoMode}
-          reset={reset}
-          performStep={performStep}
-          currentStep={currentHistory[currentHistory.length - 1]}
-          undoStep={undoStep}
-          pseudoCode={pseudoCode}
-        />
-
-        <GraphTraversalSettings
-          amountNodes={amountNodes}
-          setAmountNodes={setAmountNodes}
-          setStartGraph={setStartGraph}
-          reset={reset}
-          setAnimationSpeed={setAnimationSpeed}
-          setInAutoMode={setInAutoMode}
-          setGraphType={setGraphType}
-          animationActivated={animationActivated}
-          setAnimationActivated={setAnimationActivated}
-        />
-      </div>
+      <AlgoPageLayout
+        algorithmName={algorithmName}
+        pseudoCode={pseudoCode}
+        inAutoMode={inAutoMode}
+        setInAutoMode={setInAutoMode}
+        reset={reset}
+        performStep={performStep}
+        undoStep={undoStep}
+        currentStep={currentHistory[currentHistory.length - 1]}
+        MainContent={<GraphRenderer />}
+        GeneralSettings={
+          <GraphTraversalSettings
+            amountNodes={amountNodes}
+            setAmountNodes={setAmountNodes}
+            setStartGraph={setStartGraph}
+            reset={reset}
+            setAnimationSpeed={setAnimationSpeed}
+            setInAutoMode={setInAutoMode}
+            setGraphType={setGraphType}
+            animationActivated={animationActivated}
+            setAnimationActivated={setAnimationActivated}
+          />
+        }
+      />
     </>
   );
 }
