@@ -2,8 +2,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ArrayHistory from "../../../components/ArrayVisualization/ArrayHistory";
 import InputArray from "../../../components/ArrayVisualization/InputArray";
 import AlgoPageLayout from "../../../components/Layout/AlgoPageLayout";
+import StepController from "../../../components/StepController/StepController";
+import { useInterval } from "../../../hooks/useInterval";
 import { ArrayType } from "../../../model/CustomPresetTypes";
-
 import { SortingStep } from "../../../model/Steps/SortingStep";
 import { createArray } from "../../../util/ArrayCreator";
 import SortingSettings from "./SortingSettings";
@@ -17,62 +18,55 @@ export default function SortingPage({
   algorithm: (A: number[]) => IterableIterator<SortingStep>;
   pseudoCode: string[];
 }) {
-  const currentSortingElement = useRef<HTMLHeadingElement>(null);
-  const [arrayLength, setArrayLength] = useState(10);
-  const [startArray, setStartArray] = useState<number[]>([]);
+  const [numberArray, setNumberArray] = useState<number[]>([]);
   const [totalHistory, setTotalHistory] = useState<SortingStep[]>([]);
-  const [currentHistory, setCurrentHistory] = useState<SortingStep[]>([]);
-  const [animationSpeed, setAnimationSpeed] = useState(4);
-  const [arrayType, setArrayType] = useState<ArrayType>("random");
+  const [currentHistoryLength, setCurrentHistoryLength] = useState(0);
+  const [animationSpeed, setAnimationSpeed] = useState(3);
   const [inAutoMode, setInAutoMode] = useState(false);
   const [animationActivated, setAnimationActivated] = useState(true);
+  const currentSortingElement = useRef<HTMLHeadingElement>(null);
 
+  // Create a Iterartor for the algorithm
   const stepIterator = useMemo(
-    () => algorithm([...startArray]),
-    [startArray, algorithm]
+    () => algorithm([...numberArray]),
+    [numberArray, algorithm]
   );
 
-  // Initializes the start-array using random ordering
-  useEffect(() => {
-    setStartArray(createArray(arrayLength, arrayType));
-  }, [arrayLength, arrayType]);
-
-  // Resets the History-View
-  function reset() {
+  // Reset-Function
+  const reset = useCallback((arrayType: ArrayType, arrayLength: number) => {
+    setAnimationActivated(false);
     setTotalHistory([]);
-    setCurrentHistory([]);
+    setCurrentHistoryLength(0);
     setInAutoMode(false);
-    setStartArray(createArray(arrayLength, arrayType));
-  }
+    setNumberArray(createArray(arrayLength, arrayType));
+  }, []);
 
-  //Performs a single step of the Sorting-Calculation
+  // PerformStep-Function
   const performStep = useCallback(() => {
-    if (currentHistory.length >= totalHistory.length) {
+    if (currentHistoryLength >= totalHistory.length) {
       const step = stepIterator.next();
       if (step.done) {
         setInAutoMode(false);
-        return;
+      } else {
+        setTotalHistory([...totalHistory, step.value]);
       }
-
-      const updateHistory = [...totalHistory, step.value];
-      setTotalHistory(updateHistory);
-      setCurrentHistory(updateHistory);
-    } else {
-      const newHistory = totalHistory.slice(0, currentHistory.length + 1);
-      setCurrentHistory(newHistory);
     }
-  }, [totalHistory, stepIterator, currentHistory.length]);
+    setCurrentHistoryLength(currentHistoryLength + 1);
+  }, [totalHistory, stepIterator, currentHistoryLength]);
 
-  // Goes back a step in the Sorting-Calculation
-  function undoStep() {
-    const newLength = currentHistory.length - 1;
-
+  // UndoStep-Function
+  const undoStep = useCallback(() => {
+    const newLength = currentHistoryLength - 1;
     if (newLength >= 0) {
-      const newHistory = totalHistory.slice(0, newLength);
-      setCurrentHistory(newHistory);
+      setCurrentHistoryLength(newLength);
       setInAutoMode(false);
     }
-  }
+  }, [currentHistoryLength]);
+
+  // Initializes the start-array using random ordering
+  useEffect(() => {
+    reset("random", 10);
+  }, [reset]);
 
   // Scrolls to the currently evaluated array element after a step
   useEffect(() => {
@@ -81,7 +75,7 @@ export default function SortingPage({
       block: "start",
       inline: "center",
     });
-  }, [currentHistory, animationSpeed]);
+  }, [currentHistoryLength, animationSpeed]);
 
   //Deactivate animation if to fast
   useEffect(() => {
@@ -93,60 +87,45 @@ export default function SortingPage({
   }, [animationSpeed]);
 
   // Runs the "performStep" loop when "auto-mode" is enabled
-  useEffect(() => {
-    if (inAutoMode) {
-      let ms = 5000 / Math.pow(animationSpeed, 2);
-
-      let timer = setTimeout(() => {
-        if (inAutoMode) {
-          performStep();
-        }
-      }, ms);
-      return () => clearTimeout(timer);
-    }
-  }, [inAutoMode, performStep, animationSpeed]);
-
-  // Performs initial sorting when the auto-mode is enabled
-  useEffect(() => {
+  useInterval(() => {
     if (inAutoMode) {
       performStep();
     }
-    // eslint-disable-next-line
-  }, [inAutoMode]);
+  }, 5000 / Math.pow(animationSpeed, 2));
 
   return (
     <AlgoPageLayout
       algorithmName={algorithmName}
-      inAutoMode={inAutoMode}
-      setInAutoMode={setInAutoMode}
-      reset={reset}
-      performStep={performStep}
-      undoStep={undoStep}
       pseudoCode={pseudoCode}
-      currentStep={currentHistory[currentHistory.length - 1]}
+      currentStep={totalHistory[currentHistoryLength - 1]}
       MainContent={
         <>
           <InputArray
-            array={startArray}
+            array={numberArray}
             isLocked={totalHistory.length > 0}
-            setArray={setStartArray}
+            setArray={setNumberArray}
           />
           <ArrayHistory
-            steps={currentHistory}
+            steps={totalHistory.slice(0, currentHistoryLength)}
             currentElementRef={currentSortingElement}
             animationActivated={animationActivated}
           />
         </>
       }
+      Controller={
+        <StepController
+          inAutoMode={inAutoMode}
+          setInAutoMode={setInAutoMode}
+          reset={reset}
+          performStep={performStep}
+          undoStep={undoStep}
+        />
+      }
       GeneralSettings={
         <SortingSettings
-          arrayLength={arrayLength}
-          setArrayLength={setArrayLength}
-          setStartArray={setStartArray}
+          arrayLength={numberArray.length}
           reset={reset}
           setAnimationSpeed={setAnimationSpeed}
-          setInAutoMode={setInAutoMode}
-          setArrayType={setArrayType}
           animationActivated={animationActivated}
           setAnimationActivated={setAnimationActivated}
         />

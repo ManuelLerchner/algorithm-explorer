@@ -1,4 +1,5 @@
 import React from "react";
+import { ArrayType } from "../../model/CustomPresetTypes";
 
 export default function StepController({
   inAutoMode,
@@ -9,7 +10,7 @@ export default function StepController({
 }: {
   inAutoMode: boolean;
   setInAutoMode: React.Dispatch<React.SetStateAction<boolean>>;
-  reset: () => void;
+  reset: (arrayType: ArrayType, arrayLength: number) => void;
   performStep: () => void;
   undoStep: () => void;
 }) {
@@ -37,7 +38,7 @@ export default function StepController({
 
         <button
           className="my-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-          onClick={reset}
+          onClick={() => reset("random", 10)}
         >
           Reset
         </button>

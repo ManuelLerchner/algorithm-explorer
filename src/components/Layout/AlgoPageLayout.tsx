@@ -3,28 +3,19 @@ import React from "react";
 import { SortingStep } from "../../model/Steps/SortingStep";
 import { shiftIn } from "../../util/Transitions";
 import PseudoCodeBox from "../PseudoCodeBox/PseudoCodeBox";
-import StepController from "../StepController/StepController";
 
 export default function AlgoPageLayout({
   MainContent,
+  Controller,
   GeneralSettings,
   algorithmName,
-  inAutoMode,
-  setInAutoMode,
-  reset,
-  performStep,
-  undoStep,
   pseudoCode,
   currentStep,
 }: {
   MainContent: React.ReactNode;
+  Controller: React.ReactNode;
   GeneralSettings: React.ReactNode;
   algorithmName: string;
-  inAutoMode: boolean;
-  setInAutoMode: React.Dispatch<React.SetStateAction<boolean>>;
-  reset: () => void;
-  performStep: () => void;
-  undoStep: () => void;
   pseudoCode: string[];
   currentStep: SortingStep;
 }) {
@@ -42,21 +33,16 @@ export default function AlgoPageLayout({
       </div>
 
       <div className="flex flex-col max-w-md mb-12 h-full overflow-y-auto py-6 pr-4">
-        <h1 className="dark:text-white text-2xl sm:text-4xl my-4 ">
+        <h1 className="dark:text-white text-2xl sm:text-4xl my-4">
           {algorithmName}
         </h1>
 
         <PseudoCodeBox pseudoCode={pseudoCode} currentStep={currentStep} />
 
-        <StepController
-          inAutoMode={inAutoMode}
-          setInAutoMode={setInAutoMode}
-          reset={reset}
-          performStep={performStep}
-          undoStep={undoStep}
-        />
+        {Controller}
 
-        <h1 className="dark:text-white text-2xl sm:text-4xl my-4 ">Settings</h1>
+        <h1 className="dark:text-white text-2xl sm:text-4xl my-4">Settings</h1>
+
         {GeneralSettings}
       </div>
     </motion.div>

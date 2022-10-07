@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import GraphRenderer from "../../../components/GraphVisualization/GraphRenderer";
 import AlgoPageLayout from "../../../components/Layout/AlgoPageLayout";
-import AlgorithmController from "../../../components/StepController/StepController";
+import StepController from "../../../components/StepController/StepController";
 import { GraphType } from "../../../model/CustomPresetTypes";
 import { Graph, GraphNode } from "../../../model/Graph";
 import { GraphTraversalStep } from "../../../model/Steps/GraphTraversalStep";
@@ -118,13 +118,17 @@ export default function GraphTraversalPage({
       <AlgoPageLayout
         algorithmName={algorithmName}
         pseudoCode={pseudoCode}
-        inAutoMode={inAutoMode}
-        setInAutoMode={setInAutoMode}
-        reset={reset}
-        performStep={performStep}
-        undoStep={undoStep}
         currentStep={currentHistory[currentHistory.length - 1]}
         MainContent={<GraphRenderer />}
+        Controller={
+          <StepController
+            inAutoMode={inAutoMode}
+            setInAutoMode={setInAutoMode}
+            reset={reset}
+            performStep={performStep}
+            undoStep={undoStep}
+          />
+        }
         GeneralSettings={
           <GraphTraversalSettings
             amountNodes={amountNodes}
