@@ -1,13 +1,8 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Edge, Node } from "vis-network";
-import AlgorithmController from "../../../components/AlgorithmController/AlgorithmController";
 import GraphRenderer from "../../../components/GraphVisualization/GraphRenderer";
+import AlgoPageLayout from "../../../components/Layout/AlgoPageLayout";
+import StepController from "../../../components/StepController/StepController";
 import { GraphType } from "../../../model/CustomPresetTypes";
 import { Graph, GraphNode } from "../../../model/Graph";
 import { GraphTraversalStep } from "../../../model/Steps/GraphTraversalStep";
@@ -41,6 +36,7 @@ export default function GraphTraversalPage({
   const [currentHistory, setCurrentHistory] = useState<GraphTraversalStep[]>(
     []
   );
+  const [currentHistoryLength, setCurrentHistoryLength] = useState(0);
   const [animationSpeed, setAnimationSpeed] = useState(4);
   const [graphType, setGraphType] = useState<GraphType>("grid");
   const [inAutoMode, setInAutoMode] = useState(false);
@@ -128,24 +124,26 @@ export default function GraphTraversalPage({
   }, [inAutoMode]);
 
   return (
-    <>
-      <div className="flex flex-col w-11/12 md:max-w-4xl md:mr-4 overflow-auto scroll-container h-full py-16">
-        <GraphRenderer graph={startGraph} />
-        <button onClick={() => test(startGraph)}>test</button>
-      </div>
-
-      <div className="flex flex-col max-w-md mb-12 h-full overflow-y-auto py-6 pr-2">
-        <AlgorithmController
-          algorithmName={algorithmName}
+    <AlgoPageLayout
+      algorithmName={algorithmName}
+      pseudoCode={pseudoCode}
+      currentStep={totalHistory[currentHistoryLength - 1]}
+      MainContent={
+        <>
+          <GraphRenderer graph={startGraph} />
+          <button onClick={() => test(startGraph)}>test</button>
+        </>
+      }
+      Controller={
+        <StepController
           inAutoMode={inAutoMode}
           setInAutoMode={setInAutoMode}
           reset={reset}
           performStep={performStep}
-          currentStep={currentHistory[currentHistory.length - 1]}
           undoStep={undoStep}
-          pseudoCode={pseudoCode}
         />
-
+      }
+      GeneralSettings={
         <GraphTraversalSettings
           amountNodes={amountNodes}
           setAmountNodes={setAmountNodes}
@@ -157,7 +155,7 @@ export default function GraphTraversalPage({
           animationActivated={animationActivated}
           setAnimationActivated={setAnimationActivated}
         />
-      </div>
-    </>
+      }
+    />
   );
 }

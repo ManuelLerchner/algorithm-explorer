@@ -63,7 +63,7 @@ function GraphRenderer({ graph }: { graph: Graph }) {
 
   return (
     <div
-      className="h-full rounded-lg mx-2  border border-stone-500"
+      className="h-full py-16 rounded-lg mx-2 border border-stone-500"
       ref={networkRef}
     ></div>
   );
