@@ -1,64 +1,65 @@
 import React, { useEffect, useRef } from "react";
-import { Data, DataSet, Edge, Network, Node } from "vis-network";
+import { Data, Edge, Node } from "vis-network";
 
-export default function GraphRenderer() {
-  var nodes: Node[] = [
-    { id: 1, label: "1" },
-    { id: 2, label: "2" },
-    { id: 3, label: "3" },
-    { id: 4, label: "4" },
-    { id: 5, label: "5" },
-  ];
+import { Network } from "vis-network/peer/esm/vis-network";
+import { DataSet } from "vis-data/peer/esm/vis-data";
+import { Graph } from "./../../model/Graph";
 
-  var edges: Edge[] = [
-    { from: 1, to: 2 },
-    { from: 1, to: 3, label: "1" },
-    { from: 2, to: 4 },
-    { from: 2, to: 3 },
-    { from: 3, to: 5 },
-    { from: 4, to: 5 },
-  ];
-
+function GraphRenderer({ graph }: { graph: Graph }) {
   var networkRef = useRef<any>();
 
-  useEffect(() => {
-    if (networkRef.current !== undefined) {
-      var data: Data = {
-        nodes: nodes,
-        edges: edges,
-      };
-      var options = {
-        layout: {
-          hierarchical: false,
+  var network: Network | undefined = undefined;
+
+  if (networkRef.current !== undefined) {
+    var data: Data = {
+      nodes: graph.nodes_dataset,
+      edges: graph.edges_dataset,
+    };
+    var options = {
+      layout: {
+        hierarchical: false,
+      },
+
+      edges: {
+        chosen: false,
+        arrows: {
+          to: {
+            enabled: true,
+            scaleFactor: 1,
+            type: "arrow",
+          },
         },
-        edges: {
+
+        color: {
+          inherit: false,
           color: "#ffffff",
-          font: {
-            color: "#ff0000",
-            size: 20,
-            border: 0,
-          },
         },
-        nodes: {
-          shape: "circle",
-          margin: {
-            top: 10,
-            bottom: 10,
-            left: 10,
-            right: 10,
-          },
+
+        width: 2,
+        font: {
+          color: "#ff0000",
           size: 20,
-          color: "#ffffff",
-          font: {
-            size: 22,
-          },
-          widthConstraint: 25,
-          borderWidth: 2,
         },
-      };
-      new Network(networkRef.current, data, options);
-    }
-  }, []);
+      },
+      nodes: {
+        shape: "circle",
+        margin: {
+          top: 10,
+          bottom: 10,
+          left: 10,
+          right: 10,
+        },
+        size: 20,
+        color: "#ffffff",
+        font: {
+          size: 22,
+        },
+        widthConstraint: 25,
+        borderWidth: 2,
+      },
+    };
+    network = new Network(networkRef.current, data, options);
+  }
 
   return (
     <div
@@ -67,3 +68,5 @@ export default function GraphRenderer() {
     ></div>
   );
 }
+
+export default React.memo(GraphRenderer);

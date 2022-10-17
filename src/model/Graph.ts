@@ -1,3 +1,7 @@
+import { Network, Node } from "vis-network/peer/esm/vis-network";
+import { DataSet } from "vis-data/peer/esm/vis-data";
+import { Edge } from "vis-network";
+
 export class GraphNode {
   id: number;
   visited: boolean;
@@ -24,9 +28,26 @@ export class Graph {
   nodes: GraphNode[];
   edges: Connection[];
 
+  nodes_dataset: DataSet<Node> = new DataSet();
+  edges_dataset: DataSet<Edge> = new DataSet();
+
   constructor(nodes: GraphNode[] = [], edges: Connection[] = []) {
     this.nodes = nodes;
     this.edges = edges;
+
+    this.nodes.forEach((node) => {
+      this.nodes_dataset.add({
+        id: node.id,
+        label: node.id.toString(),
+      });
+    });
+
+    this.edges.forEach((edge) => {
+      this.edges_dataset.add({
+        from: edge.from.id,
+        to: edge.to.id,
+      });
+    });
   }
 
   neighbours(from: GraphNode): GraphNode[] {

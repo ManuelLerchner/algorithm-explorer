@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { Edge, Node } from "vis-network";
 import AlgorithmController from "../../../components/AlgorithmController/AlgorithmController";
 import GraphRenderer from "../../../components/GraphVisualization/GraphRenderer";
 import { GraphType } from "../../../model/CustomPresetTypes";
@@ -12,6 +13,14 @@ import { Graph, GraphNode } from "../../../model/Graph";
 import { GraphTraversalStep } from "../../../model/Steps/GraphTraversalStep";
 import { createGraph } from "./../../../util/GraphCreators";
 import GraphTraversalSettings from "./GraphTraversalSettings";
+import { Network } from "vis-network/peer/esm/vis-network";
+import { DataSet } from "vis-data/peer/esm/vis-data";
+
+const test = (graph: Graph) => {
+  //update color to green
+
+  graph.edges_dataset.update({ from: 2, to: 3, color: { color: "green" } });
+};
 
 export default function GraphTraversalPage({
   algorithmName,
@@ -26,14 +35,14 @@ export default function GraphTraversalPage({
   ) => IterableIterator<GraphTraversalStep>;
   pseudoCode: string[];
 }) {
-  const [amountNodes, setAmountNodes] = useState(10);
+  const [amountNodes, setAmountNodes] = useState(7);
   const [startGraph, setStartGraph] = useState<Graph>(new Graph());
   const [totalHistory, setTotalHistory] = useState<GraphTraversalStep[]>([]);
   const [currentHistory, setCurrentHistory] = useState<GraphTraversalStep[]>(
     []
   );
   const [animationSpeed, setAnimationSpeed] = useState(4);
-  const [graphType, setGraphType] = useState<GraphType>("fullyConnected");
+  const [graphType, setGraphType] = useState<GraphType>("grid");
   const [inAutoMode, setInAutoMode] = useState(false);
   const [animationActivated, setAnimationActivated] = useState(true);
 
@@ -121,7 +130,8 @@ export default function GraphTraversalPage({
   return (
     <>
       <div className="flex flex-col w-11/12 md:max-w-4xl md:mr-4 overflow-auto scroll-container h-full py-16">
-        <GraphRenderer />
+        <GraphRenderer graph={startGraph} />
+        <button onClick={() => test(startGraph)}>test</button>
       </div>
 
       <div className="flex flex-col max-w-md mb-12 h-full overflow-y-auto py-6 pr-2">
