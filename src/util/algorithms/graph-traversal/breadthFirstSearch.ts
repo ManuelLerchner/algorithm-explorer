@@ -8,7 +8,7 @@ const breadthFirstSearchPseudoCode = [
   "  while (Q.length > 0) {",
   "    let current = Q.shift();",
   "    if (current == target) {",
-  "      return",
+  "      return;",
   "    }",
   "    for (let neighbor of current.neighbors) {",
   "      if (!neighbor.visited) {",
@@ -22,88 +22,100 @@ const breadthFirstSearchPseudoCode = [
 
 function* breadthFirstSearch(
   graph: Graph,
-  root: GraphNode,
-  target: GraphNode
+  root: number,
+  target: number
 ): IterableIterator<GraphTraversalStep> {
-  const queue = [root];
-  root.visited = true;
+  var rootnode = graph.nodes.find((node) => node.id === root)!;
+
+  const queue = [rootnode];
+
   yield {
-    codeRow: 2,
-    currentIndex: -1,
-    array: [],
-    locked: [],
-    currentNode: root.id,
-    visited: [root.id],
+    codeRow: 3,
+    currentNode: root,
+    visited: [root],
     description: {
-      type: "Set",
-      description: `root.visited = true`,
+      type: "Updated",
+      description: `Set root.visited = true`,
+    },
+    variables: {
+      Q: queue.map((node) => node.id),
     },
   };
+  rootnode.visited = true;
+
   while (queue.length > 0) {
     const current = queue.shift()!;
+
     yield {
-      codeRow: 4,
-      currentIndex: -1,
-      array: [],
-      locked: [],
+      codeRow: 5,
       currentNode: current.id,
-      visited: [current.id],
+      explored: [current.id],
       description: {
         type: "Selected",
-        description: `current = Q.shift()`,
+        description: `Get current from queue`,
+      },
+      variables: {
+        Q: queue.map((node) => node.id),
+        current: current.id,
       },
     };
+
+    if (current.id === target) {
+      yield {
+        codeRow: 7,
+        currentNode: current.id,
+        visited: [current.id],
+        description: {
+          type: "Compared",
+          description: `current == target`,
+        },
+        variables: {
+          Q: queue.map((node) => node.id),
+          current: current.id,
+        },
+      };
+      break;
+    }
+
     for (let neighbor of graph.neighbours(current)) {
-      if (neighbor === target) {
+      if (!neighbor.visited) {
         yield {
-          codeRow: 5,
-          currentIndex: -1,
-          array: [],
-          locked: [],
+          codeRow: 11,
           currentNode: current.id,
-          visited: [current.id],
           description: {
-            type: "Selected",
-            description: `if (current == target) {`,
+            type: "Updated",
+            description: `Set neighbor.visited = true`,
+          },
+          variables: {
+            Q: queue.map((node) => node.id),
+            current: current.id,
+            neighbor: neighbor.id,
           },
         };
-      }
 
-      if (!neighbor.visited) {
         neighbor.visited = true;
-        queue.push(neighbor);
+
         yield {
-          codeRow: 6,
-          currentIndex: -1,
-          array: [],
-          locked: [],
+          codeRow: 12,
           currentNode: current.id,
           visited: [current.id, neighbor.id],
           description: {
             type: "Updated",
-            description: `neighbor.visited = true`,
+            description: `Add neighbor to queue`,
+          },
+          variables: {
+            Q: queue.map((node) => node.id),
+            current: current.id,
+            neighbor: neighbor.id,
           },
         };
-        yield {
-          codeRow: 7,
-          currentIndex: -1,
-          array: [],
-          locked: [],
-          currentNode: current.id,
-          visited: [current.id, neighbor.id],
-          description: {
-            type: "Set",
-            description: `Q.push(neighbor)`,
-          },
-        };
+
+        queue.push(neighbor);
       }
     }
   }
   yield {
     codeRow: -1,
-    currentIndex: -1,
-    array: [],
-    locked: [],
     description: { type: "Finished", description: "" },
   };
 }

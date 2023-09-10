@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import { Data, Edge, Node } from "vis-network";
 
-import { Network } from "vis-network/peer/esm/vis-network";
+import { Network, Options } from "vis-network/peer/esm/vis-network";
 import { DataSet } from "vis-data/peer/esm/vis-data";
 import { Graph } from "./../../model/Graph";
+import { GraphTraversalStep } from "../../model/Steps/GraphTraversalStep";
 
 function GraphRenderer({ graph }: { graph: Graph }) {
   var networkRef = useRef<any>();
@@ -15,7 +16,7 @@ function GraphRenderer({ graph }: { graph: Graph }) {
       nodes: graph.nodes_dataset,
       edges: graph.edges_dataset,
     };
-    var options = {
+    var options: Options = {
       layout: {
         hierarchical: false,
       },
@@ -42,6 +43,7 @@ function GraphRenderer({ graph }: { graph: Graph }) {
         },
       },
       nodes: {
+        chosen: false,
         shape: "circle",
         margin: {
           top: 10,
@@ -54,8 +56,10 @@ function GraphRenderer({ graph }: { graph: Graph }) {
         font: {
           size: 22,
         },
-        widthConstraint: 25,
-        borderWidth: 2,
+        widthConstraint: {
+          minimum: 25,
+        },
+        borderWidth: 1,
       },
     };
     network = new Network(networkRef.current, data, options);
@@ -63,7 +67,7 @@ function GraphRenderer({ graph }: { graph: Graph }) {
 
   return (
     <div
-      className="h-full py-16 rounded-lg mx-2 border border-stone-500"
+      className="h-full rounded-lg border border-stone-500"
       ref={networkRef}
     ></div>
   );

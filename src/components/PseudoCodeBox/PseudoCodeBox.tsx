@@ -1,13 +1,13 @@
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coy as codeStyle } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { SortingStep } from "../../model/Steps/SortingStep";
+import { IterationStep } from "../../model/Steps/IterationStep";
 
 export default function PseudoCodeBox({
   currentStep,
   pseudoCode,
 }: {
   pseudoCode: string[];
-  currentStep: SortingStep | null;
+  currentStep: IterationStep | null;
 }) {
   let { type, description } = currentStep?.description ?? {
     type: "Waiting",
@@ -45,18 +45,18 @@ export default function PseudoCodeBox({
 
       <div className="grid grid-cols-[auto_1fr] items-center mt-2 gap-2">
         <label className="font-semibold mr-4">Description:</label>
-        <div className="grid grid-cols-[1fr_1fr] items-center">
+        <div className="flex flex-col justify-between items-start">
           <span className="font-semibold text-green-600">{type}</span>
           <span className="font-medium">{description}</span>
         </div>
 
         <label className="font-semibold mr-4">Variables:</label>
         <div className="flex items-center flex-wrap">
-          {Object.entries(currentStep?.variables ?? { A: "Array" }).map(
+          {Object.entries(currentStep?.variables ?? {}).map(
             ([variable, value]) => (
               <div key={variable} className=" mr-4">
                 <span className="font-bold">{variable + ": "}</span>
-                <span>{value}</span>
+                <span>{JSON.stringify(value)}</span>
               </div>
             )
           )}

@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import React from "react";
-import { SortingStep } from "../../model/Steps/SortingStep";
 import { shiftIn } from "../../util/Transitions";
 import PseudoCodeBox from "../PseudoCodeBox/PseudoCodeBox";
+import { IterationStep } from "../../model/Steps/IterationStep";
 
 export default function AlgoPageLayout({
   MainContent,
@@ -17,7 +17,7 @@ export default function AlgoPageLayout({
   GeneralSettings: React.ReactNode;
   algorithmName: string;
   pseudoCode: string[];
-  currentStep: SortingStep;
+  currentStep: IterationStep;
 }) {
   return (
     <motion.div

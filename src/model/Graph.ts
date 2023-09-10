@@ -52,7 +52,7 @@ export class Graph {
 
   neighbours(from: GraphNode): GraphNode[] {
     return this.edges
-      .filter((edge) => edge.from === from)
+      .filter((edge) => edge.from.id === from.id)
       .map((edge) => edge.to);
   }
 }

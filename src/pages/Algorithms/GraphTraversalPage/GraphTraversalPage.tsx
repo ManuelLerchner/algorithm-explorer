@@ -11,12 +11,6 @@ import GraphTraversalSettings from "./GraphTraversalSettings";
 import { Network } from "vis-network/peer/esm/vis-network";
 import { DataSet } from "vis-data/peer/esm/vis-data";
 
-const test = (graph: Graph) => {
-  //update color to green
-
-  graph.edges_dataset.update({ from: 2, to: 3, color: { color: "green" } });
-};
-
 export default function GraphTraversalPage({
   algorithmName,
   algorithm,
@@ -25,25 +19,23 @@ export default function GraphTraversalPage({
   algorithmName: string;
   algorithm: (
     graph: Graph,
-    root: GraphNode,
-    target: GraphNode
+    root: number,
+    target: number
   ) => IterableIterator<GraphTraversalStep>;
   pseudoCode: string[];
 }) {
-  const [amountNodes, setAmountNodes] = useState(7);
+  const [amountNodes, setAmountNodes] = useState(9);
   const [startGraph, setStartGraph] = useState<Graph>(new Graph());
   const [totalHistory, setTotalHistory] = useState<GraphTraversalStep[]>([]);
-  const [currentHistory, setCurrentHistory] = useState<GraphTraversalStep[]>(
-    []
-  );
-  const [currentHistoryLength, setCurrentHistoryLength] = useState(0);
+  const [currentView, setCurrentView] = useState(0);
+
   const [animationSpeed, setAnimationSpeed] = useState(4);
   const [graphType, setGraphType] = useState<GraphType>("grid");
   const [inAutoMode, setInAutoMode] = useState(false);
   const [animationActivated, setAnimationActivated] = useState(true);
 
-  const [startNode, setStartNode] = useState<GraphNode>(new GraphNode(-1));
-  const [endNode, setEndNode] = useState<GraphNode>(new GraphNode(-1));
+  const [startNode, setStartNode] = useState(1);
+  const [endNode, setEndNode] = useState(amountNodes);
 
   const stepIterator = useMemo(
     () => algorithm(startGraph, startNode, endNode),
@@ -58,36 +50,45 @@ export default function GraphTraversalPage({
   // Resets the History-View
   function reset() {
     setTotalHistory([]);
-    setCurrentHistory([]);
     setInAutoMode(false);
+    setCurrentView(0);
     setStartGraph(createGraph(amountNodes, graphType));
   }
 
   //Performs a single step of the Sorting-Calculation
   const performStep = useCallback(() => {
-    if (currentHistory.length >= totalHistory.length) {
+    if (currentView >= totalHistory.length) {
       const step = stepIterator.next();
       if (step.done) {
         setInAutoMode(false);
         return;
       }
 
+      var totalVisitedNodes = [...totalHistory, step.value].flatMap(
+        (step) => step.visited ?? []
+      );
+
+      var totalExploredNodes = [...totalHistory, step.value].flatMap(
+        (step) => step.explored ?? []
+      );
+
+      step.value.visited = [...new Set(totalVisitedNodes)];
+      step.value.explored = [...new Set(totalExploredNodes)];
+
       const updateHistory = [...totalHistory, step.value];
       setTotalHistory(updateHistory);
-      setCurrentHistory(updateHistory);
+      setCurrentView(currentView + 1);
     } else {
-      const newHistory = totalHistory.slice(0, currentHistory.length + 1);
-      setCurrentHistory(newHistory);
+      setCurrentView(currentView + 1);
     }
-  }, [totalHistory, stepIterator, currentHistory.length]);
+  }, [totalHistory, stepIterator, currentView]);
 
   // Goes back a step in the Sorting-Calculation
   function undoStep() {
-    const newLength = currentHistory.length - 1;
+    const newLength = currentView - 1;
 
     if (newLength >= 0) {
-      const newHistory = totalHistory.slice(0, newLength);
-      setCurrentHistory(newHistory);
+      setCurrentView(newLength);
       setInAutoMode(false);
     }
   }
@@ -123,17 +124,64 @@ export default function GraphTraversalPage({
     // eslint-disable-next-line
   }, [inAutoMode]);
 
+  // color Nodes
+  useEffect(() => {
+    const currentStep = totalHistory[currentView - 1];
+
+    // reset color of all nodes
+    startGraph.nodes_dataset?.forEach((node) => {
+      startGraph.nodes_dataset.update({
+        id: node.id,
+        color: { background: "#ffffff", border: "#000000" },
+        borderWidth: 1,
+      });
+    });
+
+    //set border of start and end node
+    if (startGraph.nodes_dataset) {
+      startGraph.nodes_dataset.update({
+        id: startNode,
+        label: "Start / " + startNode,
+      });
+      startGraph.nodes_dataset.update({
+        id: endNode,
+        label: "Goal / " + endNode,
+      });
+    }
+
+    //set color of visited nodes
+    currentStep?.visited?.forEach((id) => {
+      startGraph.nodes_dataset.update({
+        id,
+        color: { background: "#FFB733" },
+      });
+    });
+
+    //set color of explored nodes
+    currentStep?.explored?.forEach((id) => {
+      startGraph.nodes_dataset.update({
+        id,
+        color: { background: "#5CAD5C" },
+      });
+    });
+
+    //set color of current node
+    if (currentStep?.currentNode) {
+      startGraph.nodes_dataset.update({
+        id: currentStep.currentNode,
+        color: {
+          background: "#FF5733",
+        },
+      });
+    }
+  }, [currentView, totalHistory, startGraph, startNode, endNode]);
+
   return (
     <AlgoPageLayout
       algorithmName={algorithmName}
       pseudoCode={pseudoCode}
-      currentStep={totalHistory[currentHistoryLength - 1]}
-      MainContent={
-        <>
-          <GraphRenderer graph={startGraph} />
-          <button onClick={() => test(startGraph)}>test</button>
-        </>
-      }
+      currentStep={totalHistory[currentView - 1]}
+      MainContent={<GraphRenderer graph={startGraph} />}
       Controller={
         <StepController
           inAutoMode={inAutoMode}
@@ -145,6 +193,11 @@ export default function GraphTraversalPage({
       }
       GeneralSettings={
         <GraphTraversalSettings
+          startNode={startNode}
+          endNode={endNode}
+          setStartNode={setStartNode}
+          setEndNode={setEndNode}
+          graphType={graphType}
           amountNodes={amountNodes}
           setAmountNodes={setAmountNodes}
           setStartGraph={setStartGraph}

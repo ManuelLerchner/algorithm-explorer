@@ -10,6 +10,11 @@ import { createGraph } from "../../../util/GraphCreators";
 
 export default function GraphTraversalSettings({
   amountNodes,
+  graphType,
+  startNode,
+  endNode,
+  setStartNode,
+  setEndNode,
   setAmountNodes,
   setStartGraph,
   reset,
@@ -20,6 +25,11 @@ export default function GraphTraversalSettings({
   setAnimationActivated,
 }: {
   amountNodes: number;
+  graphType: GraphType;
+  startNode: number;
+  endNode: number;
+  setStartNode: React.Dispatch<React.SetStateAction<number>>;
+  setEndNode: React.Dispatch<React.SetStateAction<number>>;
   setAmountNodes: React.Dispatch<React.SetStateAction<number>>;
   setStartGraph: React.Dispatch<React.SetStateAction<Graph>>;
   reset: () => void;
@@ -37,7 +47,7 @@ export default function GraphTraversalSettings({
           <input
             type="number"
             min="0"
-            max="16"
+            max="32"
             className="placeholder:text-black text-center"
             value={amountNodes.toString()}
             placeholder="0"
@@ -46,27 +56,60 @@ export default function GraphTraversalSettings({
                 var value = parseInt(e.target.value);
 
                 if (value < 1) value = 1;
-                if (value > 16) value = 16;
+                if (value > 32) value = 32;
                 setAmountNodes(value);
-                setStartGraph(createGraph(value, "fullyConnected"));
+                setStartGraph(createGraph(value, graphType));
                 setInAutoMode(false);
                 reset();
               } catch (_) {}
             }}
           />
 
+          <label className="font-semibold">Params:</label>
+          <div className="flex flex-wrap justify-around items-center">
+            <label className="font-semibold">Start:</label>
+            <input
+              type="number"
+              min="0"
+              max={amountNodes}
+              className="placeholder:text-black text-center"
+              value={startNode.toString()}
+              placeholder="0"
+              onChange={(e) => {
+                try {
+                  var value = parseInt(e.target.value);
+                  if (value < 1) value = 1;
+                  if (value > amountNodes) value = amountNodes;
+                  setStartNode(value);
+                  setInAutoMode(false);
+                  reset();
+                } catch (_) {}
+              }}
+            />
+
+            <label className="font-semibold">Goal:</label>
+            <input
+              type="number"
+              min="0"
+              max={amountNodes}
+              className="placeholder:text-black text-center"
+              value={endNode.toString()}
+              placeholder="0"
+              onChange={(e) => {
+                try {
+                  var value = parseInt(e.target.value);
+                  if (value < 1) value = 1;
+                  if (value > amountNodes) value = amountNodes;
+                  setEndNode(value);
+                  setInAutoMode(false);
+                  reset();
+                } catch (_) {}
+              }}
+            />
+          </div>
+
           <label className="font-semibold">Graph Type:</label>
           <div className="flex flex-wrap justify-between items-center">
-            <button
-              className=" bg-blue-500 hover:bg-blue-700 text-white font-bold my-1 py-1 px-2 rounded text-sm"
-              onClick={() => {
-                setGraphType("fullyConnected");
-                setInAutoMode(false);
-                reset();
-              }}
-            >
-              Random
-            </button>
             <button
               className=" bg-green-600 hover:bg-green-700 text-white font-bold my-1 py-1 px-2 rounded text-sm mx-1 "
               onClick={() => {
@@ -78,17 +121,17 @@ export default function GraphTraversalSettings({
               Grid
             </button>
             <button
-              className=" bg-rose-500 hover:bg-rose-600 text-white font-bold my-1 py-1 px-2 rounded text-sm "
+              className=" bg-blue-500 hover:bg-blue-700 text-white font-bold my-1 py-1 px-2 rounded text-sm"
               onClick={() => {
-                setGraphType("star");
+                setGraphType("tree");
                 setInAutoMode(false);
                 reset();
               }}
             >
-              Cycle
+              Tree
             </button>
             <button
-              className=" bg-orange-500 hover:bg-orange-600 text-white font-bold my-1 py-1 px-2 rounded text-sm "
+              className=" bg-rose-500 hover:bg-rose-600 text-white font-bold my-1 py-1 px-2 rounded text-sm "
               onClick={() => {
                 setGraphType("random");
                 setInAutoMode(false);
