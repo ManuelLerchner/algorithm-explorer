@@ -24,13 +24,13 @@ export default function GraphTraversalPage({
   ) => IterableIterator<GraphTraversalStep>;
   pseudoCode: string[];
 }) {
-  const [amountNodes, setAmountNodes] = useState(9);
+  const [amountNodes, setAmountNodes] = useState(16);
   const [startGraph, setStartGraph] = useState<Graph>(new Graph());
   const [totalHistory, setTotalHistory] = useState<GraphTraversalStep[]>([]);
   const [currentView, setCurrentView] = useState(0);
 
   const [animationSpeed, setAnimationSpeed] = useState(4);
-  const [graphType, setGraphType] = useState<GraphType>("grid");
+  const [graphType, setGraphType] = useState<GraphType>("tree");
   const [inAutoMode, setInAutoMode] = useState(false);
   const [animationActivated, setAnimationActivated] = useState(true);
 

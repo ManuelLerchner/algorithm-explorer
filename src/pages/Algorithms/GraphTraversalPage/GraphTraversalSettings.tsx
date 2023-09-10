@@ -60,6 +60,7 @@ export default function GraphTraversalSettings({
                 setAmountNodes(value);
                 setStartGraph(createGraph(value, graphType));
                 setInAutoMode(false);
+                setEndNode(value);
                 reset();
               } catch (_) {}
             }}
@@ -111,16 +112,6 @@ export default function GraphTraversalSettings({
           <label className="font-semibold">Graph Type:</label>
           <div className="flex flex-wrap justify-between items-center">
             <button
-              className=" bg-green-600 hover:bg-green-700 text-white font-bold my-1 py-1 px-2 rounded text-sm mx-1 "
-              onClick={() => {
-                setGraphType("grid");
-                setInAutoMode(false);
-                reset();
-              }}
-            >
-              Grid
-            </button>
-            <button
               className=" bg-blue-500 hover:bg-blue-700 text-white font-bold my-1 py-1 px-2 rounded text-sm"
               onClick={() => {
                 setGraphType("tree");
@@ -130,6 +121,17 @@ export default function GraphTraversalSettings({
             >
               Tree
             </button>
+            <button
+              className=" bg-green-600 hover:bg-green-700 text-white font-bold my-1 py-1 px-2 rounded text-sm mx-1 "
+              onClick={() => {
+                setGraphType("grid");
+                setInAutoMode(false);
+                reset();
+              }}
+            >
+              Grid
+            </button>
+
             <button
               className=" bg-rose-500 hover:bg-rose-600 text-white font-bold my-1 py-1 px-2 rounded text-sm "
               onClick={() => {
