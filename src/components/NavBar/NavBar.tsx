@@ -37,7 +37,7 @@ function NavBar({ toggleIsDark }: { toggleIsDark: () => void }) {
         ))}
       </div>
       <div>
-        <button onClick={toggleIsDark}>Toggle light & dark</button>
+        <button onClick={toggleIsDark}>Toggle Dark Mode</button>
       </div>
     </div>
   );
