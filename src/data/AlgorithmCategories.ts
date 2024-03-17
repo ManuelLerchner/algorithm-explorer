@@ -59,7 +59,6 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
       },
     ],
   },
-
   {
     name: "Signal Processing",
     description:
@@ -71,6 +70,20 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
         name: "FFT",
         url: "/signal-processing/fft",
         icon: signalIcon,
+      },
+    ],
+  },
+  {
+    name: "Convex Hull",
+    description:
+      "Convex Hull is a data structure that is used to represent a set of points. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+    url: "/convex-hull",
+    icon: convexHullIcon,
+    implementations: [
+      {
+        name: "Graham's Scan",
+        url: "/convex-hull/grahams-scan",
+        icon: convexHullIcon,
       },
     ],
   },

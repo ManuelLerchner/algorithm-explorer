@@ -9,15 +9,9 @@ function AlgorithmCategory({
   Icon: any;
   url: string;
 }) {
-  const navigate = useNavigate();
-
-  function goToRoute() {
-    navigate(url);
-  }
-
   return (
-    <div
-      onClick={goToRoute}
+    <a
+      href={url}
       className="flex flex-col items-center py-1 min-h-[8rem] hover:scale-105 transition-all ease-out cursor-pointer"
     >
       <div className="flex justify-center items-center flex-col">
@@ -32,7 +26,7 @@ function AlgorithmCategory({
           {name}
         </h3>
       </div>
-    </div>
+    </a>
   );
 }
 

@@ -63,6 +63,14 @@ function GraphRenderer({ graph }: { graph: Graph }) {
       },
     };
     network = new Network(networkRef.current, data, options);
+
+    const positions = network!.getPositions(graph.nodes.map((n) => n.id));
+    graph.updatePosition(positions);
+
+    network.on("stabilized", () => {
+      const positions = network!.getPositions(graph.nodes.map((n) => n.id));
+      graph.updatePosition(positions);
+    });
   }
 
   return (

@@ -1,14 +1,18 @@
-import { Network, Node } from "vis-network/peer/esm/vis-network";
+import { Network, Node, Position } from "vis-network/peer/esm/vis-network";
 import { DataSet } from "vis-data/peer/esm/vis-data";
 import { Edge } from "vis-network";
 
 export class GraphNode {
   id: number;
+  x?: number;
+  y?: number;
   visited: boolean;
 
-  constructor(id: number) {
+  constructor(id: number, x?: number, y?: number) {
     this.id = id;
     this.visited = false;
+    this.x = x;
+    this.y = y;
   }
 }
 
@@ -30,6 +34,8 @@ export class Graph {
 
   nodes_dataset: DataSet<Node> = new DataSet();
   edges_dataset: DataSet<Edge> = new DataSet();
+
+  onMoveCallbacks: ((data: { [nodeId: string]: Position }) => void)[] = [];
 
   constructor(nodes: GraphNode[] = [], edges: Connection[] = []) {
     this.nodes = nodes;
@@ -54,5 +60,39 @@ export class Graph {
     return this.edges
       .filter((edge) => edge.from.id === from.id)
       .map((edge) => edge.to);
+  }
+
+  clearEdges() {
+    this.edges_dataset.clear();
+    this.edges = [];
+  }
+
+  updatePosition(data: { [nodeId: string]: Position }) {
+    Object.entries(data).forEach(([id, position]) => {
+      const node = this.nodes.find((node) => node.id === parseInt(id));
+      if (!node) throw new Error("Node not found");
+      node.x = position.x;
+      node.y = position.y;
+    });
+
+    this.onMoveCallbacks.forEach((callback) => callback(data));
+  }
+
+  clearLabels() {
+    this.nodes_dataset.forEach((node) => {
+      this.nodes_dataset.update({
+        id: node.id,
+        label: "",
+      });
+    });
+  }
+
+  disableMovement() {
+    this.nodes_dataset.forEach((node) => {
+      this.nodes_dataset.update({
+        id: node.id,
+        fixed: true,
+      });
+    });
   }
 }

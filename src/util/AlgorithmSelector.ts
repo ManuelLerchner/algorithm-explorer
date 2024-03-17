@@ -1,3 +1,4 @@
+import { grahamScanInfo } from "./algorithms/convex-hull/graham-scan";
 import { bfsinfo } from "./algorithms/graph-traversal/breadthFirstSearch";
 import { dfsinfo } from "./algorithms/graph-traversal/depthFirstSearch";
 import { fftInfo } from "./algorithms/signal-processing/fft";
@@ -32,5 +33,12 @@ export function getSignalProcessingAlgorithm(algorithmName: string) {
   switch (algorithmName) {
     case "FFT":
       return fftInfo;
+  }
+}
+
+export function getConvexHullAlgorithm(algorithmName: string) {
+  switch (algorithmName) {
+    case "Graham's Scan":
+      return grahamScanInfo;
   }
 }

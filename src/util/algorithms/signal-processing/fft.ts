@@ -2,7 +2,7 @@ import { FFTStep } from "../../../model/Steps/FFTStep";
 import * as math from "mathjs";
 
 const fftPseudoCode = [
-  "if(A.length <= 1) return",
+  "if(A.length <= 1) return A",
   "let even = A[0, 2, 4, ...]",
   "let odd = A[1, 3, 5, ...]",
   "let fft_even = fft(even)",
