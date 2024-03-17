@@ -56,24 +56,48 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
         url: "/graph-traversal/depth-first-search",
         icon: graphIcon,
       },
+    ],
+  },
+
+  {
+    name: "Signal Processing",
+    description:
+      "Signal Processing is a data structure that is used to represent a set of signals. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+    url: "/signal-processing",
+    icon: graphIcon,
+    implementations: [
       {
-        name: "Dijkstra's Algorithm",
-        url: "/graph-traversal/dijkstras-algorithm",
+        name: "FFT",
+        url: "/signal-processing/fft",
         icon: graphIcon,
       },
       {
-        name: "Floyd Warshall Algorithm",
-        url: "/graph-traversal/floyd-warshall-algorithm",
+        name: "Wavelet Transform",
+        url: "/signal-processing/wavelet-transform",
+        icon: graphIcon,
+      },
+    ],
+  },
+  {
+    name: "Shortest Path",
+    description:
+      "Shortest path is a data structure that is used to represent a set of nodes and edges between them. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+    url: "/shortest-path",
+    icon: graphIcon,
+    implementations: [
+      {
+        name: "Dijkstra",
+        url: "/shortest-path/dijkstra",
         icon: graphIcon,
       },
       {
-        name: "Prim's Algorithm",
-        url: "/graph-traversal/prims-algorithm",
+        name: "Bellman-Ford",
+        url: "/shortest-path/bellman-ford",
         icon: graphIcon,
       },
       {
-        name: "Kruskal's Algorithm",
-        url: "/graph-traversal/kruskals-algorithm",
+        name: "Floyd-Warshall",
+        url: "/shortest-path/floyd-warshall",
         icon: graphIcon,
       },
     ],

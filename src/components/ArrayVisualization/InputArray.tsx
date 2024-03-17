@@ -1,17 +1,17 @@
 import React from "react";
 
-export default function InputArray({
+export default function InputArray<T>({
   array,
   isLocked,
   setArray,
 }: {
-  array: number[];
+  array: T[];
   isLocked: boolean;
-  setArray: React.Dispatch<React.SetStateAction<number[]>>;
+  setArray: React.Dispatch<React.SetStateAction<T[]>>;
 }) {
   return (
     <div className="flex w-max justify-center mx-auto items-center">
-      {array.map((value: number, j: number) => (
+      {array.map((value: T, j: number) => (
         <div
           className={
             "w-10 h-12 sm:w-12 md:w-16 border-2" +
@@ -22,13 +22,13 @@ export default function InputArray({
           <input
             type="number"
             className={"w-full h-full placeholder:text-black text-center"}
-            value={value}
+            value={value as unknown as string}
             placeholder="0"
             disabled={isLocked}
             onChange={(e) => {
               const newArray = array.slice();
               var newValue = parseInt(e.target.value) || 0;
-              newArray[j] = newValue;
+              newArray[j] = newValue as unknown as T;
               setArray(newArray);
             }}
           />

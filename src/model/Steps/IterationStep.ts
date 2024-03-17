@@ -11,7 +11,9 @@ export interface IterationStep {
       | "Selected"
       | "Updated"
       | "Set"
-      | "Shifted";
+      | "Shifted"
+      | "Calculated"
+      | "Call";
     description: string;
   };
 }

@@ -1,5 +1,6 @@
 import { bfsinfo } from "./algorithms/graph-traversal/breadthFirstSearch";
 import { dfsinfo } from "./algorithms/graph-traversal/depthFirstSearch";
+import { fftInfo } from "./algorithms/signal-processing/fft";
 import { bubbleSortInfo } from "./algorithms/sorting/BubbleSort";
 import { insertionSortInfo } from "./algorithms/sorting/InsertionSort";
 import { quickSortInfo } from "./algorithms/sorting/QuickSort";
@@ -24,5 +25,12 @@ export function getGraphTraversalAlgorithm(algorithmName: string) {
       return bfsinfo;
     case "Depth First Search":
       return dfsinfo;
+  }
+}
+
+export function getSignalProcessingAlgorithm(algorithmName: string) {
+  switch (algorithmName) {
+    case "FFT":
+      return fftInfo;
   }
 }
