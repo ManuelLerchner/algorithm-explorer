@@ -67,7 +67,7 @@ function GraphRenderer({ graph }: { graph: Graph }) {
     const positions = network!.getPositions(graph.nodes.map((n) => n.id));
     graph.updatePosition(positions);
 
-    network.on("stabilized", () => {
+    network.on("initRedraw", () => {
       const positions = network!.getPositions(graph.nodes.map((n) => n.id));
       graph.updatePosition(positions);
     });

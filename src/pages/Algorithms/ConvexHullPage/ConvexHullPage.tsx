@@ -128,10 +128,10 @@ export default function ConvexHullPage({
     });
 
     //set color of visited nodes
-    currentStep?.enumertatedNodes?.forEach((id, idx) => {
+    [...(currentStep?.labels?.entries() || [])].forEach(([id, label]) => {
       startGraph.nodes_dataset.update({
         id,
-        label: idx.toString(),
+        label,
       });
     });
 
@@ -140,6 +140,13 @@ export default function ConvexHullPage({
       startGraph.nodes_dataset.update({
         id: currentStep.rootNode,
         color: { background: "#5CAD5C" },
+      });
+    }
+
+    for (let id of currentStep.markedNodes || []) {
+      startGraph.nodes_dataset.update({
+        id,
+        color: { background: "#FFD700" },
       });
     }
 
@@ -152,7 +159,7 @@ export default function ConvexHullPage({
     }
 
     // add edges of stack
-    let prev = currentStep?.rootNode;
+    let prev = currentStep?.stack?.[currentStep?.stack?.length - 1];
     startGraph.edges_dataset.clear();
     for (let edge of currentStep?.stack || []) {
       startGraph.edges_dataset.update({

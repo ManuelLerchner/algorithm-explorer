@@ -7,6 +7,7 @@ export interface GrahamStep extends IterationStep {
   };
   rootNode?: number;
   currentNode?: number;
-  enumertatedNodes?: number[];
+  markedNodes?: number[];
+  labels?: Map<number, string>;
   stack?: number[];
 }

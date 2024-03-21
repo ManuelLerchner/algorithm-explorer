@@ -23,19 +23,17 @@ function findLowestY(graph: Graph): GraphNode {
 }
 
 function sortPointsByAngle(P: GraphNode, graph: Graph): GraphNode[] {
-  return graph.nodes
-    .filter((node) => node.id !== P.id)
-    .sort((a, b) => {
-      let orientationVal = orientation(P, a, b);
-      if (orientationVal === "collinear") {
-        return (
-          Math.pow(a.x! - P.x!, 2) +
-          Math.pow(a.y! - P.y!, 2) -
-          (Math.pow(b.x! - P.x!, 2) + Math.pow(b.y! - P.y!, 2))
-        );
-      }
-      return orientationVal === "right" ? 1 : -1;
-    });
+  return graph.nodes.sort((a, b) => {
+    let orientationVal = orientation(P, a, b);
+    if (orientationVal === "collinear") {
+      return (
+        Math.pow(a.x! - P.x!, 2) +
+        Math.pow(a.y! - P.y!, 2) -
+        (Math.pow(b.x! - P.x!, 2) + Math.pow(b.y! - P.y!, 2))
+      );
+    }
+    return orientationVal === "right" ? 1 : -1;
+  });
 }
 
 function orientation(
@@ -70,7 +68,7 @@ function* grahamScan(graph: Graph): IterableIterator<GrahamStep> {
       description: "Sorted the points by angle",
     },
     rootNode: P.id,
-    enumertatedNodes: sorted.map((node) => node.id),
+    labels: new Map(sorted.map((node, idx) => [node.id, "" + idx])),
   };
 
   let stack: GraphNode[] = [];
@@ -138,9 +136,9 @@ function* grahamScan(graph: Graph): IterableIterator<GrahamStep> {
       description: "Finished the algorithm",
     },
     rootNode: P.id,
-    stack: [...stack.map((node) => node.id), P.id],
+    stack: stack.map((node) => node.id),
     variables: {
-      stack: [...stack.map((node) => node.id), P.id],
+      stack: stack.map((node) => node.id),
     },
   };
 }

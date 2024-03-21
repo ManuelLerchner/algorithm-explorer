@@ -85,6 +85,16 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
         url: "/convex-hull/grahams-scan",
         icon: convexHullIcon,
       },
+      {
+        name: "Jarvis March",
+        url: "/convex-hull/jarvis-march",
+        icon: convexHullIcon,
+      },
+      {
+        name: "Quick Hull",
+        url: "/convex-hull/quick-hull",
+        icon: convexHullIcon,
+      },
     ],
   },
 ];

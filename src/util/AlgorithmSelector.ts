@@ -1,4 +1,6 @@
 import { grahamScanInfo } from "./algorithms/convex-hull/graham-scan";
+import { jarvisMarchInfo } from "./algorithms/convex-hull/jarvis-march";
+import { quickHullInfo } from "./algorithms/convex-hull/quick-hull";
 import { bfsinfo } from "./algorithms/graph-traversal/breadthFirstSearch";
 import { dfsinfo } from "./algorithms/graph-traversal/depthFirstSearch";
 import { fftInfo } from "./algorithms/signal-processing/fft";
@@ -40,5 +42,9 @@ export function getConvexHullAlgorithm(algorithmName: string) {
   switch (algorithmName) {
     case "Graham's Scan":
       return grahamScanInfo;
+    case "Jarvis March":
+      return jarvisMarchInfo;
+    case "Quick Hull":
+      return quickHullInfo;
   }
 }
