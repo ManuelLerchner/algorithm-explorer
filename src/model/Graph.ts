@@ -52,14 +52,15 @@ export class Graph {
       this.edges_dataset.add({
         from: edge.from.id,
         to: edge.to.id,
+        label: edge.weight.toString(),
       });
     });
   }
 
-  neighbours(from: GraphNode): GraphNode[] {
+  neighbours(from: GraphNode): [GraphNode, number][] {
     return this.edges
       .filter((edge) => edge.from.id === from.id)
-      .map((edge) => edge.to);
+      .map((edge) => [edge.to, edge.weight]);
   }
 
   clearEdges() {
@@ -82,6 +83,15 @@ export class Graph {
     this.nodes_dataset.forEach((node) => {
       this.nodes_dataset.update({
         id: node.id,
+        label: "",
+      });
+    });
+  }
+
+  clearEdgesLabels() {
+    this.edges_dataset.forEach((edge) => {
+      this.edges_dataset.update({
+        id: edge.id,
         label: "",
       });
     });

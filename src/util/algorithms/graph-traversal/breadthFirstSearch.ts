@@ -77,7 +77,7 @@ function* breadthFirstSearch(
       break;
     }
 
-    for (let neighbor of graph.neighbours(current)) {
+    for (let [neighbor, _] of graph.neighbours(current)) {
       if (!neighbor.visited) {
         yield {
           codeRow: 11,

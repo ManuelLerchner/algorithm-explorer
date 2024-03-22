@@ -15,12 +15,21 @@ export function createGraph(amountNodes: number, graphType: GraphType): Graph {
       );
 
       const nodes = indices.map((index) => new GraphNode(index));
-      const edges = indices
-        .slice(1)
-        .flatMap((index) => [
-          new Connection(nodes[index - 1], nodes[Math.floor(index / 2) - 1], 1),
-          new Connection(nodes[Math.floor(index / 2) - 1], nodes[index - 1], 1),
-        ]);
+      const edges = indices.slice(1).flatMap((index) => {
+        let weight = Math.floor(Math.random() * 10) + 1;
+        return [
+          new Connection(
+            nodes[index - 1],
+            nodes[Math.floor(index / 2) - 1],
+            weight
+          ),
+          new Connection(
+            nodes[Math.floor(index / 2) - 1],
+            nodes[index - 1],
+            weight
+          ),
+        ];
+      });
 
       return new Graph(nodes, edges);
     }
@@ -80,6 +89,10 @@ export function createGraph(amountNodes: number, graphType: GraphType): Graph {
         for (let randomNode of connectionSet) {
           edges.push(new Connection(nodes[i], nodes[randomNode], 1));
         }
+      }
+
+      for (let edge of edges) {
+        edge.weight = Math.floor(Math.random() * 10) + 1;
       }
 
       return new Graph(nodes, edges);

@@ -104,7 +104,7 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
     ],
   },
   {
-    name: "Pathfinding",
+    name: "Path Finding",
     description:
       "Pathfinding is a data structure that is used to represent a set of points. There exist many different algorithms each of them with their set of strengths and weaknesses.",
     url: "/pathfinding",

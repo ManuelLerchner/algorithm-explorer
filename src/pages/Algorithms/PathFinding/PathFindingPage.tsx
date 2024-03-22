@@ -6,12 +6,13 @@ import StepController from "../../../components/StepController/StepController";
 import { GraphType } from "../../../model/CustomPresetTypes";
 import { Graph, GraphNode } from "../../../model/Graph";
 import { GraphTraversalStep } from "../../../model/Steps/GraphTraversalStep";
-import { createGraph } from "./../../../util/GraphCreators";
-import GraphTraversalSettings from "./GraphTraversalSettings";
+import { createGraph } from "../../../util/GraphCreators";
+import GraphTraversalSettings from "./PathFindingPageSettings";
 import { Network } from "vis-network/peer/esm/vis-network";
 import { DataSet } from "vis-data/peer/esm/vis-data";
+import PathFindingSettings from "./PathFindingPageSettings";
 
-export default function GraphTraversalPage({
+export default function PathFindingPage({
   algorithmName,
   algorithm,
   pseudoCode,
@@ -44,10 +45,7 @@ export default function GraphTraversalPage({
 
   // Initializes the start-array using random ordering
   useEffect(() => {
-    const graph = createGraph(amountNodes, graphType);
-    graph.clearEdgesLabels();
-
-    setStartGraph(graph);
+    setStartGraph(createGraph(amountNodes, graphType));
   }, [amountNodes, graphType]);
 
   // Resets the History-View
@@ -55,10 +53,7 @@ export default function GraphTraversalPage({
     setTotalHistory([]);
     setInAutoMode(false);
     setCurrentView(0);
-    const graph = createGraph(amountNodes, graphType);
-    graph.clearEdgesLabels();
-
-    setStartGraph(graph);
+    setStartGraph(createGraph(amountNodes, graphType));
   }
 
   //Performs a single step of the Sorting-Calculation
@@ -134,6 +129,13 @@ export default function GraphTraversalPage({
   useEffect(() => {
     const currentStep = totalHistory[currentView - 1];
 
+    [...(currentStep?.labels?.entries() || [])].forEach(([id, label]) => {
+      startGraph.nodes_dataset.update({
+        id,
+        label,
+      });
+    });
+
     // reset color of all nodes
     startGraph.nodes_dataset?.forEach((node) => {
       startGraph.nodes_dataset.update({
@@ -155,16 +157,16 @@ export default function GraphTraversalPage({
       });
     }
 
-    //set color of visited nodes
-    currentStep?.visited?.forEach((id) => {
+    //set color of explored nodes
+    currentStep?.explored?.forEach((id) => {
       startGraph.nodes_dataset.update({
         id,
         color: { background: "#FFB733" },
       });
     });
 
-    //set color of explored nodes
-    currentStep?.explored?.forEach((id) => {
+    //set color of visited nodes
+    currentStep?.visited?.forEach((id) => {
       startGraph.nodes_dataset.update({
         id,
         color: { background: "#5CAD5C" },
@@ -180,6 +182,15 @@ export default function GraphTraversalPage({
         },
       });
     }
+
+    currentStep?.solutionpath?.forEach((id) => {
+      startGraph.nodes_dataset.update({
+        id,
+        color: { background: "#2E64FE" },
+      });
+    });
+
+
   }, [currentView, totalHistory, startGraph, startNode, endNode]);
 
   return (
@@ -198,7 +209,7 @@ export default function GraphTraversalPage({
         />
       }
       GeneralSettings={
-        <GraphTraversalSettings
+        <PathFindingSettings
           startNode={startNode}
           endNode={endNode}
           setStartNode={setStartNode}

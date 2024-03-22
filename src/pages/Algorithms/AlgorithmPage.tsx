@@ -4,6 +4,7 @@ import SortingPage from "./SortingPage/SortingPage";
 import {
   getConvexHullAlgorithm,
   getGraphTraversalAlgorithm,
+  getPathFindingAlgorithm,
   getSignalProcessingAlgorithm,
   getSortingAlgorithm,
 } from "../../util/AlgorithmSelector";
@@ -11,6 +12,7 @@ import GraphTraversalPage from "./GraphTraversalPage/GraphTraversalPage";
 import AlgorithmNotFound from "../Error/AlgorithmNotFound";
 import SignalProcessingPage from "./SignalProcessingPage/SignalProcessingPage";
 import ConvexHullPage from "./ConvexHullPage/ConvexHullPage";
+import PathFindingPage from "./PathFinding/PathFindingPage";
 
 function AlgorithmPage() {
   const location = useLocation();
@@ -37,6 +39,10 @@ function AlgorithmPage() {
         const convexHullAlgo = getConvexHullAlgorithm(algorithmName);
         if (!convexHullAlgo) break;
         return <ConvexHullPage {...convexHullAlgo} />;
+      case "Path Finding":
+        const pathFindingAlgo = getPathFindingAlgorithm(algorithmName);
+        if (!pathFindingAlgo) break;
+        return <PathFindingPage {...pathFindingAlgo} />;
     }
     return <AlgorithmNotFound algorithm={algorithmName} category={category} />;
   }

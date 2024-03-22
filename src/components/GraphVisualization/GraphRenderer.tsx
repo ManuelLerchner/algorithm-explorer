@@ -38,7 +38,7 @@ function GraphRenderer({ graph }: { graph: Graph }) {
 
         width: 2,
         font: {
-          color: "#ff0000",
+          color: "#000000",
           size: 20,
         },
       },
