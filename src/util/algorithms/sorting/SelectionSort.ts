@@ -87,7 +87,7 @@ function* selectionSort(A: number[]): IterableIterator<SortingStep> {
 }
 
 export const selectionSortInfo = {
-  algorithmName: "Insertion Sort",
+  algorithmName: "Selection Sort",
   algorithm: selectionSort,
   pseudoCode: selectionSortPseudoCode,
 };

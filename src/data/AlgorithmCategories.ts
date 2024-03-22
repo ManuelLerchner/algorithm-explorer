@@ -1,13 +1,19 @@
 import { ReactComponent as sortIcon } from "../assets/sort-icon.svg";
 import { ReactComponent as graphIcon } from "../assets/graph-icon.svg";
 import { ReactComponent as convexHullIcon } from "../assets/convex-hull-icon.svg";
-import { ReactComponent as compressionIcon } from "../assets/compression-icon.svg";
-import { ReactComponent as classificationIcon } from "../assets/classification-icon.svg";
-import { ReactComponent as cryptographyIcon } from "../assets/cryptography-icon.svg";
-import { ReactComponent as searchingIcon } from "../assets/searching-icon.svg";
-import { ReactComponent as heapsIcon } from "../assets/heaps-icon.svg";
-import { ReactComponent as quantumIcon } from "../assets/quantum-icon.svg";
+import { ReactComponent as breadthFirstIcon } from "../assets/breadth-first.svg";
+import { ReactComponent as depthFirstIcon } from "../assets/depth-first.svg";
+import { ReactComponent as insertionIcon } from "../assets/insertion.svg";
+import { ReactComponent as selectionIcon } from "../assets/selection.svg";
+import { ReactComponent as quickIcon } from "../assets/quick.svg";
+import { ReactComponent as bubbleIcon } from "../assets/bubble.svg";
+import { ReactComponent as routeIcon } from "../assets/route.svg";
 import { ReactComponent as signalIcon } from "../assets/signal.svg";
+import { ReactComponent as fftIcon } from "../assets/fft.svg";
+import { ReactComponent as jarvisIcon } from "../assets/jarvis-march.svg";
+import { ReactComponent as grahamIcon } from "../assets/graham.svg";
+import { ReactComponent as astarIcon } from "../assets/astar.svg";
+import { ReactComponent as dijkstraIcon } from "../assets/dijkstra.svg";
 import { AlgorithmCategory } from "../model/AlgorithmCategory";
 
 export const AlgorithmCategories: AlgorithmCategory[] = [
@@ -21,22 +27,22 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
       {
         name: "Bubble Sort",
         url: "/sorting/bubble-sort",
-        icon: sortIcon,
+        icon: bubbleIcon,
       },
       {
         name: "Selection Sort",
         url: "/sorting/selection-sort",
-        icon: sortIcon,
+        icon: selectionIcon,
       },
       {
         name: "Insertion Sort",
         url: "/sorting/insertion-sort",
-        icon: sortIcon,
+        icon: insertionIcon,
       },
       {
         name: "Quick Sort",
         url: "/sorting/quick-sort",
-        icon: sortIcon,
+        icon: quickIcon,
       },
     ],
   },
@@ -50,12 +56,12 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
       {
         name: "Breadth First Search",
         url: "/graph-traversal/breadth-first-search",
-        icon: graphIcon,
+        icon: breadthFirstIcon,
       },
       {
         name: "Depth First Search",
         url: "/graph-traversal/depth-first-search",
-        icon: graphIcon,
+        icon: depthFirstIcon,
       },
     ],
   },
@@ -69,7 +75,7 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
       {
         name: "FFT",
         url: "/signal-processing/fft",
-        icon: signalIcon,
+        icon: fftIcon,
       },
     ],
   },
@@ -83,17 +89,36 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
       {
         name: "Graham's Scan",
         url: "/convex-hull/grahams-scan",
-        icon: convexHullIcon,
+        icon: grahamIcon,
       },
       {
         name: "Jarvis March",
         url: "/convex-hull/jarvis-march",
-        icon: convexHullIcon,
+        icon: jarvisIcon,
       },
       {
         name: "Quick Hull",
         url: "/convex-hull/quick-hull",
-        icon: convexHullIcon,
+        icon: quickIcon,
+      },
+    ],
+  },
+  {
+    name: "Pathfinding",
+    description:
+      "Pathfinding is a data structure that is used to represent a set of points. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+    url: "/pathfinding",
+    icon: routeIcon,
+    implementations: [
+      {
+        name: "A*",
+        url: "/pathfinding/a-star",
+        icon: astarIcon,
+      },
+      {
+        name: "Dijkstra",
+        url: "/pathfinding/dijkstra",
+        icon: dijkstraIcon,
       },
     ],
   },

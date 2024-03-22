@@ -2,18 +2,20 @@ import { FFTStep } from "../../../model/Steps/FFTStep";
 import * as math from "mathjs";
 
 const fftPseudoCode = [
-  "if(A.length <= 1) return A",
-  "let even = A[0, 2, 4, ...]",
-  "let odd = A[1, 3, 5, ...]",
-  "let fft_even = fft(even)",
-  "let fft_odd = fft(odd)",
-  "let omega = exp(2 * PI * i / n)",
-  "let result = Array(n)",
-  "for(let k = 0; k < n/2; k++)",
-  "  omega_k = omega^k",
-  "  result[k] = fft_even[k] + omega_k * fft_odd[k]",
-  "  result[k + n/2] = fft_even[k] - omega_k * fft_odd[k]",
-  "return result",
+  "function fft(A){",
+  " if(A.length <= 1) return A",
+  " let even = A[0, 2, 4, ...]",
+  " let odd = A[1, 3, 5, ...]",
+  " let fft_even = fft(even)",
+  " let fft_odd = fft(odd)",
+  " let omega = exp(2 * PI * i / n)",
+  " let result = Array(n)",
+  " for(let k = 0; k < n/2; k++)",
+  "   omega_k = omega^k",
+  "   result[k] = fft_even[k] + omega_k * fft_odd[k]",
+  "   result[k + n/2] = fft_even[k] - omega_k * fft_odd[k]",
+  " return result",
+  "}",
 ];
 
 function formatComplex<T>(complex: T): string {
@@ -50,7 +52,7 @@ function* fft_helper(
     yield {
       currentArray: A,
       parentArrays: parentArrays,
-      codeRow: 1,
+      codeRow: 2,
       description: {
         type: "Finished",
         description: `Array length is less than or equal to 1, returning array`,
@@ -65,7 +67,7 @@ function* fft_helper(
   yield {
     currentArray: A,
     parentArrays: parentArrays,
-    codeRow: 2,
+    codeRow: 3,
     description: {
       type: "Calculated",
       description: `Calculate even array`,
@@ -76,7 +78,7 @@ function* fft_helper(
   yield {
     currentArray: A,
     parentArrays: parentArrays,
-    codeRow: 3,
+    codeRow: 4,
     description: {
       type: "Calculated",
       description: `Calculate odd array`,
@@ -87,7 +89,7 @@ function* fft_helper(
   yield {
     currentArray: A,
     parentArrays: parentArrays,
-    codeRow: 4,
+    codeRow: 5,
     description: {
       type: "Call",
       description: `Call fft recursively on even array`,
@@ -101,7 +103,7 @@ function* fft_helper(
   yield {
     currentArray: A,
     parentArrays: parentArrays,
-    codeRow: 5,
+    codeRow: 6,
     description: {
       type: "Call",
       description: `Call fft recursively on odd array`,
@@ -120,7 +122,7 @@ function* fft_helper(
   yield {
     currentArray: A,
     parentArrays: parentArrays,
-    codeRow: 6,
+    codeRow: 7,
     description: {
       type: "Calculated",
       description: `Calculate omega`,
@@ -138,7 +140,7 @@ function* fft_helper(
     currentArray: A,
     parentArrays: parentArrays,
     resultArray: result,
-    codeRow: 7,
+    codeRow: 8,
     description: {
       type: "Set",
       description: `Set result to Array(` + A.length + `)`,
@@ -161,7 +163,7 @@ function* fft_helper(
       currentArray: A,
       parentArrays: parentArrays,
       resultArray: result,
-      codeRow: 10,
+      codeRow: 11,
       description: {
         type: "Set",
         description: `Set result[${k}] to ${formatComplex(
@@ -183,7 +185,7 @@ function* fft_helper(
       currentArray: A,
       parentArrays: parentArrays,
       resultArray: result,
-      codeRow: 11,
+      codeRow: 12,
       description: {
         type: "Set",
         description: `Set result[${k + A.length / 2}] to ${formatComplex(
@@ -202,7 +204,7 @@ function* fft_helper(
     currentArray: A,
     parentArrays: parentArrays,
     resultArray: result,
-    codeRow: 12,
+    codeRow: 13,
     description: {
       type: "Finished",
       description: `Returning result`,

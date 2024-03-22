@@ -1,6 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { mapUrlToBreadcrumbs } from "./BreadcrumbHelper";
 
+import { ReactComponent as MoonIcon } from "../../assets/moon.svg";
+import { ReactComponent as SunIcon } from "../../assets/sun.svg";
+
 function NavBar({ toggleIsDark }: { toggleIsDark: () => void }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,9 +39,16 @@ function NavBar({ toggleIsDark }: { toggleIsDark: () => void }) {
           </div>
         ))}
       </div>
-      <div>
-        <button onClick={toggleIsDark}>Toggle Dark Mode</button>
-      </div>
+      <button
+        className="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full p-1"
+        onClick={toggleIsDark}
+      >
+        <MoonIcon className="w-10 h-10 dark:hidden hover:scale-105 hover:-hue-rotate-270 hover:contrast-200 transition-all ease-out" />
+        <SunIcon
+          className="w-10 h-10 hidden dark:block hover:scale-105 hover:-hue-rotate-180 hover:contrast-200
+         transition-all ease-out"
+        />
+      </button>
     </div>
   );
 }

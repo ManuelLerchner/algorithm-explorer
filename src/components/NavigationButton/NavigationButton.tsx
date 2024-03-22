@@ -9,24 +9,28 @@ function AlgorithmCategory({
   Icon: any;
   url: string;
 }) {
+  const navigate = useNavigate();
   return (
-    <a
-      href={url}
-      className="flex flex-col items-center py-1 min-h-[8rem] hover:scale-105 transition-all ease-out cursor-pointer"
-    >
-      <div className="flex justify-center items-center flex-col">
-        <div
-          className={
-            "w-28 h-28 shadow-xl shadow-stone-300 dark:shadow-gray-600 bg-zinc-400/90 dark:bg-neutral-200/90 rounded-md mb-2  "
-          }
-        >
-          <Icon className="w-full h-full drop-shadow-lg p-3 hover:p-[0.65rem] transition-all ease-in" />
+    <>
+      <a
+        onClick={() => navigate(url)}
+        className="flex flex-col items-center py-1 min-h-[8rem] hover:scale-105 transition-all ease-out cursor-pointer"
+      >
+        <div className="flex justify-center items-center flex-col">
+          <div
+            className={
+              "w-28 h-28 shadow-xl shadow-stone-300 dark:shadow-gray-600 bg-zinc-400/90 dark:bg-neutral-200/90 rounded-md mb-2  "
+            }
+          >
+            <Icon className="w-full h-full drop-shadow-lg p-3 hover:p-[0.65rem] transition-all ease-in" />
+          </div>
+          <h3 className="dark:text-neutral-200 text-2xl text-center tracking-wide font-medium ">
+            {name}
+          </h3>
         </div>
-        <h3 className="dark:text-neutral-200 text-2xl text-center tracking-wide font-medium ">
-          {name}
-        </h3>
-      </div>
-    </a>
+      </a>
+      <a href={url} className="hidden" />
+    </>
   );
 }
 

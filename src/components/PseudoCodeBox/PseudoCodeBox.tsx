@@ -5,9 +5,11 @@ import { IterationStep } from "../../model/Steps/IterationStep";
 export default function PseudoCodeBox({
   currentStep,
   pseudoCode,
+  controller,
 }: {
   pseudoCode: string[];
   currentStep: IterationStep | null;
+  controller: React.ReactNode;
 }) {
   let { type, description } = currentStep?.description ?? {
     type: "Waiting",
@@ -42,6 +44,8 @@ export default function PseudoCodeBox({
       >
         {pseudoCode.join("\n")}
       </SyntaxHighlighter>
+
+      {controller}
 
       <div className="grid grid-cols-[auto_1fr] items-center mt-2 gap-2">
         <label className="font-semibold mr-4">Description:</label>
