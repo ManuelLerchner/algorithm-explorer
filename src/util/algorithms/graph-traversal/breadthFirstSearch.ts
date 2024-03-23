@@ -1,5 +1,5 @@
 import { Graph, GraphNode } from "../../../model/Graph";
-import { GraphTraversalStep } from "../../../model/Steps/GraphTraversalStep";
+import { GraphStep } from "../../../model/Steps/GraphStep";
 
 const breadthFirstSearchPseudoCode = [
   "function BFS(G, root) {",
@@ -24,7 +24,7 @@ function* breadthFirstSearch(
   graph: Graph,
   root: number,
   target: number
-): IterableIterator<GraphTraversalStep> {
+): IterableIterator<GraphStep> {
   var rootnode = graph.nodes.find((node) => node.id === root)!;
 
   const queue = [rootnode];

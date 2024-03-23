@@ -1,17 +1,14 @@
+import * as math from "mathjs";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import ArrayHistory from "../../../components/ArrayVisualization/ArrayHistory";
+import FFTRecursiveStack from "../../../components/ArrayVisualization/FFTRecursiveStack";
 import InputArray from "../../../components/ArrayVisualization/InputArray";
 import AlgoPageLayout from "../../../components/Layout/AlgoPageLayout";
 import StepController from "../../../components/StepController/StepController";
 import { useInterval } from "../../../hooks/useInterval";
 import { ArrayType } from "../../../model/CustomPresetTypes";
-import { SortingStep } from "../../../model/Steps/SortingStep";
-import { createArray } from "../../../util/ArrayCreator";
-import SortingSettings from "./SignalProcessingSettings";
-import SignalProcessingSettings from "./SignalProcessingSettings";
 import { FFTStep } from "../../../model/Steps/FFTStep";
-import * as math from "mathjs";
-import FFTRecursiveStack from "../../../components/ArrayVisualization/FFTRecursiveStack";
+import { createArray } from "../../../util/ArrayCreator";
+import SignalProcessingSettings from "./SignalProcessingSettings";
 
 export default function SignalProcessingPage({
   algorithmName,

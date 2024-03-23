@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import React from "react";
+import { IterationStep } from "../../model/Steps/IterationStep";
 import { shiftIn } from "../../util/Transitions";
 import PseudoCodeBox from "../PseudoCodeBox/PseudoCodeBox";
-import { IterationStep } from "../../model/Steps/IterationStep";
 
 export default function AlgoPageLayout({
   MainContent,

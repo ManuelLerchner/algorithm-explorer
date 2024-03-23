@@ -1,9 +1,6 @@
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
-import { SortingStep } from "../../model/Steps/SortingStep";
-import ArrayStep from "./ArrayStep";
 import { FFTStep } from "../../model/Steps/FFTStep";
-import { motion } from "framer-motion";
 import FFTArray from "./FFTArray";
 
 export default function FFTRecursiveStack({

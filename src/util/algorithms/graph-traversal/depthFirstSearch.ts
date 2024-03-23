@@ -1,5 +1,5 @@
-import { Graph, GraphNode } from "../../../model/Graph";
-import { GraphTraversalStep } from "../../../model/Steps/GraphTraversalStep";
+import { Graph } from "../../../model/Graph";
+import { GraphStep } from "../../../model/Steps/GraphStep";
 
 const depthFirstSearchPseudoCode = [
   "function DFS(G, root) {",
@@ -23,7 +23,7 @@ function* depthFirstSearch(
   graph: Graph,
   root: number,
   target: number
-): IterableIterator<GraphTraversalStep> {
+): IterableIterator<GraphStep> {
   var rootnode = graph.nodes.find((node) => node.id === root)!;
 
   const stack = [rootnode];

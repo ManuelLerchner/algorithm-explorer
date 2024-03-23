@@ -1,9 +1,7 @@
 import { motion } from "framer-motion";
-import React from "react";
-import { SortingStep } from "../../model/Steps/SortingStep";
-import { noPopUp, popUp } from "../../util/Transitions";
-import { FFTStep } from "../../model/Steps/FFTStep";
 import * as math from "mathjs";
+import React from "react";
+import { noPopUp, popUp } from "../../util/Transitions";
 
 export default function FFTArray({
   array,

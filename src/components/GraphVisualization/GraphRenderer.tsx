@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Data, Edge, Node } from "vis-network";
+import React, { useRef } from "react";
+import { Data } from "vis-network";
 
 import { Network, Options } from "vis-network/peer/esm/vis-network";
-import { DataSet } from "vis-data/peer/esm/vis-data";
 import { Graph } from "./../../model/Graph";
-import { GraphTraversalStep } from "../../model/Steps/GraphTraversalStep";
 
 function GraphRenderer({ graph }: { graph: Graph }) {
   var networkRef = useRef<any>();

@@ -1,5 +1,5 @@
-import { IterationStep } from "./IterationStep";
 import math from "mathjs";
+import { IterationStep } from "./IterationStep";
 
 export interface FFTStep extends IterationStep {
   currentArray: math.Complex[];

@@ -1,19 +1,19 @@
-import { ReactComponent as sortIcon } from "../assets/sort-icon.svg";
-import { ReactComponent as graphIcon } from "../assets/graph-icon.svg";
-import { ReactComponent as convexHullIcon } from "../assets/convex-hull-icon.svg";
-import { ReactComponent as breadthFirstIcon } from "../assets/breadth-first.svg";
-import { ReactComponent as depthFirstIcon } from "../assets/depth-first.svg";
-import { ReactComponent as insertionIcon } from "../assets/insertion.svg";
-import { ReactComponent as selectionIcon } from "../assets/selection.svg";
-import { ReactComponent as quickIcon } from "../assets/quick.svg";
-import { ReactComponent as bubbleIcon } from "../assets/bubble.svg";
-import { ReactComponent as routeIcon } from "../assets/route.svg";
-import { ReactComponent as signalIcon } from "../assets/signal.svg";
-import { ReactComponent as fftIcon } from "../assets/fft.svg";
-import { ReactComponent as jarvisIcon } from "../assets/jarvis-march.svg";
-import { ReactComponent as grahamIcon } from "../assets/graham.svg";
 import { ReactComponent as astarIcon } from "../assets/astar.svg";
+import { ReactComponent as breadthFirstIcon } from "../assets/breadth-first.svg";
+import { ReactComponent as bubbleIcon } from "../assets/bubble.svg";
+import { ReactComponent as convexHullIcon } from "../assets/convex-hull-icon.svg";
+import { ReactComponent as depthFirstIcon } from "../assets/depth-first.svg";
 import { ReactComponent as dijkstraIcon } from "../assets/dijkstra.svg";
+import { ReactComponent as fftIcon } from "../assets/fft.svg";
+import { ReactComponent as grahamIcon } from "../assets/graham.svg";
+import { ReactComponent as graphIcon } from "../assets/graph-icon.svg";
+import { ReactComponent as insertionIcon } from "../assets/insertion.svg";
+import { ReactComponent as jarvisIcon } from "../assets/jarvis-march.svg";
+import { ReactComponent as quickIcon } from "../assets/quick.svg";
+import { ReactComponent as routeIcon } from "../assets/route.svg";
+import { ReactComponent as selectionIcon } from "../assets/selection.svg";
+import { ReactComponent as signalIcon } from "../assets/signal.svg";
+import { ReactComponent as sortIcon } from "../assets/sort-icon.svg";
 import { AlgorithmCategory } from "../model/AlgorithmCategory";
 
 export const AlgorithmCategories: AlgorithmCategory[] = [

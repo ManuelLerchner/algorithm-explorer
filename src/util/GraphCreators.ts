@@ -1,6 +1,5 @@
 import { GraphType } from "../model/CustomPresetTypes";
 import { Connection, Graph, GraphNode } from "../model/Graph";
-import { Edge, Node as VisNode } from "vis-network/peer/esm/vis-network";
 
 /**
  * Creates a graph of the specified length, of the specified type

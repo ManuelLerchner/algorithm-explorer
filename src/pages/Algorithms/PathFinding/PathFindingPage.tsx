@@ -5,7 +5,7 @@ import AlgoPageLayout from "../../../components/Layout/AlgoPageLayout";
 import StepController from "../../../components/StepController/StepController";
 import { GraphType } from "../../../model/CustomPresetTypes";
 import { Graph, GraphNode } from "../../../model/Graph";
-import { GraphTraversalStep } from "../../../model/Steps/GraphTraversalStep";
+import { GraphStep } from "../../../model/Steps/GraphStep";
 import { createGraph } from "../../../util/GraphCreators";
 import GraphTraversalSettings from "./PathFindingPageSettings";
 import { Network } from "vis-network/peer/esm/vis-network";
@@ -22,12 +22,12 @@ export default function PathFindingPage({
     graph: Graph,
     root: number,
     target: number
-  ) => IterableIterator<GraphTraversalStep>;
+  ) => IterableIterator<GraphStep>;
   pseudoCode: string[];
 }) {
   const [amountNodes, setAmountNodes] = useState(24);
   const [startGraph, setStartGraph] = useState<Graph>(new Graph());
-  const [totalHistory, setTotalHistory] = useState<GraphTraversalStep[]>([]);
+  const [totalHistory, setTotalHistory] = useState<GraphStep[]>([]);
   const [currentView, setCurrentView] = useState(0);
 
   const [animationSpeed, setAnimationSpeed] = useState(4);

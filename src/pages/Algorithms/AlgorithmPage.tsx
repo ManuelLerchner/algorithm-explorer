@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom";
 import { mapUrlToBreadcrumbs } from "../../components/NavBar/BreadcrumbHelper";
-import SortingPage from "./SortingPage/SortingPage";
 import {
   getConvexHullAlgorithm,
   getGraphTraversalAlgorithm,
@@ -8,11 +7,12 @@ import {
   getSignalProcessingAlgorithm,
   getSortingAlgorithm,
 } from "../../util/AlgorithmSelector";
-import GraphTraversalPage from "./GraphTraversalPage/GraphTraversalPage";
 import AlgorithmNotFound from "../Error/AlgorithmNotFound";
-import SignalProcessingPage from "./SignalProcessingPage/SignalProcessingPage";
 import ConvexHullPage from "./ConvexHullPage/ConvexHullPage";
+import GraphTraversalPage from "./GraphTraversalPage/GraphTraversalPage";
 import PathFindingPage from "./PathFinding/PathFindingPage";
+import SignalProcessingPage from "./SignalProcessingPage/SignalProcessingPage";
+import SortingPage from "./SortingPage/SortingPage";
 
 function AlgorithmPage() {
   const location = useLocation();

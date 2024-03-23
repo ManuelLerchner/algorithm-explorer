@@ -1,5 +1,5 @@
 import { Graph, GraphNode } from "../../../model/Graph";
-import { GrahamStep } from "../../../model/Steps/GrahamStep";
+import { ConvexHullStep } from "../../../model/Steps/ConvexHullStep";
 
 const jarvisMarchPseudoCode = [
   "function jarvisMarch(graph) {",
@@ -39,7 +39,7 @@ function orientation(
   return val > 0 ? "left" : "right";
 }
 
-function* jarvisMarch(graph: Graph): IterableIterator<GrahamStep> {
+function* jarvisMarch(graph: Graph): IterableIterator<ConvexHullStep> {
   let P = findLowestX(graph);
 
   yield {

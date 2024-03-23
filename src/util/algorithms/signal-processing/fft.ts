@@ -1,5 +1,5 @@
-import { FFTStep } from "../../../model/Steps/FFTStep";
 import * as math from "mathjs";
+import { FFTStep } from "../../../model/Steps/FFTStep";
 
 const fftPseudoCode = [
   "function fft(A) {",

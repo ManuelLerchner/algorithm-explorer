@@ -1,5 +1,5 @@
 import { Graph, GraphNode } from "../../../model/Graph";
-import { GrahamStep } from "../../../model/Steps/GrahamStep";
+import { ConvexHullStep } from "../../../model/Steps/ConvexHullStep";
 
 const quickHullPsuedoCode = [
   "function quickHull(graph) {",
@@ -86,7 +86,7 @@ function* findHull(
   P: GraphNode,
   Q: GraphNode,
   hull: GraphNode[]
-): IterableIterator<GrahamStep> {
+): IterableIterator<ConvexHullStep> {
   let C = pointFarthestLeftFromLine(P, Q, graph);
 
   yield {
@@ -172,7 +172,7 @@ function* findHull(
   yield* findHull(graph, C, Q, hull);
 }
 
-function* quickHull(graph: Graph): IterableIterator<GrahamStep> {
+function* quickHull(graph: Graph): IterableIterator<ConvexHullStep> {
   let Q = findLowestX(graph);
   let P = findHighestX(graph);
 

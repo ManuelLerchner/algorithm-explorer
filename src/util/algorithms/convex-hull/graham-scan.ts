@@ -1,5 +1,5 @@
 import { Graph, GraphNode } from "../../../model/Graph";
-import { GrahamStep } from "../../../model/Steps/GrahamStep";
+import { ConvexHullStep } from "../../../model/Steps/ConvexHullStep";
 
 const grahamScanPseudoCode = [
   "function grahamScan(graph) {",
@@ -51,7 +51,7 @@ function orientation(
   return val > 0 ? "left" : "right";
 }
 
-function* grahamScan(graph: Graph): IterableIterator<GrahamStep> {
+function* grahamScan(graph: Graph): IterableIterator<ConvexHullStep> {
   let P = findLowestY(graph);
 
   yield {

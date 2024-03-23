@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export function useInterval(callback: () => void, delay: number) {
   const intervalRef = useRef<number>(-1);

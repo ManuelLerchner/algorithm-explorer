@@ -1,6 +1,6 @@
 import { IterationStep } from "./IterationStep";
 
-export interface GrahamStep extends IterationStep {
+export interface ConvexHullStep extends IterationStep {
   stepNum?: number;
   variables?: {
     [key: string]: any;

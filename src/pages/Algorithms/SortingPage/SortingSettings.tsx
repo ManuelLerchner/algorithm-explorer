@@ -1,8 +1,8 @@
 import { Slider, Stack } from "@mui/material";
 import React from "react";
 
-import { ReactComponent as Slow } from "../../../assets/slow.svg";
 import { ReactComponent as Fast } from "../../../assets/fast.svg";
+import { ReactComponent as Slow } from "../../../assets/slow.svg";
 import { ArrayType } from "../../../model/CustomPresetTypes";
 
 export default function SortingSettings({

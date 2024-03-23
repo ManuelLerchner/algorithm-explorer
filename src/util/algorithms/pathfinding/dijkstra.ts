@@ -1,6 +1,6 @@
 import vis from "vis-network/declarations/index-legacy-bundle";
 import { Graph, GraphNode } from "../../../model/Graph";
-import { GraphTraversalStep } from "../../../model/Steps/GraphTraversalStep";
+import { GraphStep } from "../../../model/Steps/GraphStep";
 
 const dijstraPseudoCode = [
   "function dijkstra(graph, root, target) {",
@@ -35,7 +35,7 @@ const dijstraPseudoCode = [
 function* traceBackPath(
   parents: Map<GraphNode, GraphNode>,
   target: GraphNode
-): IterableIterator<GraphTraversalStep> {
+): IterableIterator<GraphStep> {
   let path = [];
   let current = target;
   while (parents.has(current)) {
@@ -89,7 +89,7 @@ function* dijkstra(
   graph: Graph,
   root: number,
   target: number
-): IterableIterator<GraphTraversalStep> {
+): IterableIterator<GraphStep> {
   let priorityQueue = new Array<[GraphNode, number]>();
   let visited = new Set<number>();
   let parents = new Map();

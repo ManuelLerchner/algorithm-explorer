@@ -1,10 +1,10 @@
+import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
+import MenuLayout from "../components/Layout/MenuLayout";
 import AlgorithmCategory from "../components/NavigationButton/NavigationButton";
 import { AlgorithmCategories } from "../data/AlgorithmCategories";
-import AlgorithmCategoryNotFound from "./Error/AlgorithmCategoryNotFound";
-import { motion } from "framer-motion";
 import { shiftIn } from "../util/Transitions";
-import MenuLayout from "../components/Layout/MenuLayout";
+import AlgorithmCategoryNotFound from "./Error/AlgorithmCategoryNotFound";
 
 function CategoryPage() {
   const params = useParams();

@@ -1,6 +1,5 @@
-import vis from "vis-network/declarations/index-legacy-bundle";
 import { Graph, GraphNode } from "../../../model/Graph";
-import { GraphTraversalStep } from "../../../model/Steps/GraphTraversalStep";
+import { GraphStep } from "../../../model/Steps/GraphStep";
 
 const astarPseudoCode = [
   "function astar(graph, root, target) {",
@@ -38,7 +37,7 @@ const astarPseudoCode = [
 function* traceBackPath(
   predecessor: Map<GraphNode, GraphNode>,
   target: GraphNode
-): IterableIterator<GraphTraversalStep> {
+): IterableIterator<GraphStep> {
   let path = [];
   let current = target;
   while (predecessor.has(current)) {
@@ -96,7 +95,7 @@ function* astar(
   graph: Graph,
   root: number,
   target: number
-): IterableIterator<GraphTraversalStep> {
+): IterableIterator<GraphStep> {
   let openSet = new Array<[GraphNode, number]>();
   let closedSet = new Set<number>();
   let gScore = new Map<number, number>();

@@ -1,15 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Edge, Node } from "vis-network";
 import GraphRenderer from "../../../components/GraphVisualization/GraphRenderer";
 import AlgoPageLayout from "../../../components/Layout/AlgoPageLayout";
 import StepController from "../../../components/StepController/StepController";
-import { GraphType } from "../../../model/CustomPresetTypes";
-import { Graph, GraphNode } from "../../../model/Graph";
-import { GrahamStep } from "../../../model/Steps/GrahamStep";
+import { Graph } from "../../../model/Graph";
+import { ConvexHullStep } from "../../../model/Steps/ConvexHullStep";
 import { createGraph } from "../../../util/GraphCreators";
 import ConvexHullSettings from "./ConvexHullSettings";
-import { Network } from "vis-network/peer/esm/vis-network";
-import { DataSet } from "vis-data/peer/esm/vis-data";
 
 export default function ConvexHullPage({
   algorithmName,
@@ -17,12 +13,12 @@ export default function ConvexHullPage({
   pseudoCode,
 }: {
   algorithmName: string;
-  algorithm: (graph: Graph) => IterableIterator<GrahamStep>;
+  algorithm: (graph: Graph) => IterableIterator<ConvexHullStep>;
   pseudoCode: string[];
 }) {
   const [amountNodes, setAmountNodes] = useState(32);
   const [startGraph, setStartGraph] = useState<Graph>(new Graph());
-  const [totalHistory, setTotalHistory] = useState<GrahamStep[]>([]);
+  const [totalHistory, setTotalHistory] = useState<ConvexHullStep[]>([]);
   const [currentView, setCurrentView] = useState(0);
 
   const [animationSpeed, setAnimationSpeed] = useState(4);

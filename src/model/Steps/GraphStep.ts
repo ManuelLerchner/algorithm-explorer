@@ -1,6 +1,6 @@
 import { IterationStep } from "./IterationStep";
 
-export interface GraphTraversalStep extends IterationStep {
+export interface GraphStep extends IterationStep {
   stepNum?: number;
   hidden?: number[];
   variables?: {

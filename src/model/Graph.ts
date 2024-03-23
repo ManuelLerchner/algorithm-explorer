@@ -1,6 +1,6 @@
-import { Network, Node, Position } from "vis-network/peer/esm/vis-network";
 import { DataSet } from "vis-data/peer/esm/vis-data";
 import { Edge } from "vis-network";
+import { Node, Position } from "vis-network/peer/esm/vis-network";
 
 export class GraphNode {
   id: number;

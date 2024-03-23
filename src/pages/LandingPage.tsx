@@ -1,9 +1,9 @@
 import { AlgorithmCategories } from "../data/AlgorithmCategories";
 
-import AlgorithmCategory from "../components/NavigationButton/NavigationButton";
 import { motion } from "framer-motion";
-import { shiftIn } from "../util/Transitions";
 import MenuLayout from "../components/Layout/MenuLayout";
+import AlgorithmCategory from "../components/NavigationButton/NavigationButton";
+import { shiftIn } from "../util/Transitions";
 
 function StartPage() {
   return (
