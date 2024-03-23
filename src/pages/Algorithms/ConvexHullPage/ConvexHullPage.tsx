@@ -36,7 +36,6 @@ export default function ConvexHullPage({
     setInAutoMode(false);
     setCurrentView(0);
     const graph = createGraph(amountNodes, "random");
-    graph.clearLabels();
     graph.clearEdges();
     setStartGraph(graph);
   }
@@ -45,7 +44,6 @@ export default function ConvexHullPage({
   useEffect(() => {
     const graph = createGraph(amountNodes, "random");
     graph.clearEdges();
-    graph.clearLabels();
 
     setStartGraph(graph);
   }, [amountNodes]);

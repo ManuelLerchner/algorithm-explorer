@@ -63,6 +63,8 @@ function GraphRenderer({ graph }: { graph: Graph }) {
       },
     };
 
+    (document.getElementById("physics") as any).checked = true;
+
     network = new Network(networkRef.current, data, options);
 
     network.on("afterDrawing", () => {
@@ -80,9 +82,9 @@ function GraphRenderer({ graph }: { graph: Graph }) {
       <div className="flex justify-end items-center mt-4">
         <label className="flex items-center space-x-2">
           <input
+            id="physics"
             type="checkbox"
             className="form-checkbox h-6 w-6"
-            defaultChecked={true}
             onChange={(e) => {
               if (network !== undefined) {
                 network.setOptions({

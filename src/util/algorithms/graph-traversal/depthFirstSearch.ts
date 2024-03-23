@@ -94,19 +94,6 @@ function* depthFirstSearch(
 
       for (let [neighbor, _] of graph.neighbours(current)) {
         yield {
-          codeRow: 11,
-          currentNode: current.id,
-          description: {
-            type: "Selected",
-            description: `Get neighbor from stack`,
-          },
-          variables: {
-            S: stack.map((node) => node.id),
-            current: current.id,
-          },
-        };
-
-        yield {
           codeRow: 12,
           currentNode: current.id,
           description: {
