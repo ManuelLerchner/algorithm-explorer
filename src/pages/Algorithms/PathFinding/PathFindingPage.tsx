@@ -25,7 +25,7 @@ export default function PathFindingPage({
   ) => IterableIterator<GraphTraversalStep>;
   pseudoCode: string[];
 }) {
-  const [amountNodes, setAmountNodes] = useState(16);
+  const [amountNodes, setAmountNodes] = useState(24);
   const [startGraph, setStartGraph] = useState<Graph>(new Graph());
   const [totalHistory, setTotalHistory] = useState<GraphTraversalStep[]>([]);
   const [currentView, setCurrentView] = useState(0);
@@ -58,6 +58,7 @@ export default function PathFindingPage({
 
   //Performs a single step of the Sorting-Calculation
   const performStep = useCallback(() => {
+    startGraph.disableMovement();
     if (currentView >= totalHistory.length) {
       const step = stepIterator.next();
       if (step.done) {
@@ -189,8 +190,6 @@ export default function PathFindingPage({
         color: { background: "#2E64FE" },
       });
     });
-
-
   }, [currentView, totalHistory, startGraph, startNode, endNode]);
 
   return (

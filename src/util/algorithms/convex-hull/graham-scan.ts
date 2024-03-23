@@ -2,16 +2,20 @@ import { Graph, GraphNode } from "../../../model/Graph";
 import { GrahamStep } from "../../../model/Steps/GrahamStep";
 
 const grahamScanPseudoCode = [
-  "let P = findLowestY(graph)",
-  "let sorted = sortPointsByAngle(P, graph)",
-  "let stack = []",
-  "stack.push(sorted[0])",
-  "stack.push(sorted[1])",
-  "for i = 2 to sorted.length",
-  "  while stack.length > 1 and orientation(stack[stack.length - 2], stack[stack.length - 1], sorted[i]) != 'left'",
-  "    stack.pop()",
-  "  stack.push(sorted[i])",
-  "return stack",
+  "function grahamScan(graph) {",
+  "  let P = findLowestY(graph);",
+  "  let sorted = sortPointsByAngle(P, graph);",
+  "  let stack = [];",
+  "  stack.push(sorted[0])",
+  "  stack.push(sorted[1])",
+  "  for (let i = 2; i < sorted.length; i++) {",
+  "    while (stack.length > 1 and orientation(stack[stack.length - 2], stack[stack.length - 1], sorted[i]) != 'left') {",
+  "      stack.pop();",
+  "    }",
+  "    stack.push(sorted[i]);",
+  "  }",
+  "  return stack;",
+  "}",
 ];
 
 function findLowestY(graph: Graph): GraphNode {
@@ -51,7 +55,7 @@ function* grahamScan(graph: Graph): IterableIterator<GrahamStep> {
   let P = findLowestY(graph);
 
   yield {
-    codeRow: 1,
+    codeRow: 2,
     description: {
       type: "Selected",
       description: "Selected the point with the lowest y-coordinate",
@@ -62,7 +66,7 @@ function* grahamScan(graph: Graph): IterableIterator<GrahamStep> {
   let sorted = sortPointsByAngle(P, graph);
 
   yield {
-    codeRow: 2,
+    codeRow: 3,
     description: {
       type: "Calculated",
       description: "Sorted the points by angle",
@@ -77,7 +81,7 @@ function* grahamScan(graph: Graph): IterableIterator<GrahamStep> {
   stack.push(sorted[1]);
 
   yield {
-    codeRow: 5,
+    codeRow: 6,
     description: {
       type: "Updated",
       description: "Added the first two points to the stack",
@@ -101,7 +105,7 @@ function* grahamScan(graph: Graph): IterableIterator<GrahamStep> {
       stack.pop();
 
       yield {
-        codeRow: 8,
+        codeRow: 9,
         description: {
           type: "Updated",
           description: "Removed a point from the stack",
@@ -116,7 +120,7 @@ function* grahamScan(graph: Graph): IterableIterator<GrahamStep> {
     stack.push(sorted[i]);
 
     yield {
-      codeRow: 9,
+      codeRow: 11,
       description: {
         type: "Updated",
         description: "Added a point to the stack",
@@ -130,7 +134,7 @@ function* grahamScan(graph: Graph): IterableIterator<GrahamStep> {
   }
 
   yield {
-    codeRow: 10,
+    codeRow: 13,
     description: {
       type: "Finished",
       description: "Finished the algorithm",

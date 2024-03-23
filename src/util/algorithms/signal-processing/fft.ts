@@ -2,19 +2,20 @@ import { FFTStep } from "../../../model/Steps/FFTStep";
 import * as math from "mathjs";
 
 const fftPseudoCode = [
-  "function fft(A){",
-  " if(A.length <= 1) return A",
-  " let even = A[0, 2, 4, ...]",
-  " let odd = A[1, 3, 5, ...]",
-  " let fft_even = fft(even)",
-  " let fft_odd = fft(odd)",
-  " let omega = exp(2 * PI * i / n)",
-  " let result = Array(n)",
-  " for(let k = 0; k < n/2; k++)",
-  "   omega_k = omega^k",
-  "   result[k] = fft_even[k] + omega_k * fft_odd[k]",
-  "   result[k + n/2] = fft_even[k] - omega_k * fft_odd[k]",
-  " return result",
+  "function fft(A) {",
+  " if (A.length <= 1) return A;",
+  " let even = A[0, 2, 4, ...];",
+  " let odd = A[1, 3, 5, ...];",
+  " let fft_even = fft(even);",
+  " let fft_odd = fft(odd);",
+  " let omega = exp(2 * PI * i / n);",
+  " let result = Array(n);",
+  " for (let k = 0; k < n/2; k++) {",
+  "   omega_k = pow(omega, k)",
+  "   result[k] = fft_even[k] + omega_k * fft_odd[k];",
+  "   result[k + n/2] = fft_even[k] - omega_k * fft_odd[k];",
+  " }",
+  " return result;",
   "}",
 ];
 
@@ -204,7 +205,7 @@ function* fft_helper(
     currentArray: A,
     parentArrays: parentArrays,
     resultArray: result,
-    codeRow: 13,
+    codeRow: 14,
     description: {
       type: "Finished",
       description: `Returning result`,

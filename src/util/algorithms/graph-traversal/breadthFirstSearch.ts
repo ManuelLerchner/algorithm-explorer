@@ -3,7 +3,7 @@ import { GraphTraversalStep } from "../../../model/Steps/GraphTraversalStep";
 
 const breadthFirstSearchPseudoCode = [
   "function BFS(G, root) {",
-  "  let Q = [root]; // queue",
+  "  let Q = new Queue([root]);",
   "  root.visited = true;",
   "  while (Q.length > 0) {",
   "    let current = Q.shift();",

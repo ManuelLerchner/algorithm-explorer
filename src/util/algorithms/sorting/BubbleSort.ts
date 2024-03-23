@@ -2,10 +2,12 @@ import { SortingStep } from "../../../model/Steps/SortingStep";
 import { swap } from "./Swap";
 
 const bubbleSortPseudoCode = [
-  "for (let n=A.length-1; n>=1; n--) {",
-  "  for (let i=0; i<n; i++) {",
-  "    if (A[i] > A[i+1]) {",
-  "      swap(A, i, i+1);",
+  "function bubbleSort(A) {",
+  "  for (let n=A.length-1; n>=1; n--) {",
+  "    for (let i=0; i<n; i++) {",
+  "      if (A[i] > A[i+1]) {",
+  "        swap(A, i, i+1);",
+  "      }",
   "    }",
   "  }",
   "}",
@@ -15,7 +17,7 @@ function* bubbleSort(A: number[]): IterableIterator<SortingStep> {
   for (let n = A.length - 1; n >= 1; n--) {
     for (let i = 0; i < n; i++) {
       yield {
-        codeRow: 3,
+        codeRow: 4,
         currentIndex: i,
         comparing: [i, i + 1],
         array: [...A],
@@ -33,7 +35,7 @@ function* bubbleSort(A: number[]): IterableIterator<SortingStep> {
       if (A[i] > A[i + 1]) {
         swap(A, i, i + 1);
         yield {
-          codeRow: 4,
+          codeRow: 5,
           currentIndex: i,
           swapping: [i, i + 1],
           array: [...A],

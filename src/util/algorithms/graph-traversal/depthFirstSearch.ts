@@ -3,7 +3,7 @@ import { GraphTraversalStep } from "../../../model/Steps/GraphTraversalStep";
 
 const depthFirstSearchPseudoCode = [
   "function DFS(G, root) {",
-  "  let S = [root]; // stack",
+  "  let S = new Stack([root]);",
   "  while (S.length > 0) {",
   "    let current = S.pop();",
   "    if (current == target) {",

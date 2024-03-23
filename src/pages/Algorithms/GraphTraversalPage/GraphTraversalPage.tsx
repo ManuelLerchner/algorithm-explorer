@@ -63,6 +63,7 @@ export default function GraphTraversalPage({
 
   //Performs a single step of the Sorting-Calculation
   const performStep = useCallback(() => {
+    startGraph.disableMovement();
     if (currentView >= totalHistory.length) {
       const step = stepIterator.next();
       if (step.done) {

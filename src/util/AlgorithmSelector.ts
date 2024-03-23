@@ -3,6 +3,7 @@ import { jarvisMarchInfo } from "./algorithms/convex-hull/jarvis-march";
 import { quickHullInfo } from "./algorithms/convex-hull/quick-hull";
 import { bfsinfo } from "./algorithms/graph-traversal/breadthFirstSearch";
 import { dfsinfo } from "./algorithms/graph-traversal/depthFirstSearch";
+import { astarInfo } from "./algorithms/pathfinding/astar";
 import { dijkstraInfo } from "./algorithms/pathfinding/dijkstra";
 import { fftInfo } from "./algorithms/signal-processing/fft";
 import { bubbleSortInfo } from "./algorithms/sorting/BubbleSort";
@@ -54,5 +55,7 @@ export function getPathFindingAlgorithm(algorithmName: string) {
   switch (algorithmName) {
     case "Dijkstra":
       return dijkstraInfo;
+    case "A*":
+      return astarInfo;
   }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Data, Edge, Node } from "vis-network";
 
 import { Network, Options } from "vis-network/peer/esm/vis-network";
@@ -20,7 +20,9 @@ function GraphRenderer({ graph }: { graph: Graph }) {
       layout: {
         hierarchical: false,
       },
-
+      physics: {
+        enabled: true,
+      },
       edges: {
         chosen: false,
         arrows: {
@@ -33,7 +35,7 @@ function GraphRenderer({ graph }: { graph: Graph }) {
 
         color: {
           inherit: false,
-          color: "#ffffff",
+          color: "#848484",
         },
 
         width: 2,
@@ -62,22 +64,41 @@ function GraphRenderer({ graph }: { graph: Graph }) {
         borderWidth: 1,
       },
     };
+
     network = new Network(networkRef.current, data, options);
 
-    const positions = network!.getPositions(graph.nodes.map((n) => n.id));
-    graph.updatePosition(positions);
-
-    network.on("initRedraw", () => {
+    network.on("afterDrawing", () => {
       const positions = network!.getPositions(graph.nodes.map((n) => n.id));
       graph.updatePosition(positions);
     });
   }
 
   return (
-    <div
-      className="h-full rounded-lg border border-stone-500"
-      ref={networkRef}
-    ></div>
+    <>
+      <div
+        className="h-full rounded-lg border border-stone-500"
+        ref={networkRef}
+      ></div>
+      <div className="flex justify-end items-center mt-4">
+        <label className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            className="form-checkbox h-6 w-6"
+            defaultChecked={true}
+            onChange={(e) => {
+              if (network !== undefined) {
+                network.setOptions({
+                  physics: {
+                    enabled: e.target.checked,
+                  },
+                });
+              }
+            }}
+          />
+          <span className="text-lg">Physics</span>
+        </label>
+      </div>
+    </>
   );
 }
 

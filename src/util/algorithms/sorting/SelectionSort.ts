@@ -1,16 +1,17 @@
-
 import { SortingStep } from "../../../model/Steps/SortingStep";
 import { swap } from "./Swap";
 
 const selectionSortPseudoCode = [
-  "for (let n=0; n<A.length; n++) {",
-  "  let minIndex = n;",
-  "  for (let i=n+1; i<A.length; i++) {",
-  "    if (A[i] < A[minIndex]) {",
-  "      minIndex = i;",
+  "function selectionSort(A) {",
+  "  for (let n=0; n<A.length; n++) {",
+  "    let minIndex = n;",
+  "    for (let i=n+1; i<A.length; i++) {",
+  "      if (A[i] < A[minIndex]) {",
+  "        minIndex = i;",
+  "      }",
   "    }",
+  "    swap(A, n, minIndex);",
   "  }",
-  "  swap(A, n, minIndex);",
   "}",
 ];
 
@@ -20,7 +21,7 @@ function* selectionSort(A: number[]): IterableIterator<SortingStep> {
 
     for (let i = n + 1; i < A.length; i++) {
       yield {
-        codeRow: 4,
+        codeRow: 5,
         currentIndex: i,
         comparing: [i, minIndex],
         array: [...A],
@@ -42,7 +43,7 @@ function* selectionSort(A: number[]): IterableIterator<SortingStep> {
       if (A[i] < A[minIndex]) {
         minIndex = i;
         yield {
-          codeRow: 5,
+          codeRow: 6,
           currentIndex: i,
           array: [...A],
           locked: A.map((_, i) => i < n),
@@ -61,7 +62,7 @@ function* selectionSort(A: number[]): IterableIterator<SortingStep> {
     }
     swap(A, n, minIndex);
     yield {
-      codeRow: 8,
+      codeRow: 9,
       currentIndex: n,
       swapping: [n, minIndex],
       array: [...A],

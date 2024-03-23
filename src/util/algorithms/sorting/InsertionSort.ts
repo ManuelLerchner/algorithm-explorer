@@ -1,14 +1,16 @@
 import { SortingStep } from "../../../model/Steps/SortingStep";
 
 const insertionSortPseudoCode = [
-  "for (let n=1; n<A.length; n++) {",
-  "  let element = A[n];",
-  "  let i = n;",
-  "  while (i > 0 && A[i-1] > element) {",
-  "    A[i] = A[i-1];",
-  "    i--;",
+  "function insertionSort(A) {",
+  "  for (let n=1; n<A.length; n++) {",
+  "    let element = A[n];",
+  "    let i = n;",
+  "    while (i > 0 && A[i-1] > element) {",
+  "      A[i] = A[i-1];",
+  "      i--;",
+  "    }",
+  "    A[i] = element;",
   "  }",
-  "  A[i] = element;",
   "}",
 ];
 
@@ -18,7 +20,7 @@ function* insertionSort(A: number[]): IterableIterator<SortingStep> {
     let i = n;
 
     yield {
-      codeRow: 2,
+      codeRow: 3,
       currentIndex: i,
       highlightedIndex: i,
 
@@ -39,7 +41,7 @@ function* insertionSort(A: number[]): IterableIterator<SortingStep> {
       A[i] = A[i - 1];
       i--;
       yield {
-        codeRow: 5,
+        codeRow: 6,
         currentIndex: i,
         comparing: [i - 1, -1],
 
@@ -60,7 +62,7 @@ function* insertionSort(A: number[]): IterableIterator<SortingStep> {
     }
     A[i] = element;
     yield {
-      codeRow: 8,
+      codeRow: 9,
       currentIndex: i,
       array: [...A],
       locked: A.map((_, i) => false),

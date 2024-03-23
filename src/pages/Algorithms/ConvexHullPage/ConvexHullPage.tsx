@@ -20,7 +20,7 @@ export default function ConvexHullPage({
   algorithm: (graph: Graph) => IterableIterator<GrahamStep>;
   pseudoCode: string[];
 }) {
-  const [amountNodes, setAmountNodes] = useState(16);
+  const [amountNodes, setAmountNodes] = useState(32);
   const [startGraph, setStartGraph] = useState<Graph>(new Graph());
   const [totalHistory, setTotalHistory] = useState<GrahamStep[]>([]);
   const [currentView, setCurrentView] = useState(0);

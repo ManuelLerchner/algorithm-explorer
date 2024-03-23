@@ -9,23 +9,23 @@ const dijstraPseudoCode = [
   " let parents = new Map();",
   " ",
   " for (let node of graph.nodes) {",
-  "     priorityQueue.add({ node, distance: Infinity });",
+  "   priorityQueue.add({ node, distance: Infinity });",
   " }",
   " priorityQueue[root].distance = 0;",
   " ",
   " while (!priorityQueue.isEmpty()) {",
-  "     let { node, currentDistance } = priorityQueue.poll();",
-  "     visited.add(node);",
-  "     if (node === target) break;",
-  "     ",
-  "     for (let [neighbor, distance] of graph.neighbours(node)) {",
-  "         if (visited.has(neighbor)) continue;",
-  "         let newDistance = distance + currentDistance;",
-  "         if (newDistance < priorityQueue[neighbor].distance) {",
-  "             priorityQueue[neighbor].distance = newDistance;",
-  "             parents.set(neighbor, node);",
-  "         }",
+  "   let { node, currentDistance } = priorityQueue.poll();",
+  "   visited.add(node);",
+  "   if (node === target) break;",
+  "   ",
+  "   for (let [neighbor, distance] of graph.neighbours(node)) {",
+  "     if (visited.has(neighbor)) continue;",
+  "     let newDistance = distance + currentDistance;",
+  "     if (newDistance < priorityQueue[neighbor].distance) {",
+  "       priorityQueue[neighbor].distance = newDistance;",
+  "       parents.set(neighbor, node);",
   "     }",
+  "   }",
   " }",
   " let path = traceBackPath(parents, target);",
   " return path;",
@@ -124,7 +124,7 @@ function* dijkstra(
   };
 
   while (priorityQueue.length > 0) {
-    let [node, currentDistance] = priorityQueue.reduce((a, b) =>
+    let [node, edgeWeight] = priorityQueue.reduce((a, b) =>
       a[1] < b[1] ? a : b
     );
     priorityQueue = priorityQueue.filter((n) => n[0].id !== node.id);
@@ -172,7 +172,7 @@ function* dijkstra(
     for (let [neighbor, distance] of graph.neighbours(node)) {
       if (visited.has(neighbor.id)) continue;
 
-      let newDistance = distance + currentDistance;
+      let newDistance = distance + edgeWeight;
 
       yield {
         codeRow: 18,
@@ -192,7 +192,7 @@ function* dijkstra(
             ),
           node: node.id,
           neighbor: neighbor.id,
-          currentDistance: currentDistance,
+          edgeWeight: edgeWeight,
           edgedistance: distance,
           newDistance: newDistance,
         },

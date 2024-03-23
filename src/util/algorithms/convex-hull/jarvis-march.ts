@@ -2,20 +2,22 @@ import { Graph, GraphNode } from "../../../model/Graph";
 import { GrahamStep } from "../../../model/Steps/GrahamStep";
 
 const jarvisMarchPseudoCode = [
-  "let P = findLowestX(graph)",
-  "let Q = undefined",
-  "let hull = []",
-  "do {",
-  "  hull.push(P)",
-  "  let Q = graph.nodes[0]",
-  "  for (let point of graph.nodes) {",
-  "    if (Q === P || orientation(P, point, Q) === 'right') {",
-  "      Q = point",
+  "function jarvisMarch(graph) {",
+  "  let P = findLowestX(graph);",
+  "  let Q = undefined;",
+  "  let hull = [];",
+  "  do {",
+  "    hull.push(P);",
+  "    let Q = graph.nodes[0];",
+  "    for (let point of graph.nodes) {",
+  "      if (Q === P || orientation(P, point, Q) === 'right') {",
+  "        Q = point;",
+  "      }",
   "    }",
-  "  }",
-  "  P = Q",
-  "} while (P !== hull[0])",
-  "return hull",
+  "    P = Q;",
+  "  } while (P !== hull[0])",
+  "  return hull;",
+  "}",
 ];
 
 function findLowestX(graph: Graph): GraphNode {
@@ -41,7 +43,7 @@ function* jarvisMarch(graph: Graph): IterableIterator<GrahamStep> {
   let P = findLowestX(graph);
 
   yield {
-    codeRow: 1,
+    codeRow: 2,
     description: {
       type: "Selected",
       description: "Selected the point with the lowest x-coordinate",
@@ -61,7 +63,7 @@ function* jarvisMarch(graph: Graph): IterableIterator<GrahamStep> {
     hull.push(P);
 
     yield {
-      codeRow: 5,
+      codeRow: 6,
       description: {
         type: "Updated",
         description: "Pushed the point to the hull",
@@ -79,7 +81,7 @@ function* jarvisMarch(graph: Graph): IterableIterator<GrahamStep> {
     Q = graph.nodes[0];
     for (let point of graph.nodes) {
       yield {
-        codeRow: 8,
+        codeRow: 9,
         description: {
           type: "Selected",
           description: "Selected a point to compare",
@@ -99,7 +101,7 @@ function* jarvisMarch(graph: Graph): IterableIterator<GrahamStep> {
       if (Q === P || orientation(P, point, Q) === "right") {
         Q = point;
         yield {
-          codeRow: 9,
+          codeRow: 10,
           description: {
             type: "Updated",
             description: "Found a new Q",
@@ -119,7 +121,7 @@ function* jarvisMarch(graph: Graph): IterableIterator<GrahamStep> {
     P = Q!;
 
     yield {
-      codeRow: 12,
+      codeRow: 13,
       description: {
         type: "Updated",
         description: "Updated P",
@@ -136,7 +138,7 @@ function* jarvisMarch(graph: Graph): IterableIterator<GrahamStep> {
   } while (P !== hull[0]);
 
   yield {
-    codeRow: 10,
+    codeRow: 15,
     description: {
       type: "Finished",
       description: "Finished the algorithm",

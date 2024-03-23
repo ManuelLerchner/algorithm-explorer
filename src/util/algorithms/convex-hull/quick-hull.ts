@@ -3,20 +3,20 @@ import { GrahamStep } from "../../../model/Steps/GrahamStep";
 
 const quickHullPsuedoCode = [
   "function quickHull(graph) {",
-  "  let P = findLowestX(graph)",
-  "  let Q = findHighestX(graph)",
-  "  let convexHull = [P, Q]",
-  "  findHull(graph, P, Q, convexHull)",
-  "  findHull(graph, Q, P, convexHull)",
-  "  return convexHull",
+  "  let P = findLowestX(graph);",
+  "  let Q = findHighestX(graph);",
+  "  let convexHull = [P, Q];",
+  "  findHull(graph, P, Q, convexHull);",
+  "  findHull(graph, Q, P, convexHull);",
+  "  return convexHull;",
   "}",
 
   "function findHull(graph, P, Q, hull) {",
-  "  let C = pointFarthestLeftFromLine(P, Q, graph)",
-  "  if (C === undefined) return",
-  "  hull.splice(hull.indexOf(P), 0, C)",
-  "  findHull(graph, P, C, hull)",
-  "  findHull(graph, C, Q, hull)",
+  "  let C = pointFarthestLeftFromLine(P, Q, graph);",
+  "  if (C === undefined) return;",
+  "  hull.splice(hull.indexOf(P), 0, C);",
+  "  findHull(graph, P, C, hull);",
+  "  findHull(graph, C, Q, hull);",
   "}",
 ];
 
