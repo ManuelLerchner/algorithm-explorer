@@ -2,6 +2,8 @@
 
 This website is a collection of fundamental algorithms and interactive visualizations. The goal of the project is to provide an easy way to learn how an algorithm works by visualizing the algorithm's behavior in realtime.
 
+The project is hosted on: [algoexplorer.manuellerchner.de](https://algoexplorer.manuellerchner.de)
+
 ## Approach
 
 Each algorithm can be visualized by stepping through the algorithm's execution. This is similar to how breakpoints work in a debugger. The user can step forward and backward through the algorithm's execution and see how the data changes over time.
