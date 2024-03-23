@@ -2,6 +2,7 @@ import { Graph, GraphNode } from "../../../model/Graph";
 import { ConvexHullStep } from "../../../model/Steps/ConvexHullStep";
 
 const quickHullPsuedoCode = [
+  "// Best: O(n log n), Average: O(n log n), Worst: O(n^2)",
   "function quickHull(graph) {",
   "  let P = findLowestX(graph);",
   "  let Q = findHighestX(graph);",
@@ -90,7 +91,7 @@ function* findHull(
   let C = pointFarthestLeftFromLine(P, Q, graph);
 
   yield {
-    codeRow: 10,
+    codeRow: 1,
     description: {
       type: "Selected",
       description: "Selected the point farthest from the line",
@@ -107,7 +108,7 @@ function* findHull(
 
   if (C === undefined) {
     yield {
-      codeRow: 11,
+      codeRow: 12,
       description: {
         type: "Finished",
         description: "No point found left of the line",
@@ -125,7 +126,7 @@ function* findHull(
   hull.splice(hull.indexOf(P), 0, C);
 
   yield {
-    codeRow: 12,
+    codeRow: 13,
     description: {
       type: "Updated",
       description: "Added the point farthest from the line to the hull",
@@ -140,7 +141,7 @@ function* findHull(
   };
 
   yield {
-    codeRow: 13,
+    codeRow: 14,
     description: {
       type: "Call",
       description: `Call findHull with P: ${P.id} and C: ${C.id}`,
@@ -156,7 +157,7 @@ function* findHull(
   yield* findHull(graph, P, C, hull);
 
   yield {
-    codeRow: 14,
+    codeRow: 15,
     description: {
       type: "Call",
       description: `Call findHull with C: ${C.id} and Q: ${Q.id}`,
@@ -178,7 +179,7 @@ function* quickHull(graph: Graph): IterableIterator<ConvexHullStep> {
 
   let convexHull: GraphNode[] = [P, Q];
   yield {
-    codeRow: 4,
+    codeRow: 5,
     description: {
       type: "Calculated",
       description: "Add first two points to the convex hull",
@@ -193,7 +194,7 @@ function* quickHull(graph: Graph): IterableIterator<ConvexHullStep> {
   };
 
   yield {
-    codeRow: 5,
+    codeRow: 6,
     description: {
       type: "Call",
       description: `Call findHull with P: ${P.id} and Q: ${Q.id}`,
@@ -209,7 +210,7 @@ function* quickHull(graph: Graph): IterableIterator<ConvexHullStep> {
   yield* findHull(graph, P, Q, convexHull);
 
   yield {
-    codeRow: 6,
+    codeRow: 7,
     description: {
       type: "Call",
       description: `Call findHull with Q: ${Q.id} and P: ${P.id}`,
@@ -225,7 +226,7 @@ function* quickHull(graph: Graph): IterableIterator<ConvexHullStep> {
   yield* findHull(graph, Q, P, convexHull);
 
   yield {
-    codeRow: 7,
+    codeRow: 8,
     description: {
       type: "Finished",
       description: "Finished finding the convex hull",

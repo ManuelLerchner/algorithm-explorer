@@ -2,6 +2,7 @@ import { SortingStep } from "../../../model/Steps/SortingStep";
 import { swap } from "./Swap";
 
 const selectionSortPseudoCode = [
+  "// Best: O(n^2), Average: O(n^2), Worst: O(n^2)",
   "function selectionSort(A) {",
   "  for (let n=0; n<A.length; n++) {",
   "    let minIndex = n;",
@@ -21,7 +22,7 @@ function* selectionSort(A: number[]): IterableIterator<SortingStep> {
 
     for (let i = n + 1; i < A.length; i++) {
       yield {
-        codeRow: 5,
+        codeRow: 6,
         currentIndex: i,
         comparing: [i, minIndex],
         array: [...A],
@@ -43,7 +44,7 @@ function* selectionSort(A: number[]): IterableIterator<SortingStep> {
       if (A[i] < A[minIndex]) {
         minIndex = i;
         yield {
-          codeRow: 6,
+          codeRow: 7,
           currentIndex: i,
           array: [...A],
           locked: A.map((_, i) => i < n),
@@ -62,7 +63,7 @@ function* selectionSort(A: number[]): IterableIterator<SortingStep> {
     }
     swap(A, n, minIndex);
     yield {
-      codeRow: 9,
+      codeRow: 10,
       currentIndex: n,
       swapping: [n, minIndex],
       array: [...A],

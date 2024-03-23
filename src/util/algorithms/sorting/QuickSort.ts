@@ -2,6 +2,7 @@ import { SortingStep } from "../../../model/Steps/SortingStep";
 import { swap } from "./Swap";
 
 const quickSortPseudoCode = [
+  "// Best: O(n log n), Average: O(n log n), Worst: O(n^2)",
   "function quickSort(A, start, end) {",
   "  if (start >= end) return;",
   "  let i = start, j = end - 1;",
@@ -36,7 +37,7 @@ function* quickSortHelper(
     }
 
     yield {
-      codeRow: 2,
+      codeRow: 3,
       currentIndex: start,
       array: [...A],
       locked: [...locked],
@@ -58,7 +59,7 @@ function* quickSortHelper(
   let pivot = A[end];
 
   yield {
-    codeRow: 4,
+    codeRow: 5,
     currentIndex: i,
     array: [...A],
     locked: [...locked],
@@ -79,7 +80,7 @@ function* quickSortHelper(
     while (A[i] <= pivot && i < j) {
       i++;
       yield {
-        codeRow: 7,
+        codeRow: 8,
         currentIndex: i,
         array: [...A],
         locked: [...locked],
@@ -99,7 +100,7 @@ function* quickSortHelper(
     while (A[j] > pivot && i < j) {
       j--;
       yield {
-        codeRow: 10,
+        codeRow: 11,
         currentIndex: j,
         array: [...A],
         locked: [...locked],
@@ -119,7 +120,7 @@ function* quickSortHelper(
     if (i < j) {
       swap(A, i, j);
       yield {
-        codeRow: 12,
+        codeRow: 13,
         currentIndex: j,
         swapping: [i, j],
         array: [...A],
@@ -141,7 +142,7 @@ function* quickSortHelper(
   if (A[i] > pivot) {
     swap(A, i, end);
     yield {
-      codeRow: 15,
+      codeRow: 16,
       currentIndex: i,
       comparing: [i, j],
       array: [...A],

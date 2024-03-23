@@ -12,7 +12,7 @@ function AlgorithmCategory({
   const navigate = useNavigate();
   return (
     <>
-      <a
+      <div
         onClick={() => navigate(url)}
         className="flex flex-col items-center py-1 min-h-[8rem] hover:scale-105 transition-all ease-out cursor-pointer"
       >
@@ -28,7 +28,7 @@ function AlgorithmCategory({
             {name}
           </h3>
         </div>
-      </a>
+      </div>
       <a href={url} className="hidden" />
     </>
   );

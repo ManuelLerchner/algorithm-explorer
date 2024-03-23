@@ -49,7 +49,7 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
   {
     name: "Graph Traversal",
     description:
-      "Graphs are a data structure that are used to represent a set of nodes and edges between them. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+      "Graphs are a data structure that is used to represent a set of nodes. There exist different algorithms to search through the graph each of them with their set of strengths and weaknesses.",
     url: "/graph-traversal",
     icon: graphIcon,
     implementations: [
@@ -68,7 +68,7 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
   {
     name: "Signal Processing",
     description:
-      "Signal Processing is a data structure that is used to represent a set of signals. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+      "Signal Processing algorithms are used to process data. Some of the most common algorithms are used to process audio and image data.",
     url: "/signal-processing",
     icon: signalIcon,
     implementations: [
@@ -82,7 +82,7 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
   {
     name: "Convex Hull",
     description:
-      "Convex Hull is a data structure that is used to represent a set of points. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+      "Convex Hulls are used to find the smallest convex polygon that contains all the points in a set. There exist many different algorithms each of them with their set of strengths and weaknesses.",
     url: "/convex-hull",
     icon: convexHullIcon,
     implementations: [
@@ -106,19 +106,19 @@ export const AlgorithmCategories: AlgorithmCategory[] = [
   {
     name: "Path Finding",
     description:
-      "Pathfinding is a data structure that is used to represent a set of points. There exist many different algorithms each of them with their set of strengths and weaknesses.",
+      "Pathfinding algorithms are used to find the shortest path between two points. There exist many different algorithms each of them with their set of strengths and weaknesses.",
     url: "/pathfinding",
     icon: routeIcon,
     implementations: [
       {
-        name: "A*",
-        url: "/pathfinding/a-star",
-        icon: astarIcon,
-      },
-      {
         name: "Dijkstra",
         url: "/pathfinding/dijkstra",
         icon: dijkstraIcon,
+      },
+      {
+        name: "A*",
+        url: "/pathfinding/a-star",
+        icon: astarIcon,
       },
     ],
   },

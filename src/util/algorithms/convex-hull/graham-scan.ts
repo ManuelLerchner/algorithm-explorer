@@ -2,6 +2,7 @@ import { Graph, GraphNode } from "../../../model/Graph";
 import { ConvexHullStep } from "../../../model/Steps/ConvexHullStep";
 
 const grahamScanPseudoCode = [
+  "// O(n log n)",
   "function grahamScan(graph) {",
   "  let P = findLowestY(graph);",
   "  let sorted = sortPointsByAngle(P, graph);",
@@ -55,7 +56,7 @@ function* grahamScan(graph: Graph): IterableIterator<ConvexHullStep> {
   let P = findLowestY(graph);
 
   yield {
-    codeRow: 2,
+    codeRow: 3,
     description: {
       type: "Selected",
       description: "Selected the point with the lowest y-coordinate",
@@ -66,7 +67,7 @@ function* grahamScan(graph: Graph): IterableIterator<ConvexHullStep> {
   let sorted = sortPointsByAngle(P, graph);
 
   yield {
-    codeRow: 3,
+    codeRow: 4,
     description: {
       type: "Calculated",
       description: "Sorted the points by angle",
@@ -81,7 +82,7 @@ function* grahamScan(graph: Graph): IterableIterator<ConvexHullStep> {
   stack.push(sorted[1]);
 
   yield {
-    codeRow: 6,
+    codeRow: 7,
     description: {
       type: "Updated",
       description: "Added the first two points to the stack",
@@ -105,7 +106,7 @@ function* grahamScan(graph: Graph): IterableIterator<ConvexHullStep> {
       stack.pop();
 
       yield {
-        codeRow: 9,
+        codeRow: 10,
         description: {
           type: "Updated",
           description: "Removed a point from the stack",
@@ -120,7 +121,7 @@ function* grahamScan(graph: Graph): IterableIterator<ConvexHullStep> {
     stack.push(sorted[i]);
 
     yield {
-      codeRow: 11,
+      codeRow: 12,
       description: {
         type: "Updated",
         description: "Added a point to the stack",
@@ -134,7 +135,7 @@ function* grahamScan(graph: Graph): IterableIterator<ConvexHullStep> {
   }
 
   yield {
-    codeRow: 13,
+    codeRow: 14,
     description: {
       type: "Finished",
       description: "Finished the algorithm",

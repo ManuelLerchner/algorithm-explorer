@@ -2,6 +2,7 @@ import { Graph, GraphNode } from "../../../model/Graph";
 import { GraphStep } from "../../../model/Steps/GraphStep";
 
 const breadthFirstSearchPseudoCode = [
+  "// O(V+E)",
   "function BFS(G, root) {",
   "  let Q = new Queue([root]);",
   "  root.visited = true;",
@@ -30,7 +31,7 @@ function* breadthFirstSearch(
   const queue = [rootnode];
 
   yield {
-    codeRow: 3,
+    codeRow: 4,
     currentNode: root,
     visited: [root],
     description: {
@@ -47,7 +48,7 @@ function* breadthFirstSearch(
     const current = queue.shift()!;
 
     yield {
-      codeRow: 5,
+      codeRow: 6,
       currentNode: current.id,
       explored: [current.id],
       description: {
@@ -62,7 +63,7 @@ function* breadthFirstSearch(
 
     if (current.id === target) {
       yield {
-        codeRow: 7,
+        codeRow: 8,
         currentNode: current.id,
         visited: [current.id],
         description: {
@@ -80,7 +81,7 @@ function* breadthFirstSearch(
     for (let [neighbor, _] of graph.neighbours(current)) {
       if (!neighbor.visited) {
         yield {
-          codeRow: 11,
+          codeRow: 12,
           currentNode: current.id,
           description: {
             type: "Updated",
@@ -96,7 +97,7 @@ function* breadthFirstSearch(
         neighbor.visited = true;
 
         yield {
-          codeRow: 12,
+          codeRow: 13,
           currentNode: current.id,
           visited: [current.id, neighbor.id],
           description: {

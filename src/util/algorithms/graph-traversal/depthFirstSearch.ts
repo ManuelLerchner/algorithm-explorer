@@ -2,6 +2,7 @@ import { Graph } from "../../../model/Graph";
 import { GraphStep } from "../../../model/Steps/GraphStep";
 
 const depthFirstSearchPseudoCode = [
+  "// O(V+E)",
   "function DFS(G, root) {",
   "  let S = new Stack([root]);",
   "  while (S.length > 0) {",
@@ -29,7 +30,7 @@ function* depthFirstSearch(
   const stack = [rootnode];
 
   yield {
-    codeRow: 2,
+    codeRow: 3,
     currentNode: root,
     visited: [root],
     description: {
@@ -45,7 +46,7 @@ function* depthFirstSearch(
     const current = stack.pop()!;
 
     yield {
-      codeRow: 4,
+      codeRow: 5,
       currentNode: current.id,
       explored: [current.id],
       description: {
@@ -60,7 +61,7 @@ function* depthFirstSearch(
 
     if (current.id === target) {
       yield {
-        codeRow: 6,
+        codeRow: 7,
         currentNode: current.id,
         visited: [current.id],
         description: {
@@ -77,7 +78,7 @@ function* depthFirstSearch(
 
     if (!current.visited) {
       yield {
-        codeRow: 9,
+        codeRow: 10,
         currentNode: current.id,
         description: {
           type: "Updated",
@@ -93,7 +94,7 @@ function* depthFirstSearch(
 
       for (let [neighbor, _] of graph.neighbours(current)) {
         yield {
-          codeRow: 10,
+          codeRow: 11,
           currentNode: current.id,
           description: {
             type: "Selected",
@@ -106,7 +107,7 @@ function* depthFirstSearch(
         };
 
         yield {
-          codeRow: 11,
+          codeRow: 12,
           currentNode: current.id,
           description: {
             type: "Updated",

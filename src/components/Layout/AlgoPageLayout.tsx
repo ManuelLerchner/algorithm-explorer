@@ -32,7 +32,7 @@ export default function AlgoPageLayout({
         {MainContent}
       </div>
 
-      <div className="flex flex-col max-w-2xl mb-12 h-full overflow-y-auto py-6 pr-4">
+      <div className="flex flex-col max-w-2xl mb-12 h-full overflow-y-auto py-6 pr-4 mx-4 w-full">
         <h1 className="dark:text-white text-2xl sm:text-4xl my-4">
           {algorithmName}
         </h1>

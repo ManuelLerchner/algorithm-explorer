@@ -3,6 +3,7 @@ import { mapUrlToBreadcrumbs } from "./BreadcrumbHelper";
 
 import { ReactComponent as MoonIcon } from "../../assets/moon.svg";
 import { ReactComponent as SunIcon } from "../../assets/sun.svg";
+import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
 
 function NavBar({ toggleIsDark }: { toggleIsDark: () => void }) {
   const navigate = useNavigate();
@@ -18,7 +19,9 @@ function NavBar({ toggleIsDark }: { toggleIsDark: () => void }) {
           navigate(breadcrumbs[breadcrumbs.length - 2].url);
         }}
       >
-        {breadcrumbs.length > 1 && "Back"}
+        {breadcrumbs.length > 1 && (
+          <ArrowLeft className="w-10 h-10 dark:invert" />
+        )}
       </button>
 
       <div className="hidden md:flex items-center justify-center">

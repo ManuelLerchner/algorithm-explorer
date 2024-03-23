@@ -2,6 +2,7 @@ import { Graph, GraphNode } from "../../../model/Graph";
 import { ConvexHullStep } from "../../../model/Steps/ConvexHullStep";
 
 const jarvisMarchPseudoCode = [
+  "// O(nh) (h=number of points in hull)",
   "function jarvisMarch(graph) {",
   "  let P = findLowestX(graph);",
   "  let Q = undefined;",
@@ -43,7 +44,7 @@ function* jarvisMarch(graph: Graph): IterableIterator<ConvexHullStep> {
   let P = findLowestX(graph);
 
   yield {
-    codeRow: 2,
+    codeRow: 3,
     description: {
       type: "Selected",
       description: "Selected the point with the lowest x-coordinate",
@@ -63,7 +64,7 @@ function* jarvisMarch(graph: Graph): IterableIterator<ConvexHullStep> {
     hull.push(P);
 
     yield {
-      codeRow: 6,
+      codeRow: 7,
       description: {
         type: "Updated",
         description: "Pushed the point to the hull",
@@ -81,7 +82,7 @@ function* jarvisMarch(graph: Graph): IterableIterator<ConvexHullStep> {
     Q = graph.nodes[0];
     for (let point of graph.nodes) {
       yield {
-        codeRow: 9,
+        codeRow: 10,
         description: {
           type: "Selected",
           description: "Selected a point to compare",
@@ -101,7 +102,7 @@ function* jarvisMarch(graph: Graph): IterableIterator<ConvexHullStep> {
       if (Q === P || orientation(P, point, Q) === "right") {
         Q = point;
         yield {
-          codeRow: 10,
+          codeRow: 11,
           description: {
             type: "Updated",
             description: "Found a new Q",
@@ -121,7 +122,7 @@ function* jarvisMarch(graph: Graph): IterableIterator<ConvexHullStep> {
     P = Q!;
 
     yield {
-      codeRow: 13,
+      codeRow: 14,
       description: {
         type: "Updated",
         description: "Updated P",
@@ -138,7 +139,7 @@ function* jarvisMarch(graph: Graph): IterableIterator<ConvexHullStep> {
   } while (P !== hull[0]);
 
   yield {
-    codeRow: 15,
+    codeRow: 16,
     description: {
       type: "Finished",
       description: "Finished the algorithm",

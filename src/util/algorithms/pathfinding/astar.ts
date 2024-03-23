@@ -2,6 +2,7 @@ import { Graph, GraphNode } from "../../../model/Graph";
 import { GraphStep } from "../../../model/Steps/GraphStep";
 
 const astarPseudoCode = [
+  "// O(E + log V)",
   "function astar(graph, root, target) {",
   " let openSet = new PriorityQueue();",
   " let closedSet = new Set();",
@@ -44,7 +45,7 @@ function* traceBackPath(
     path.push(current);
 
     yield {
-      codeRow: 28,
+      codeRow: 29,
       solutionpath: path.map((node) => node.id),
       description: {
         type: "Updated",
@@ -60,7 +61,7 @@ function* traceBackPath(
   path.push(current);
 
   yield {
-    codeRow: 28,
+    codeRow: 29,
     solutionpath: path.map((node) => node.id),
     description: {
       type: "Updated",
@@ -72,7 +73,7 @@ function* traceBackPath(
   };
 
   yield {
-    codeRow: 29,
+    codeRow: 30,
     solutionpath: path.map((node) => node.id),
     description: {
       type: "Calculated",
@@ -105,7 +106,7 @@ function* astar(
   openSet.push([graph.nodes.find((n) => n.id === root)!, 0]);
 
   yield {
-    codeRow: 6,
+    codeRow: 7,
     visited: [...closedSet],
     description: {
       type: "Updated",
@@ -141,7 +142,7 @@ function* astar(
     closedSet.add(node.id);
 
     yield {
-      codeRow: 8,
+      codeRow: 9,
       currentNode: node.id,
       visited: [...closedSet],
       description: {
@@ -166,7 +167,7 @@ function* astar(
 
     if (node.id === target) {
       yield {
-        codeRow: 10,
+        codeRow: 11,
         visited: [...closedSet],
         description: {
           type: "Updated",
@@ -195,7 +196,7 @@ function* astar(
       let tentative_g = gScore.get(node.id)! + edgeWeight;
 
       yield {
-        codeRow: 14,
+        codeRow: 15,
         visited: [...closedSet],
         explored: [neighbor.id],
         description: {
@@ -233,7 +234,7 @@ function* astar(
       predecessor.set(neighbor, node);
 
       yield {
-        codeRow: 18,
+        codeRow: 19,
         visited: [...closedSet],
         explored: [neighbor.id],
         currentNode: node.id,
@@ -273,7 +274,7 @@ function* astar(
       let f = tentative_g + h;
 
       yield {
-        codeRow: 20,
+        codeRow: 21,
         visited: [...closedSet],
         explored: [neighbor.id],
         currentNode: node.id,
@@ -307,7 +308,7 @@ function* astar(
         openSet.find(([n, _]) => n.id === neighbor.id)![1] = f;
 
         yield {
-          codeRow: 22,
+          codeRow: 23,
           visited: [...closedSet],
           explored: [neighbor.id],
           currentNode: node.id,
@@ -343,7 +344,7 @@ function* astar(
         openSet.push([neighbor, f]);
 
         yield {
-          codeRow: 24,
+          codeRow: 25,
           visited: [...closedSet],
           explored: [neighbor.id],
           currentNode: node.id,
@@ -381,7 +382,7 @@ function* astar(
   }
 
   yield {
-    codeRow: 28,
+    codeRow: 29,
     visited: [...closedSet],
     description: {
       type: "Calculated",

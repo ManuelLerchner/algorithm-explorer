@@ -3,6 +3,7 @@ import { Graph, GraphNode } from "../../../model/Graph";
 import { GraphStep } from "../../../model/Steps/GraphStep";
 
 const dijstraPseudoCode = [
+  "// O(E + V log V)",
   "function dijkstra(graph, root, target) {",
   " let priorityQueue = new PriorityQueue();",
   " let visited = new Set();",
@@ -42,7 +43,7 @@ function* traceBackPath(
     path.push(current);
 
     yield {
-      codeRow: 25,
+      codeRow: 26,
       solutionpath: path.map((node) => node.id),
       description: {
         type: "Updated",
@@ -58,7 +59,7 @@ function* traceBackPath(
   path.push(current);
 
   yield {
-    codeRow: 25,
+    codeRow: 26,
     solutionpath: path.map((node) => node.id),
     description: {
       type: "Updated",
@@ -70,7 +71,7 @@ function* traceBackPath(
   };
 
   yield {
-    codeRow: 26,
+    codeRow: 27,
     solutionpath: path.map((node) => node.id),
     description: {
       type: "Calculated",
@@ -100,7 +101,7 @@ function* dijkstra(
   priorityQueue.find(([node, _]) => node.id === root)![1] = 0;
 
   yield {
-    codeRow: 9,
+    codeRow: 10,
     visited: [...visited],
     description: {
       type: "Updated",
@@ -130,7 +131,7 @@ function* dijkstra(
     priorityQueue = priorityQueue.filter((n) => n[0].id !== node.id);
 
     yield {
-      codeRow: 12,
+      codeRow: 13,
       currentNode: node.id,
       visited: [...visited],
       description: {
@@ -151,7 +152,7 @@ function* dijkstra(
 
     if (node.id === target) {
       yield {
-        codeRow: 14,
+        codeRow: 15,
         visited: [...visited],
         description: {
           type: "Updated",
@@ -175,7 +176,7 @@ function* dijkstra(
       let newDistance = distance + edgeWeight;
 
       yield {
-        codeRow: 18,
+        codeRow: 19,
         visited: [...visited],
         explored: [neighbor.id],
         description: {
@@ -205,7 +206,7 @@ function* dijkstra(
         parents.set(neighbor, node);
 
         yield {
-          codeRow: 20,
+          codeRow: 21,
           visited: [...visited],
           explored: [neighbor.id],
           currentNode: node.id,
@@ -238,7 +239,7 @@ function* dijkstra(
   }
 
   yield {
-    codeRow: 25,
+    codeRow: 26,
     visited: [...visited],
     description: {
       type: "Calculated",
