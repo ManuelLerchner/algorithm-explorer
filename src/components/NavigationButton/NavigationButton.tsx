@@ -29,7 +29,6 @@ function AlgorithmCategory({
           </h3>
         </div>
       </div>
-      <a href={url} className="hidden" />
     </>
   );
 }

@@ -137,8 +137,8 @@ function* astar(
   };
 
   while (openSet.length > 0) {
-    let [node, _] = openSet.reduce((a, b) => (a[1] < b[1] ? a : b));
-    openSet = openSet.filter(([n, _]) => n.id !== node.id);
+    let [node] = openSet.reduce((a, b) => (a[1] < b[1] ? a : b));
+    openSet = openSet.filter(([n]) => n.id !== node.id);
     closedSet.add(node.id);
 
     yield {

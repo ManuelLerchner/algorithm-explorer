@@ -64,7 +64,7 @@ export default function ConvexHullPage({
     } else {
       setCurrentView(currentView + 1);
     }
-  }, [totalHistory, stepIterator, currentView]);
+  }, [totalHistory, stepIterator, currentView, startGraph]);
 
   // Goes back a step in the Sorting-Calculation
   function undoStep() {

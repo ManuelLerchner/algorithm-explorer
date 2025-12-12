@@ -1,15 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Edge, Node } from "vis-network";
 import GraphRenderer from "../../../components/GraphVisualization/GraphRenderer";
 import AlgoPageLayout from "../../../components/Layout/AlgoPageLayout";
 import StepController from "../../../components/StepController/StepController";
 import { GraphType } from "../../../model/CustomPresetTypes";
-import { Graph, GraphNode } from "../../../model/Graph";
+import { Graph } from "../../../model/Graph";
 import { GraphStep } from "../../../model/Steps/GraphStep";
 import { createGraph } from "../../../util/GraphCreators";
-import GraphTraversalSettings from "./PathFindingPageSettings";
-import { Network } from "vis-network/peer/esm/vis-network";
-import { DataSet } from "vis-data/peer/esm/vis-data";
 import PathFindingSettings from "./PathFindingPageSettings";
 
 export default function PathFindingPage({
@@ -83,7 +79,7 @@ export default function PathFindingPage({
     } else {
       setCurrentView(currentView + 1);
     }
-  }, [totalHistory, stepIterator, currentView]);
+  }, [totalHistory, stepIterator, currentView, startGraph]);
 
   // Goes back a step in the Sorting-Calculation
   function undoStep() {
