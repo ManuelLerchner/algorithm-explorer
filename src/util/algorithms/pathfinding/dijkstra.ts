@@ -1,4 +1,3 @@
-import vis from "vis-network/declarations/index-legacy-bundle";
 import { Graph, GraphNode } from "../../../model/Graph";
 import { GraphStep } from "../../../model/Steps/GraphStep";
 

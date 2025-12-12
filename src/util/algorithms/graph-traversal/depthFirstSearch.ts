@@ -92,7 +92,7 @@ function* depthFirstSearch(
 
       current.visited = true;
 
-      for (let [neighbor, _] of graph.neighbours(current)) {
+      for (let [neighbor] of graph.neighbours(current)) {
         yield {
           codeRow: 12,
           currentNode: current.id,
