@@ -42,7 +42,7 @@ jobs:
         echo "✓ HTML file is not empty"
         
         # Check for basic HTML structure
-        if ! grep -q "<!doctype html>" "build/index.html"; then
+        if ! grep -iq "<!doctype html>" "build/index.html"; then
           echo "Error: HTML file does not contain doctype declaration!"
           exit 1
         fi
